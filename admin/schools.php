@@ -77,7 +77,7 @@
               <th>City </th>
               <th>Country</th>
               <th>Currency</th>
-              <th>Actions</th>
+              <th width="10%">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -93,7 +93,7 @@
                     <td><?php echo $school_row['currency'] ?></td>
                     <td>
                         
-                        <a href="update_school.php?page=schools&id=<?php echo $school_row['id'] ?>" class="btn btn-link" onclick="return confirm('Are you sure to Update School?')"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a href="update_school.php?id=<?php echo $school_row['id'] ?>" class="btn btn-link" onclick="return confirm('Are you sure to Update School?')"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
                         <a href="delete.php?page=schools&id=<?php echo $school_row['id'] ?>" class="btn btn-link" onclick="return confirm('Are you sure to delete School?')"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </td>

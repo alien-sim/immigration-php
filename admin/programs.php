@@ -76,7 +76,7 @@
               <th>Program Name</th>
               <th>Length Of Program</th>
               <th>Program Level</th>
-              <th>Actions</th>
+              <th width="10%">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -90,7 +90,8 @@
                     <td><?php echo $progarm_row['length_program'] ?></td>
                     <td><?php echo $progarm_row['program_level'] ?></td>
                     <td>
-                        <!-- <a href="#" class="btn btn-link"><i class="fa fa-pencil" aria-hidden="true"></i></a> -->
+                        <a href="update_program.php?id=<?php echo $progarm_row['id'] ?>" class="btn btn-link"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
                         <a href="delete.php?page=programs&id=<?php echo $progarm_row['id'] ?>" class="btn btn-link" onclick="return confirm('Are you sure to delete Program?')"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </td>
                     

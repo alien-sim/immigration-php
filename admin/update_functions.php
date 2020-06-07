@@ -21,4 +21,22 @@
 			header("location:schools.php");
 		}
 	}
+
+	if(isset($_POST['update_program'])){
+		$idd = $_POST['idd'];
+    	$program_name = mysqli_real_escape_string($db,$_POST['program_name']);
+    	$description = mysqli_real_escape_string($db,$_POST['description']);
+        $admission_req = mysqli_real_escape_string($db,$_POST['admission_req']);
+        $other_fees = mysqli_real_escape_string($db,$_POST['other_fees']);
+    	$level_program = mysqli_real_escape_string($db,$_POST['level_program']);
+    	$length_program = mysqli_real_escape_string($db,$_POST['length_program']);
+        $school_id = $_POST['school_id'];
+
+    	$query = $db->query("update programs set program_name='".$program_name."', description='".$description."', additional_requirements='".$admission_req."', other_fees='".$other_fees."', program_level='".$level_program."', length_program='".$length_program."', school_id='".$school_id."' where id='".$idd."' ");
+    	if($query){
+    		header("location:programs.php");
+    	}else{
+    		echo mysqli_error($db);
+    	}
+    }
 ?>
