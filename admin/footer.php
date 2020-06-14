@@ -48,14 +48,12 @@
 <script src="assets/js/pie.js"></script>
 <!-- //Different scripts of charts.  Ex.Barchart, Stackedchart, Linechart, Piechart -->
 
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+
 <!-- data tables js -->
 <script>
   $(document).ready(function () {
     $('#example').DataTable();
-    $('#updateModal').click(function ()  {
-            console.log("#############")
-            $("#updateModal_id_text").val($(this).attr("setid"))
-    });
   });
 </script>
 <!-- //data tables js -->
@@ -80,6 +78,21 @@
   }
 </script>
 <!-- //close script -->
+
+<!-- CK Editor settings -->
+<script>
+	var toolbar = {
+		toolbar: [
+			{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
+			{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
+			{ name: 'links', items: [ 'Link' ] },
+			{ name: 'insert', items: ['Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+		]
+	}
+	CKEDITOR.replace( 'admission_req', toolbar);
+	CKEDITOR.replace( 'other_fees', toolbar);
+</script>
+<!-- // CK Editor settings -->
 
 <!-- disable body scroll when navbar is in active -->
 <script>
