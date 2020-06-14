@@ -1,15 +1,7 @@
-<?php 
-	include_once './submit_functions.php'; 
-	session_start(); 
-	if(isset($_SESSION['email'])){ 
-		header("location:add_agent.php");
-	}
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>first page</title>
+	<title>Login page</title>
 </head>
 <body>
 	<form method="post" action="index.php">
