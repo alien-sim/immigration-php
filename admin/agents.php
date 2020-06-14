@@ -52,8 +52,7 @@
             <tr>
               <th>Username</th>
               <th>Email</th>
-              <th>Joining date</th>
-              <th></th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -65,9 +64,10 @@
                   <tr>
                     <td><?php echo $agent_row['username'] ?>  </td>
                     <td><?php echo $agent_row['email'] ?></td>
-                    <td>06/01/2020</td>
-                    <td></td>
-                    
+                    <td>
+						<a href="update_agent.php?id=<?php echo $agent_row['id'] ?>" class="btn btn-link"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+						<a href="delete.php?page=agents&id=<?php echo $agent_row['id'] ?>" class="btn btn-link" onclick="return confirm('Are you sure to delete School?')"><i class="fa fa-trash" aria-hidden="true"></i></a>
+					</td>
                   </tr>
                 <?php
               }
@@ -110,9 +110,7 @@
                   <label for="inputPassword4" class="input__label">Password</label>
                   <input type="password" class="form-control input-style" id="inputPassword4" name="password" placeholder="Password" required="required">
               </div>
-
             </div>
-            
 
             <div class="form-check check-remember check-me-out">
                 <input class="form-check-input checkbox" type="checkbox" id="gridCheck" name="is_admin">
