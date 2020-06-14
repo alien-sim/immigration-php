@@ -14,7 +14,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Collective Admin Panel a Flat Bootstrap Responsive Website Template | Blank Page </title>
+  <title>Update School/University </title>
 
   <!-- CSS files import -->
   <?php 
@@ -52,8 +52,8 @@
     ?>
     <div class="card">
       <div class="card-body">
-        <h3 class="card__title mb-3">All Schools & Universities</h3>
-        <form action="update_school.php" method="post">
+        <h3 class="card__title mb-3">Update Schools/ Universities</h3>
+        <form action="update_school.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="idd" value="<?php echo $school['id'] ?>">
             <div class="form-group">
                 <label class="input__label">School Name</label>
@@ -119,6 +119,18 @@
                 <label class="input__label">About School</label>
                 <textarea class="form-control input-style" name="about" row=4><?php echo $school['about'] ?></textarea>
             </div> 
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="input__label">School Logo</label>
+                <input type="file" name="school_logo" class="form-control">
+                <input type="hidden" value="<?php echo $school['school_logo'] ?>" name="old_logo" />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="input__label">Cover Image of School</label>
+                <input type="file" name="cover_img" class="form-control">
+                <input type="hidden" value="<?php echo $school['cover_img'] ?>" name="old_cover"/>
+              </div>
+            </div>
 
             <div class="form-group text-right">
               <button type="submit" name="update_school" class="btn btn-primary btn-style">Update</button>

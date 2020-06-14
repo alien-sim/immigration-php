@@ -115,7 +115,7 @@
 <div class="modal fade bd-example-modal-lg" id="addSchoolModal" tabindex="-1" role="dialog" aria-labelledby="addSchoolModalLabel" aria-hidden="true">
   <div class="modal-dialog  modal-lg" role="document">
     <div class="modal-content">
-      <form action="schools.php" method="post">
+      <form action="schools.php" method="post" enctype="multipart/form-data">
         <div class="modal-header">
           <h5 class="modal-title" id="addSchoolModalLabel">Add New School</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -165,7 +165,19 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="input__label">Country</label>
-                    <input type="text" class="form-control input-style" name="country" placeholder="Country" required="required">
+                    <!-- <input type="text" class="form-control input-style" name="country" placeholder="Country" required="required"> -->
+					<select name="country" class="custom-select input-style" required>
+			  			<option value="null">Select Country</option>
+			  			<?php
+							$country = "SELECT * from `countries`";
+							$country_result = $db->query($country);
+							while($country_row = $country_result->fetch_assoc()) {
+							  ?>
+							  <option value="<?php echo $country_row['id'] ?>"><?php echo $country_row['country_name'] ?></option>
+							  <?php
+							}
+						?>
+					</select>
                 </div>
             </div>
 
@@ -184,9 +196,19 @@
               </div>
             </div>
             <div class="form-group">
-                <label class="input__label">Abount School</label>
+                <label class="input__label">About School</label>
                 <textarea class="form-control input-style" name="about" row=4></textarea>
-            </div>   
+            </div>
+            <div class="form-row">
+				<div class="form-group col-md-6">
+					<label class="input__label">School Logo</label>
+					<input type="file" name="school_logo" class="form-control">
+				</div>
+				<div class="form-group col-md-6">
+					<label class="input__label">Cover Image of School</label>
+					<input type="file" name="cover_img" class="form-control">
+				</div>
+            </div>
           
         </div>
         <div class="modal-footer">

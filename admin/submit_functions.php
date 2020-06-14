@@ -1,5 +1,6 @@
 <?php
 	include_once './config.php';
+	include_once './common_functions.php' ;
 	// Login Function
 	if(isset($_POST['login'])){
         $username = mysqli_real_escape_string($db,$_POST['username']);
@@ -76,9 +77,24 @@
     	$living_cost = $_POST['living_cost'];
     	$application_fee = $_POST['application_fee'];
     	$address = mysqli_real_escape_string($db, $_POST['address']);
-        $currency = mysqli_real_escape_string($db, $_POST['currency']);
+		$currency = mysqli_real_escape_string($db, $_POST['currency']);
+		
+		$ts = get_timestamp();
+		
+		$logo_dir = "../media/logos/";
+		$logo_filename = $ts . "_" . basename($_FILES["school_logo"]["name"]);
+		$logo_file = $logo_dir . $logo_filename;
+		move_uploaded_file($_FILES['school_logo']['tmp_name'], $logo_file);
+		
+		$cover_dir = "../media/cover_img/";
+		$cover_filename = $ts . "_" . basename($_FILES["cover_img"]["name"]);
+		$cover_file = $cover_dir . $cover_filename;
+		move_uploaded_file($_FILES['cover_img']['tmp_name'], $cover_file);
 
-    	$query = $db->query("insert into schools (school_name, founded, type, total_students, intrested_students, city, country, about, address, cost_of_living_yearly, tution_fee_yearly, application_fee,currency) values('$school_name', '$founded', '$type', '$total_students', '$intrested_students', '$city', '$country', '$about', '$address', '$living_cost', '$tution_fee', '$application_fee','$currency') ");
+		echo '<script>console.log("' .$logo_file. '"); </script>'; 
+		echo '<script>console.log("' .$file_name. '"); </script>'; 
+
+    	$query = $db->query("insert into schools (school_name, founded, type, total_students, intrested_students, city, country, about, address, cost_of_living_yearly, tution_fee_yearly, application_fee, currency, school_logo, cover_img) values('$school_name', '$founded', '$type', '$total_students', '$intrested_students', '$city', '$country', '$about', '$address', '$living_cost', '$tution_fee', '$application_fee', '$currency', '$logo_filename', '$cover_filename') ");
     	if($query){
     		header("location:schools.php");
     	}else{
