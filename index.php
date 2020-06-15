@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login test</title>
+	<title>Login test 1</title>
 </head>
 <body>
 	<form method="post" action="index.php">
