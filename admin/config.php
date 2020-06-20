@@ -1,3 +1,4 @@
 <?php
-	$db = new mysqli("localhost", "root", "", "immigration"); 
+	$db = new mysqli("localhost", "root", "", "immigration");  
+	$GLOBALS['db'] = $db;
 ?>
