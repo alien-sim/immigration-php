@@ -2,7 +2,7 @@
     include_once './submit_functions.php'; 
     session_start(); 
     if(isset($_SESSION['email'])){ 
-        header("location:home.php");
+        header("location:index.php");
     }
 ?>
 <!doctype html>

@@ -97,7 +97,26 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="input__label">Country</label>
-                    <input type="text" class="form-control input-style" name="country" placeholder="Country" value="<?php echo $school['country'] ?>" required="required">
+                    <!-- <input type="text" class="form-control input-style" name="country" placeholder="Country" value="<?php echo $school['country'] ?>" required="required"> -->
+                    <select name="country" class="custom-select input-style" required>
+                      <option value="null">Select Country</option>
+                      <?php
+                      $country = "SELECT * from `countries`";
+                      $country_result = $db->query($country);
+                      while($country_row = $country_result->fetch_assoc()) {
+                        if($country_row['id'] == $school['country']){
+                          ?>
+                          <option value="<?php echo $country_row['id'] ?>" selected><?php echo $country_row['country_name'] ?></option>
+                          <?php
+                        }
+                        else{
+                          ?>
+                          <option value="<?php echo $country_row['id'] ?>"><?php echo $country_row['country_name'] ?></option>
+                          <?php
+                        }
+                      }
+                      ?>
+                    </select>
                 </div>
             </div>
 
@@ -117,17 +136,23 @@
             </div>
             <div class="form-group">
                 <label class="input__label">About School</label>
-                <textarea class="form-control input-style" name="about" row=4><?php echo $school['about'] ?></textarea>
+                <textarea class="form-control input-style" name="about" rows=4><?php echo $school['about'] ?></textarea>
             </div> 
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label class="input__label">School Logo</label>
-                <input type="file" name="school_logo" class="form-control">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="school_logo" >
+                    <label class="custom-file-label">Choose School logo image...</label>
+                </div>
                 <input type="hidden" value="<?php echo $school['school_logo'] ?>" name="old_logo" />
               </div>
               <div class="form-group col-md-6">
                 <label class="input__label">Cover Image of School</label>
-                <input type="file" name="cover_img" class="form-control">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="cover_img">
+                    <label class="custom-file-label">Choose Cover image of School...</label>
+                </div>
                 <input type="hidden" value="<?php echo $school['cover_img'] ?>" name="old_cover"/>
               </div>
             </div>

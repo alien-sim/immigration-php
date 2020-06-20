@@ -4,5 +4,5 @@
 	unset($_SESSION['is_superadmin']);
 	unset($_SESSION['username']);
 	session_destroy(); 
-	header("location:home.php"); 
+	header("location:index.php"); 
 ?>

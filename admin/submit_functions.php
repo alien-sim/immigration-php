@@ -12,7 +12,7 @@
 			$_SESSION['email'] 			= $row[1];
 			$_SESSION['is_superadmin'] 	= $row[4];
         	$_SESSION['username'] 		= $username;
-            header("location:home.php");
+            header("location:index.php");
         }
 
         else { 

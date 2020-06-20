@@ -1,9 +1,9 @@
 <?php 
+    include_once './submit_functions.php';
     session_start(); 
     if(!isset($_SESSION['email']) and (!isset($_SESSION['is_superadmin'])) ){ 
         header("location:login.php");
     }
-    include_once './submit_functions.php'; 
 ?>
 <!doctype html>
 <html lang="en">
@@ -89,12 +89,10 @@
                   <tr>
                     <td><?php echo $school_row['school_name'] ?></td>
                     <td><?php echo $school_row['city'] ?></td>
-                    <td><?php echo $school_row['country'] ?></td>
+                    <td><?php echo get_country_name($school_row['country']); ?></td>
                     <td><?php echo $school_row['currency'] ?></td>
                     <td>
-                        
                         <a href="update_school.php?id=<?php echo $school_row['id'] ?>" class="btn btn-link" onclick="return confirm('Are you sure to Update School?')"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-
                         <a href="delete.php?page=schools&id=<?php echo $school_row['id'] ?>" class="btn btn-link" onclick="return confirm('Are you sure to delete School?')"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </td>
                   </tr>
@@ -197,16 +195,22 @@
             </div>
             <div class="form-group">
                 <label class="input__label">About School</label>
-                <textarea class="form-control input-style" name="about" row=4></textarea>
+                <textarea class="form-control input-style" name="about" rows=4></textarea>
             </div>
             <div class="form-row">
 				<div class="form-group col-md-6">
 					<label class="input__label">School Logo</label>
-					<input type="file" name="school_logo" class="form-control">
+					<div class="custom-file">
+              <input type="file" class="custom-file-input" name="school_logo" id="validatedCustomFile" required>
+              <label class="custom-file-label" for="validatedCustomFile">Choose School logo image...</label>
+          </div>
 				</div>
 				<div class="form-group col-md-6">
 					<label class="input__label">Cover Image of School</label>
-					<input type="file" name="cover_img" class="form-control">
+					<div class="custom-file">
+              <input type="file" class="custom-file-input" name="cover_img" id="validatedCustomFile" required>
+              <label class="custom-file-label" for="validatedCustomFile">Choose Cover image of School...</label>
+          </div>
 				</div>
             </div>
           
