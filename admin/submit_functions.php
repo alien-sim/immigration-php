@@ -11,7 +11,8 @@
         	session_start();
 			$_SESSION['email'] 			= $row[1];
 			$_SESSION['is_superadmin'] 	= $row[4];
-        	$_SESSION['username'] 		= $username;
+			$_SESSION['username'] 		= $username;
+			$_SESSION['user_id']		= $row[0];
             header("location:index.php");
         }
 
@@ -53,9 +54,11 @@
         $other_fees = mysqli_real_escape_string($db,$_POST['other_fees']);
     	$level_program = mysqli_real_escape_string($db,$_POST['level_program']);
     	$length_program = mysqli_real_escape_string($db,$_POST['length_program']);
-        $school_id = $_POST['school_id'];
+		$school_id = $_POST['school_id'];
+		$application_fee = $_POST['application_fee'];
+		$tution_fee = $_POST['tution_fee'];
 
-    	$query = $db->query("insert into programs (program_name, description, program_level, length_program, school_id, additional_requirements, other_fees) values('$program_name', '$description', '$level_program', '$length_program','$school_id','$admission_req', '$other_fees') ");
+    	$query = $db->query("insert into programs (program_name, description, program_level, length_program, school_id, additional_requirements, other_fees, tution_fee, application_fee) values('$program_name', '$description', '$level_program', '$length_program','$school_id','$admission_req', '$other_fees', '$tution_fee', '$application_fee') ");
     	if($query){
     		header("location:programs.php");
     	}else{

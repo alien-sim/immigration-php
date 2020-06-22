@@ -24,7 +24,7 @@
                   <li class="user-info">
                     <h5 class="user-name">John Deo</h5>
                   </li>
-                  <li> <a href="#"><i class="lnr lnr-user"></i>My Profile</a> </li>
+                  <li> <a href="profile.php"><i class="lnr lnr-user"></i>My Profile</a> </li>
                   <li class="logout"> <a href="logout.php"><i class="fa fa-power-off"></i> Logout</a> </li>
                 </ul>
               </li>

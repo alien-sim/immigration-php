@@ -87,7 +87,18 @@
             <div class="form-group">
                 <label class="input__label">Program Description</label>
                 <textarea class="form-control input-style" name="description" row=2><?php echo $program['description'] ?> </textarea>
-            </div>  
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="input__label">Tution Fee</label>
+                <input type="number" class="form-control input-style" value=<?php echo $program['tution_fee'] ?> name="tution_fee" placeholder="Tution Fee" required="required">
+              </div>
+              <div class="form-group col-md-6">
+                <label class="input__label">Application Fee</label>
+                <input type="number" class="form-control input-style" name="application_fee" value=<?php echo $program['application_fee'] ?> placeholder="Application Fee" required="required">
+              </div>
+            </div>
             
             <div class="form-row">
               <div class="form-group col-md-6">

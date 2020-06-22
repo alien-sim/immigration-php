@@ -25,8 +25,7 @@
 
       <!-- sidebar nav start -->
       <ul class="nav nav-pills nav-stacked custom-nav">
-        <li><a href="index.html"><i class="fa fa-tachometer"></i><span> Dashboard</span></a>
-        </li>
+        <li><a href="index.html"><i class="fa fa-tachometer"></i><span> Dashboard</span></a></li>
         <?php
           if($_SESSION['is_superadmin']){
             ?>
@@ -37,7 +36,7 @@
             <?php
           }
         ?>
-       
+        <li><a href="search.php"><i class="fa fa-search"></i><span> Search </span></a></li>
       </ul>
       <!-- //sidebar nav end -->
       <!-- toggle button start -->

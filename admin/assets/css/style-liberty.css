@@ -13623,10 +13623,10 @@ h3.number {
   background-color: #fff;
   color: #1b2740;
   position: relative;
-  border: 2px solid #1b2740;
+  /* border: 2px solid #1b2740; */
   border-radius: 5px; }
 
-.nav-item.nav-link.active:before {
+/* .nav-item.nav-link.active:before {
   content: '';
   width: 12px;
   height: 12px;
@@ -13639,7 +13639,7 @@ h3.number {
   bottom: -8px;
   left: 0px;
   right: 0px;
-  margin: 0px auto; }
+  margin: 0px auto; } */
 
 .profile__title {
   font-weight: 300;

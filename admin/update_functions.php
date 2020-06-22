@@ -51,9 +51,11 @@
         $other_fees = mysqli_real_escape_string($db,$_POST['other_fees']);
     	$level_program = mysqli_real_escape_string($db,$_POST['level_program']);
     	$length_program = mysqli_real_escape_string($db,$_POST['length_program']);
-        $school_id = $_POST['school_id'];
+		$school_id = $_POST['school_id'];
+		$application_fee = $_POST['application_fee'];
+		$tution_fee = $_POST['tution_fee'];
 
-    	$query = $db->query("update programs set program_name='".$program_name."', description='".$description."', additional_requirements='".$admission_req."', other_fees='".$other_fees."', program_level='".$level_program."', length_program='".$length_program."', school_id='".$school_id."' where id='".$idd."' ");
+    	$query = $db->query("update programs set program_name='".$program_name."', description='".$description."', additional_requirements='".$admission_req."', other_fees='".$other_fees."', program_level='".$level_program."', length_program='".$length_program."', school_id='".$school_id."', application_fee='".$application_fee."', tution_fee='".$tution_fee."' where id='".$idd."' ");
     	if($query){
     		header("location:programs.php");
     	}else{
