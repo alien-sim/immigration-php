@@ -70,8 +70,8 @@
                 <input type="text" class="form-control input-style" name="type" placeholder="e.g. Public or University etc." value="<?php echo $school['type'] ?>" required="required">
               </div>
               <div class="form-group col-md-4">
-                  <label class="input__label">Currency</label>
-                <input type="text" class="form-control input-style" name="currency" placeholder="e.g. $" value="<?php echo $school['currency'] ?>" required="required">
+                  <label class="input__label">DLI Number</label>
+                  <input type="text" class="form-control input-style" name="dli" value="<?php echo $school['dli'] ?>" placeholder="e.g. O242632228347">
               </div>
 
             </div> 
@@ -155,7 +155,17 @@
                 </div>
                 <input type="hidden" value="<?php echo $school['cover_img'] ?>" name="old_cover"/>
               </div>
+
             </div>
+              <div class="form-group">
+                <label class="input__label">Gallery Images <span class="text-muted">(Atleast select 4 images)</span></label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="gallery_img[]" multiple >
+                    <label class="custom-file-label">Choose 4 Gallery Images</label>
+                </div>
+                <input type="hidden" value="<?php echo $school['gallery_img'] ?>" name="old_gallery"/>
+              </div>
+
 
             <div class="form-group text-right">
               <button type="submit" name="update_school" class="btn btn-primary btn-style">Update</button>

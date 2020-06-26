@@ -80,7 +80,7 @@
     	$living_cost = $_POST['living_cost'];
     	$application_fee = $_POST['application_fee'];
     	$address = mysqli_real_escape_string($db, $_POST['address']);
-		$currency = mysqli_real_escape_string($db, $_POST['currency']);
+		$dli = mysqli_real_escape_string($db, $_POST['dli']);
 		
 		$ts = get_timestamp();
 		
@@ -94,10 +94,18 @@
 		$cover_file = $cover_dir . $cover_filename;
 		move_uploaded_file($_FILES['cover_img']['tmp_name'], $cover_file);
 
-		echo '<script>console.log("' .$logo_file. '"); </script>'; 
-		echo '<script>console.log("' .$file_name. '"); </script>'; 
+		$gallery_dir = "../media/gallery/";
+		$gallery_arr = [];
+		foreach($_FILES["gallery_img"]["tmp_name"] as $key=>$tmp_name) {
+			$gallery_filename = $ts . "_" . basename($_FILES["gallery_img"]["name"][$key]);
+			$gallery_file = $gallery_dir . $gallery_filename;
+			move_uploaded_file($_FILES['gallery_img']['tmp_name'][$key], $gallery_file);
+			array_push($gallery_arr, $gallery_filename);
+			
+		} 
+		$gallery_str = implode(",",$gallery_arr);
 
-    	$query = $db->query("insert into schools (school_name, founded, type, total_students, intrested_students, city, country, about, address, cost_of_living_yearly, tution_fee_yearly, application_fee, currency, school_logo, cover_img) values('$school_name', '$founded', '$type', '$total_students', '$intrested_students', '$city', '$country', '$about', '$address', '$living_cost', '$tution_fee', '$application_fee', '$currency', '$logo_filename', '$cover_filename') ");
+    	$query = $db->query("insert into schools (school_name, founded, type, total_students, intrested_students, city, country, about, address, cost_of_living_yearly, tution_fee_yearly, application_fee, dli, school_logo, cover_img,gallery) values('$school_name', '$founded', '$type', '$total_students', '$intrested_students', '$city', '$country', '$about', '$address', '$living_cost', '$tution_fee', '$application_fee', '$dli', '$logo_filename', '$cover_filename','$gallery_str') ");
     	if($query){
     		header("location:schools.php");
     	}else{

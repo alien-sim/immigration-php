@@ -14,7 +14,7 @@
     	$living_cost = $_POST['living_cost'];
     	$application_fee = $_POST['application_fee'];
     	$address = mysqli_real_escape_string($db, $_POST['address']);
-		$currency = mysqli_real_escape_string($db, $_POST['currency']);
+		$dli = mysqli_real_escape_string($db, $_POST['dli']);
 		
 		$ts = get_timestamp();
 
@@ -35,11 +35,27 @@
 			move_uploaded_file($_FILES['cover_img']['tmp_name'], $cover_file);
 		}else{
 			$cover_filename = $_POST['old_cover'];
-		} 
+		}
+		if($_FILES['gallery_img']['name']){
+			$gallery_dir = "../media/gallery/";
+			$gallery_arr = [];
+			foreach($_FILES["gallery_img"]["tmp_name"] as $key=>$tmp_name) {
+				$gallery_filename = $ts . "_" . basename($_FILES["gallery_img"]["name"][$key]);
+				$gallery_file = $gallery_dir . $gallery_filename;
+				move_uploaded_file($_FILES['gallery_img']['tmp_name'][$key], $gallery_file);
+				array_push($gallery_arr, $gallery_filename);
+			}
+			$gallery_str = implode(",",$gallery_arr);
+		}else{
+			$gallery_str = $_POST['old_gallery'];
+		}
 
-        $sql="update schools set school_name='".$school_name."', founded='".$founded."', type='".$type."', total_students='".$total_students."', intrested_students = '".$intrested_students."', city='".$city."', country='".$country."', about='".$about."', tution_fee_yearly = '".$tution_fee."', cost_of_living_yearly = '".$living_cost."', application_fee='".$application_fee."', address='".$address."', currency='".$currency."', school_logo='".$logo_filename."', cover_img='".$cover_filename."' where id='".$idd."'";
+        $sql="update schools set school_name='".$school_name."', founded='".$founded."', type='".$type."', total_students='".$total_students."', intrested_students = '".$intrested_students."', city='".$city."', country='".$country."', about='".$about."', tution_fee_yearly = '".$tution_fee."', cost_of_living_yearly = '".$living_cost."', application_fee='".$application_fee."', address='".$address."', dli='".$dli."', school_logo='".$logo_filename."', cover_img='".$cover_filename."', gallery='".$gallery_str."' where id='".$idd."'";
 		if(mysqli_query($db,$sql)){
 			header("location:schools.php");
+		}
+		else{
+			echo mysqli_error($db);
 		}
 	}
 

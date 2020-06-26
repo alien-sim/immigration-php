@@ -76,7 +76,7 @@
               <th>School Name</th>
               <th>City </th>
               <th>Country</th>
-              <th>Currency</th>
+              <!-- <th>Currency</th> -->
               <th width="10%">Actions</th>
             </tr>
           </thead>
@@ -90,7 +90,7 @@
                     <td><?php echo $school_row['school_name'] ?></td>
                     <td><?php echo $school_row['city'] ?></td>
                     <td><?php echo get_country_name($school_row['country']); ?></td>
-                    <td><?php echo $school_row['currency'] ?></td>
+                    <!-- <td><?php #echo $school_row['currency'] ?></td> -->
                     <td>
                         <a href="update_school.php?id=<?php echo $school_row['id'] ?>" class="btn btn-link" onclick="return confirm('Are you sure to Update School?')"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                         <a href="delete.php?page=schools&id=<?php echo $school_row['id'] ?>" class="btn btn-link" onclick="return confirm('Are you sure to delete School?')"><i class="fa fa-trash" aria-hidden="true"></i></a>
@@ -136,8 +136,8 @@
                 <input type="text" class="form-control input-style" name="type" placeholder="e.g. Public or University etc." required="required">
               </div>
               <div class="form-group col-md-4">
-                  <label class="input__label">Currency</label>
-                <input type="text" class="form-control input-style" name="currency" placeholder="e.g. $" required="required">
+                  <label class="input__label">DLI Number</label>
+                  <input type="text" class="form-control input-style" name="dli" placeholder="e.g. O242632228347">
               </div>
 
             </div> 
@@ -163,19 +163,18 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="input__label">Country</label>
-                    <!-- <input type="text" class="form-control input-style" name="country" placeholder="Country" required="required"> -->
-					<select name="country" class="custom-select input-style" required>
-			  			<option value="null">Select Country</option>
-			  			<?php
-							$country = "SELECT * from `countries`";
-							$country_result = $db->query($country);
-							while($country_row = $country_result->fetch_assoc()) {
-							  ?>
-							  <option value="<?php echo $country_row['id'] ?>"><?php echo $country_row['country_name'] ?></option>
-							  <?php
-							}
-						?>
-					</select>
+                    <select name="country" class="custom-select input-style" required>
+                        <option value="null">Select Country</option>
+                        <?php
+                        $country = "SELECT * from `countries`";
+                        $country_result = $db->query($country);
+                        while($country_row = $country_result->fetch_assoc()) {
+                          ?>
+                          <option value="<?php echo $country_row['id'] ?>"><?php echo $country_row['country_name'] ?></option>
+                          <?php
+                        }
+                      ?>
+                    </select>
                 </div>
             </div>
 
@@ -198,20 +197,28 @@
                 <textarea class="form-control input-style" name="about" rows=4></textarea>
             </div>
             <div class="form-row">
-				<div class="form-group col-md-6">
-					<label class="input__label">School Logo</label>
-					<div class="custom-file">
-              <input type="file" class="custom-file-input" name="school_logo" id="validatedCustomFile" required>
-              <label class="custom-file-label" for="validatedCustomFile">Choose School logo image...</label>
-          </div>
-				</div>
-				<div class="form-group col-md-6">
-					<label class="input__label">Cover Image of School</label>
-					<div class="custom-file">
-              <input type="file" class="custom-file-input" name="cover_img" id="validatedCustomFile" required>
-              <label class="custom-file-label" for="validatedCustomFile">Choose Cover image of School...</label>
-          </div>
-				</div>
+              <div class="form-group col-md-6">
+                <label class="input__label">School Logo</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="school_logo" id="validatedCustomFile1" required>
+                    <label class="custom-file-label" for="validatedCustomFile1">Choose School logo image...</label>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label class="input__label">Cover Image of School</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="cover_img" id="validatedCustomFile2" required>
+                    <label class="custom-file-label" for="validatedCustomFile2">Choose Cover image of School...</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+                <label class="input__label">Gallery Images <span class="text-muted">(Atleast select 4 images)</span></label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="gallery_img[]" id="validatedCustomFile3" multiple required>
+                    <label class="custom-file-label" for="validatedCustomFile3">Choose 4 Gallery Images</label>
+                </div>
             </div>
           
         </div>
