@@ -4,20 +4,20 @@
 
     <!-- logo start -->
     <div class="logo">
-      <h1><a href="index.html">Collective</a></h1>
+      <h1><a href="index.php">Express Board</a></h1>
     </div>
 
   <!-- if logo is image enable this -->
     <!-- image logo -->
     <!-- <div class="logo">
-      <a href="index.html">
+      <a href="index.php">
         <img src="image-path" alt="Your logo" title="Your logo" class="img-fluid" style="height:35px;" />
       </a>
     </div> -->
     <!-- //image logo -->
 
     <div class="logo-icon text-center">
-      <a href="index.html" title="logo"><img src="assets/images/logo.png" alt="logo-icon"> </a>
+      <a href="index.php" title="logo"><img src="assets/images/logo.png" alt="logo-icon"> </a>
     </div>
     <!-- //logo end -->
 
@@ -25,7 +25,7 @@
 
       <!-- sidebar nav start -->
       <ul class="nav nav-pills nav-stacked custom-nav">
-        <li><a href="index.html"><i class="fa fa-tachometer"></i><span> Dashboard</span></a></li>
+        <li><a href="index.php"><i class="fa fa-tachometer"></i><span> Dashboard</span></a></li>
         <?php
           if($_SESSION['is_superadmin']){
             ?>

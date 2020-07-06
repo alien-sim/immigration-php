@@ -22,7 +22,7 @@
 </head>
 <style>
     /* The Modal (background) */
-.modal {
+#myModal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -36,7 +36,7 @@
 }
 
 /* Modal Content */
-.modal-content {
+#myModal .modal-content {
   position: relative;
   background-color: black;
   margin: auto;
@@ -123,6 +123,10 @@
         $result_c = mysqli_query($db, $sql_c);
         $country = mysqli_fetch_array($result_c);
 
+        $sql_f = "select * from features where id=".$school['features'];
+        $result_f = mysqli_query($db, $sql_f);
+        $feature = mysqli_fetch_array($result_f);
+
         $total_fees = number_format(($school['tution_fee_yearly']+$school['cost_of_living_yearly']+$school['application_fee']),2);
     ?>
 
@@ -133,15 +137,15 @@
     <!-- breadcrumbs -->
     <nav aria-label="breadcrumb" class="mb-4">
       <ol class="breadcrumb my-breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page"><?php echo $school['school_name'] ?></li>
       </ol>
     </nav>
     <!-- //breadcrumbs -->
     <!-- blank block -->
     <div class="card">
-      <div class="card-body py-0">
-        <div class="row">
+      <div class="card-body p-0">
+        <div class="col-md-12 px-0">
             <div class="w-100 cover-image" style="background-image:url('../media/cover_img/<?php echo $school['cover_img'] ?>')"></div>
             <div class="col-md-12 school-gallery position-absolute">
                 <div class="row">
@@ -175,7 +179,7 @@
                 <img src="../media/logos/<?php echo $school['school_logo'] ?>" class="school-logo" >
                 <h4><?php echo $school['school_name'] ?></h4>
                 <img src="../media/flags/<?php echo $country['country_flag'] ?>" class="country-flag">
-                <?php echo $school['city'] ?>
+                <?php echo $school['city'].", ".$country['country_name'] ?>
                 <?php
                   if($school['dli']){
                     ?>
@@ -216,6 +220,72 @@
             </div>
 
             <div class="col-md-12 divided-cols">
+                  <h3>Features</h3>
+                  <hr>
+                  <div class="row feature-cols mb-3">
+                    <div class="col" data-toggle="modal" data-target="#workPermit">
+                      <i class="fa fa-graduation-cap"></i>
+                      <?php
+                        if($feature['work_permit']){
+                          ?><i class="fa fa-check"></i><?php
+                        }else{
+                          ?><i class="fa fa-ban"></i><?php
+                        }
+                      ?>
+                      <h6>Post graduation work permit</h6>
+                    </div>
+
+                    <div class="col" data-toggle="modal" data-target="#internship">
+                      <i class="fa fa-suitcase"></i>
+                      <?php
+                        if($feature['internship']){
+                          ?><i class="fa fa-check"></i><?php
+                        }else{
+                          ?><i class="fa fa-ban"></i><?php
+                        }
+                      ?>
+                      <h6>Co-op / Internship Participation</h6>
+                    </div>
+                    <div class="col" data-toggle="modal" data-target="#workStudying">
+                      <i class="fa fa-usd"></i>
+                      <?php
+                        if($feature['work_study']){
+                          ?><i class="fa fa-check"></i><?php
+                        }else{
+                          ?><i class="fa fa-ban"></i><?php
+                        }
+                      ?>
+                      <h6>Work While Studying</h6>  
+                    </div>
+
+                    <div class="col" data-toggle="modal" data-target="#offerLetter">
+                      <i class="fa fa-envelope"></i>
+                      <?php
+                        if($feature['offer_letter']){
+                          ?><i class="fa fa-check"></i><?php
+                        }else{
+                          ?><i class="fa fa-ban"></i><?php
+                        }
+                      ?>
+                      <h6>Conditional Offer Letter</h6>  
+                    </div>
+                    <div class="col" data-toggle="modal" data-target="#accomodation">
+                      <i class="fa fa-home"></i>
+                      <?php
+                        if($feature['accomodation']){
+                          ?><i class="fa fa-check"></i><?php
+                        }else{
+                          ?><i class="fa fa-ban"></i><?php
+                        }
+                      ?>
+                      <h6>Type of Accomodation</h6>
+                    </div>
+                  </div>
+                  <label class="feature-label text-muted">* Information listed is subject to change without notice and should not be construed as a commitment by Express Board.</label>
+                  <hr>
+            </div>
+
+            <div class="col-md-12 divided-cols">
                 <h3>Location</h3>
                 <p> <i class="fa fa-map-marker"></i> <?php  echo $school['address'] ?></p>
                 <div class="col-md-12 gmap_canvas">
@@ -231,19 +301,19 @@
                 </div>
                 <div class="row mx-3 mt-3 pb-2 tution-row">
                     <div class="col-md-6 pl-0 text-left">Avg Cost of Tuition/Year</div>
-                    <div class="col-md-6 pr-0 text-right"><?php echo number_format($school['tution_fee_yearly'],2) ?> <?php echo $country['country_currency'] ?></div>
+                    <div class="col-md-6 pr-0 text-right"><?php echo $country['currency_symbol']." ".number_format($school['tution_fee_yearly'],2) ?> <?php echo $country['country_currency'] ?></div>
                 </div>
                 <div class="row mx-3 mt-3 pb-2 tution-row">
                     <div class="col-md-6 pl-0 text-left">Cost of Living/Year</div>
-                    <div class="col-md-6 pr-0 text-right"><?php echo number_format($school['cost_of_living_yearly'],2) ?> <?php echo $country['country_currency'] ?></div>
+                    <div class="col-md-6 pr-0 text-right"><?php echo $country['currency_symbol']." ".number_format($school['cost_of_living_yearly'],2) ?> <?php echo $country['country_currency'] ?></div>
                 </div>
                 <div class="row mx-3 mt-3 pb-2 tution-row">
                     <div class="col-md-6 pl-0 text-left">* Application Fee</div>
-                    <div class="col-md-6 pr-0 text-right"><?php echo number_format($school['application_fee'],2) ?> <?php echo $country['country_currency'] ?></div>
+                    <div class="col-md-6 pr-0 text-right"><?php echo $country['currency_symbol']." ".number_format($school['application_fee'],2) ?> <?php echo $country['country_currency'] ?></div>
                 </div>
                 <div class="row mx-3 py-3 financials-foot">
                     <div class="col-md-6 pl-0 text-left ">Estimated Total/Year</div>
-                    <div class="col-md-6 pr-0 text-right"><?php echo $total_fees ?> <?php echo $country['country_currency'] ?></div>
+                    <div class="col-md-6 pr-0 text-right"><?php echo $country['currency_symbol']." ".$total_fees." ".$country['country_currency'] ?></div>
                 </div>
             </div>
         </div>
@@ -264,21 +334,21 @@
                         <div class="col">
                             <label>
                                 <i class="fa fa-credit-card" aria-hidden="true"></i>
-                                Tution Fee:
+                                <b>Tution Fee :</b>
                             </label>
-                            <span><?php echo $program_row['tution_fee'] ?> </span>
+                            <span><?php echo $country['currency_symbol']." ".number_format($program_row['tution_fee'],2)." ". $country['country_currency'] ?> </span>
                         </div>
                         <div class="col">
                             <label>
                                 <i class="fa fa-money" aria-hidden="true"></i>
-                                Application Fee:
+                                <b>Application Fee :</b>
                             </label>
-                            <span><?php echo $program_row['application_fee'] ?> </span>
+                            <span><?php echo $country['currency_symbol']." ".number_format($program_row['application_fee'],2)." ". $country['country_currency']?> </span>
                         </div>
                         <div class="col">
                             <label>
                                 <i class="fa fa-signal" aria-hidden="true"></i>
-                                Program Level:
+                                <b>Program Level :</b>
                             </label>
                             <span><?php echo $program_row['program_level'] ?> </span>
                         </div>
@@ -292,6 +362,137 @@
   </div>
   <!-- //content -->
 </div>
+<!-- workPermit Modal -->
+<div class="modal fade feature-modal" id="workPermit" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        
+        <div class="modal-body">
+          <h5>
+          <?php
+            if($feature['work_permit']){
+              $verb = 'Eligible';
+              ?><i class="fa fa-check"></i><?php
+            }else{
+              $verb = 'Ineligible';
+              ?><i class="fa fa-ban"></i><?php
+            }
+          ?>
+          <?php echo $verb ?>  for Post Graduation Work Permit</h5>
+          <p>The Post-Graduation Work Permit Program (PGWPP) allows students who have graduated from a participating Canadian post-secondary institution to gain valuable Canadian work experience.</p>
+        </div>
+        
+      </div>
+    </div>
+</div>
+
+<!-- internship Modal -->
+<div class="modal fade feature-modal" id="internship" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        
+        <div class="modal-body">
+          <h5>
+          <?php
+            if($feature['internship']){
+              $verb = ' ';
+              ?><i class="fa fa-check"></i><?php
+            }else{
+              $verb = ' No ';
+              ?><i class="fa fa-ban"></i><?php
+            }
+          echo $verb ?>Co-op / Internship Participation</h5>
+          <p>Cooperative education (or co-operative education) and internships are methods of combining classroom-based education with practical work experience. A cooperative education experience ("co-op"), provides academic credit for structured job experience. Co-ops are full-time, paid or unpaid positions. Internships may be full-time or part-time, paid or unpaid positions.</p>
+        </div>
+        
+      </div>
+    </div>
+</div>
+
+<!-- workStudying Modal -->
+<div class="modal fade feature-modal" id="workStudying" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        
+        <div class="modal-body">
+          <h5>
+          <?php
+            if($feature['work_study']){
+              $verb = ' ';
+              $para = '<p>Full-time undergraduate and post-graduate international students can work anywhere on or off campus without a work permit. The rules around the number of hours a student will be allowed to work may vary based on the country the student chooses to study in. International students are typically able to work up to 20 hours a week.</p>';
+              ?><i class="fa fa-check"></i><?php
+            }else{
+              $verb = ' Ineligible for ';
+              $para = '';
+              ?><i class="fa fa-ban"></i><?php
+            }
+          echo $verb ?>Work While Studying </h5>
+          <?php echo $para ?>
+        </div>
+        
+      </div>
+    </div>
+</div>
+
+<!-- offerLetter Modal -->
+<div class="modal fade feature-modal" id="offerLetter" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        
+        <div class="modal-body">
+          <h5>
+          <?php
+            if($feature['offer_letter']){
+              $verb = ' ';
+              $para = '<p>Even if you do NOT meet our minimum English requirement (IELTS or TOEFL), you still can get conditionally accepted in the program of your choice with the condition of completing our English program prior to starting your chosen program.</p>';
+              ?><i class="fa fa-check"></i><?php
+            }else{
+              $verb = ' ';
+              $para = '<p>Conditional Admission is not available for this school</p>';
+              ?><i class="fa fa-ban"></i><?php
+            }
+          echo $verb ?>Conditional Offer Letter  </h5>
+          <?php echo $para ?>
+        </div>
+        
+      </div>
+    </div>
+</div>
+
+<!-- accomodation Modal -->
+<div class="modal fade feature-modal" id="accomodation" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        
+        <div class="modal-body">
+          <h5>
+          <?php
+            if($feature['accomodation']){
+              $verb = ' ';
+              ?><i class="fa fa-check"></i><?php
+            }else{
+              $verb = ' ';
+              ?><i class="fa fa-ban"></i><?php
+            }
+          echo $verb ?>Type of Accommodation  </h5>
+          <p>
+            Students need to plan their accommodations well in advance of their arrival as all accommodation options fill up quickly, well before the start of the semester.</p>
+            <br>
+            <h6>On-Campus Residence Accommodations</h6>
+            <p>On-Campus residence accommodations are provided per discretion by the school.</p>
+            <br>
+            <h6>Off-Campus Accommodations</h6>
+            <p>The local area has a variety of off-campus rental housing options including single homes, duplexes, apartments and rooms for rent. Students wishing to live off-campus need to research availability on their own and should arrive well before the start of term to do so.</p>
+            <br>
+            <h6>Homestay</h6>
+            <p>There are a wide variety of homestay options available, and our partners do their best to match students and hosts according to their interests and preferences. Homestay hosts include single people, young couples with children and pets, and older couples. All homestay accommodations have been inspected, and all adults in the home have completed a required criminal reference check.</p>
+          
+        </div>
+        
+      </div>
+    </div>
+</div>
+
 <!-- Gallery modal -->
 <div id="myModal" class="modal">
     <span class="close cursor" onclick="closeModal()">&times;</span>

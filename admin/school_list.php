@@ -1,4 +1,4 @@
-<div class="tab-pane fade show active my-4 row" id="nav-school" role="tabpanel" aria-labelledby="nav-school-tab">
+<div class="tab-pane fade my-4 row" id="nav-school" role="tabpanel" aria-labelledby="nav-school-tab">
     <?php
         $schools = "SELECT * from `schools`";
         $school_result = $db->query($schools);

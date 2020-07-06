@@ -1,6 +1,17 @@
 <?php
 	include_once './config.php';
 	if(isset($_POST['update_school'])){
+
+		$workPermit 	= isset($_POST['workPermit']) ? 1 : 0;
+		$internship 	= isset($_POST['internship']) ? 1 : 0;
+		$workStudy 		= isset($_POST['workStudy']) ? 1 : 0;
+		$offerLetter 	= isset($_POST['offerLetter']) ? 1 : 0;
+		$accomodation 	= isset($_POST['accomodation']) ? 1 : 0;
+
+		$feature_id = $_POST['feature_id'];
+		$sqlf="update features set work_permit='".$workPermit."', work_study='".$workStudy."', accomodation='".$accomodation."', internship='".$internship."', offer_letter='".$offerLetter."' where id='".$feature_id."'";
+		mysqli_query($db,$sqlf);
+
 		$idd = $_POST['idd'];
 		$school_name = mysqli_real_escape_string($db,$_POST['school_name']);
     	$founded = $_POST['founded'];

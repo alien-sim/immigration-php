@@ -68,19 +68,30 @@
 
     // Add School
     if(isset($_POST['add_school'])){
-    	$school_name = mysqli_real_escape_string($db,$_POST['school_name']);
-    	$founded = $_POST['founded'];
-    	$type = $_POST['type'];
+
+		$workPermit 	= isset($_POST['workPermit']) ? 1 : 0;
+		$internship 	= isset($_POST['internship']) ? 1 : 0;
+		$workStudy 		= isset($_POST['workStudy']) ? 1 : 0;
+		$offerLetter 	= isset($_POST['offerLetter']) ? 1 : 0;
+		$accomodation 	= isset($_POST['accomodation']) ? 1 : 0;
+
+		$queryf = $db->query("insert into features (work_permit, work_study, accomodation, internship, offer_letter) values('$workPermit', '$workStudy', '$accomodation', '$internship', '$offerLetter') ");
+    	if($queryf){
+    		$feature_id = $db->insert_id;
+    	}
+    	$school_name 	= mysqli_real_escape_string($db,$_POST['school_name']);
+    	$founded 		= $_POST['founded'];
+    	$type 			= $_POST['type'];
     	$total_students = $_POST['total_students'];
     	$intrested_students = $_POST['int_students'];
-    	$city = $_POST['city'];
-    	$country = $_POST['country'];
-    	$about = mysqli_real_escape_string($db,$_POST['about']);
-    	$tution_fee = $_POST['tution_fee'];
-    	$living_cost = $_POST['living_cost'];
+    	$city 			= $_POST['city'];
+    	$country 		= $_POST['country'];
+    	$about 			= mysqli_real_escape_string($db,$_POST['about']);
+    	$tution_fee 	= $_POST['tution_fee'];
+    	$living_cost 	= $_POST['living_cost'];
     	$application_fee = $_POST['application_fee'];
-    	$address = mysqli_real_escape_string($db, $_POST['address']);
-		$dli = mysqli_real_escape_string($db, $_POST['dli']);
+    	$address 		= mysqli_real_escape_string($db, $_POST['address']);
+		$dli 			= mysqli_real_escape_string($db, $_POST['dli']);
 		
 		$ts = get_timestamp();
 		
@@ -105,7 +116,7 @@
 		} 
 		$gallery_str = implode(",",$gallery_arr);
 
-    	$query = $db->query("insert into schools (school_name, founded, type, total_students, intrested_students, city, country, about, address, cost_of_living_yearly, tution_fee_yearly, application_fee, dli, school_logo, cover_img,gallery) values('$school_name', '$founded', '$type', '$total_students', '$intrested_students', '$city', '$country', '$about', '$address', '$living_cost', '$tution_fee', '$application_fee', '$dli', '$logo_filename', '$cover_filename','$gallery_str') ");
+    	$query = $db->query("insert into schools (school_name, founded, type, total_students, intrested_students, city, country, about, address, cost_of_living_yearly, tution_fee_yearly, application_fee, dli, school_logo, cover_img, gallery, features) values('$school_name', '$founded', '$type', '$total_students', '$intrested_students', '$city', '$country', '$about', '$address', '$living_cost', '$tution_fee', '$application_fee', '$dli', '$logo_filename', '$cover_filename','$gallery_str', '$feature_id') ");
     	if($query){
     		header("location:schools.php");
     	}else{

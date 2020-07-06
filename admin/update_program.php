@@ -14,7 +14,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Collective Admin Panel a Flat Bootstrap Responsive Website Template | Blank Page </title>
+  <title>Update Program </title>
 
   <!-- CSS files import -->
   <?php 
@@ -38,7 +38,7 @@
     <!-- breadcrumbs -->
     <nav aria-label="breadcrumb" class="mb-4">
       <ol class="breadcrumb my-breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
         <li class="breadcrumb-item"><a href="programs.php">Programs</a></li>
         <li class="breadcrumb-item active" aria-current="page">Update Programs</li>
       </ol>
@@ -105,10 +105,13 @@
                 <label class="input__label">Level of Program</label>
                 <select class="custom-select input-style" name="level_program" required>
                     <option value="<?php echo $program['program_level'] ?>" selected><?php echo $program['program_level'] ?> </option>
-                    <option value="Postgraduate Certificate / Master's Degree">Postgraduate Certificate / Master's Degree</option>
                     <option value="English as Second Language (ESL)">English as Second Language (ESL)</option>
+                    <option value="1-Year Post Secondary Diploma">1-Year Post Secondary Diploma</option>
+                    <option value="2-Year Undegraduate Diploma">2 Year Undegraduate Diploma</option>
                     <option value="3-Year Bachelor's Degree">3-Year Bachelor's Degree</option>
+                    <option value="3-Year Undergraduate Advance Diploma">3-Year Undergraduate Advance Diploma</option>
                     <option value="4-Year Bachelor's Degree">4-Year Bachelor's Degree</option>
+                    <option value="Postgraduate Certificate / Master's Degree">Postgraduate Certificate / Master's Degree</option>
                 </select>
               </div>
               <div class="form-group col-md-6">

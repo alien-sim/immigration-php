@@ -37,7 +37,7 @@
     <!-- breadcrumbs -->
     <nav aria-label="breadcrumb" class="mb-4">
       <ol class="breadcrumb my-breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Programs</li>
       </ol>
     </nav>
@@ -164,10 +164,13 @@
               <div class="form-group col-md-6">
                 <label class="input__label">Level of Program</label>
                 <select class="custom-select input-style" name="level_program" required>
-                    <option value="Postgraduate Certificate / Master's Degree">Postgraduate Certificate / Master's Degree</option>
-                    <option value="English as Second Language (ESL)">English as Second Language (ESL)</option>
-                    <option value="3-Year Bachelor's Degree">3-Year Bachelor's Degree</option>
-                    <option value="4-Year Bachelor's Degree">4-Year Bachelor's Degree</option>
+                  <option value="English as Second Language (ESL)">English as Second Language (ESL)</option>
+                  <option value="1-Year Post Secondary Diploma">1-Year Post Secondary Diploma</option>
+                  <option value="2-Year Undegraduate Diploma">2 Year Undegraduate Diploma</option>
+                  <option value="3-Year Bachelor's Degree">3-Year Bachelor's Degree</option>
+                  <option value="3-Year Undergraduate Advance Diploma">3-Year Undergraduate Advance Diploma</option>
+                  <option value="4-Year Bachelor's Degree">4-Year Bachelor's Degree</option>
+                  <option value="Postgraduate Certificate / Master's Degree">Postgraduate Certificate / Master's Degree</option>
                 </select>
               </div>
               <div class="form-group col-md-6">

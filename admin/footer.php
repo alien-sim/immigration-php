@@ -5,7 +5,7 @@
 <!--footer section end-->
 
 <!-- move top -->
-<button onclick="topFunction()" id="movetop" class="bg-primary" title="Go to top">
+<button onclick="topFunction()" id="movetop" class="bg-primary1" title="Go to top">
   <span class="fa fa-angle-up"></span>
 </button>
 
@@ -35,28 +35,21 @@
 
 <script src="assets/js/jquery-3.3.1.min.js"></script>
 <script src="assets/js/jquery-1.10.2.min.js"></script>
+<!-- <script src="assets/js/jquery.js"></script> -->
 
 <!-- chart js -->
-<script src="assets/js/Chart.min.js"></script>
-<script src="assets/js/utils.js"></script>
+<!-- <script src="assets/js/Chart.min.js"></script> -->
+<!-- <script src="assets/js/utils.js"></script> -->
 <!-- //chart js -->
 
 <!-- Different scripts of charts.  Ex.Barchart, Stackedchart, Linechart, Piechart -->
-<script src="assets/js/bar.js"></script>
-<script src="assets/js/stacked.js"></script>
-<script src="assets/js/linechart.js"></script>
-<script src="assets/js/pie.js"></script>
+<!-- <script src="assets/js/bar.js"></script> -->
+<!-- <script src="assets/js/stacked.js"></script> -->
+<!-- <script src="assets/js/linechart.js"></script> -->
+<!-- <script src="assets/js/pie.js"></script> -->
 <!-- //Different scripts of charts.  Ex.Barchart, Stackedchart, Linechart, Piechart -->
 
 <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-
-<!-- data tables js -->
-<script>
-  $(document).ready(function () {
-    $('#example').DataTable();
-  });
-</script>
-<!-- //data tables js -->
 
 <script src="assets/js/jquery.dataTables.min.js"></script>
 
@@ -88,9 +81,12 @@
 			{ name: 'links', items: [ 'Link' ] },
 			{ name: 'insert', items: ['Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
 		]
-	}
-	CKEDITOR.replace( 'admission_req', toolbar);
-	CKEDITOR.replace( 'other_fees', toolbar);
+  }
+  var path_name = window.location.pathname
+  if (path_name.includes("programs.php") || path_name.includes("program.php")){
+    CKEDITOR.replace( 'admission_req', toolbar);
+    CKEDITOR.replace( 'other_fees', toolbar);
+  }
 </script>
 <!-- // CK Editor settings -->
 
@@ -116,5 +112,9 @@
 
 
 <!-- Bootstrap Core JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 <script src="assets/js/bootstrap.min.js"></script>
+<!-- Latest compiled and minified JavaScript Bootstrap Select -->
+<script src="assets/js/bootstrap-select.min.js"></script>
+<script src="assets/js/ajax_requests.js"></script>
 

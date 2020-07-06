@@ -13,7 +13,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Collective Admin Panel a Flat Bootstrap Responsive Website Template | Blank Page </title>
+  <title>Express Board </title>
 
   <!-- CSS files import -->
   <?php 
@@ -37,19 +37,16 @@
     <!-- breadcrumbs -->
     <nav aria-label="breadcrumb" class="mb-4">
       <ol class="breadcrumb my-breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Blank Page</li>
+        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
       </ol>
     </nav>
     <!-- //breadcrumbs -->
     <!-- blank block -->
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Title goes here</h5>
-        This is some text within a card body. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est dolorem
-        voluptatibus quia, dicta ad velit quae soluta sunt dolor enim quaerat numquam alias perspiciatis nam similique
-        expedita temporibus voluptate dolorum ullam facere, et eos. Fugit magnam aliquid animi at est ipsam quasi ipsa,
-        quas nostrum veritatis, labore modi temporibus iusto?
+        <h3 class="card-title">Hi <?php echo strtoupper($_SESSION['username']) ?>!</h3>
+          
       </div>
     </div>
     <!-- blank block -->

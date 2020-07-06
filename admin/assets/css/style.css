@@ -1,11 +1,19 @@
+.bg-red{background-color: var(--red);color:#fff}
 .school-card{margin-bottom: 30px;}
 .school-card img{height:60px; width: 60px; margin-bottom: 10px;}
 .school-program-card{margin-top: 15px;}
-.school-program-card .col-md-1 img{width:60%}
+/* .school-program-card .col-md-1 img{width:60%} */
+.school-program-card img{width:52px; margin-right: 20px;}
 .cover-image{height:300px; background-size:cover; background-position: center;}
+.program-cover{ background-size:cover; background-position: center;}
+.program-cover img{max-height:80px; margin-bottom:20px}
+.program-cover h3{color: white;text-shadow: rgb(0, 0, 0) 1px 1px 4px; margin:15px 0px 0px;}
+.program-cover h3 a{color: #6b76bb;}
+.program-cover h3 a:hover{color: #4755AB;}
+.program-cover .col-md-12{height: 100%; background-color:rgba(0,0,0,0.35);padding: 30px 15px;}
 .school-intro img.school-logo{width:80px; position: relative; top: -30px; }
 .school-intro img.country-flag{width:30px; }
-.school-intro h4{margin-top : -20px}
+.school-intro h4{margin-top : -20px; font-weight: bold; font-size: 28px;}
 .light-row{width:80%; margin: auto; border-radius:3px}
 .light-row-2{width:90%; margin: auto; border-radius:3px; font-size: 14px;}
 .light-row label{font-weight: bold;}
@@ -26,3 +34,52 @@
     box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.66);
 }
 label span.text-muted{font-size:11px}
+.program-details{margin-top: 30px;}
+
+.program-details .div-common .col-md-12.bg-light{padding: 15px; font-size: 14px;box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.12); border-radius: 3px;}
+.program-details table tr td{padding: 5px 0px;}
+.program-card-cover{box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.36)}
+.div-common p{font-size: 14px;}
+.program-head{margin-bottom: 10px;}
+.program-details .program2 ul li{color: var(--para-color);}
+.program-details .program2 h5.note{font-size:12px; font-weight: bold;}
+.program1 .w-100 i{font-size: 36px;animation: rotation 5s infinite linear;}
+@keyframes rotation {
+    from {
+      /* transform: rotate(0deg); */
+      transform: rotateY(0deg);
+    }
+    to {
+      /* transform: rotate(359deg); */
+      transform: rotateY(-360deg);
+    }
+}
+.school-program-card label{font-weight: bold; font-size: 18px; border-bottom: 2px solid var(--primary);}
+.feature-cols{padding: 15px; color: #6c757d; text-align: center;}
+.feature-cols:hover > .col:hover{color: black;cursor: pointer;}
+.feature-cols .col i.fa-ban, .feature-cols .col i.fa-check{font-size: 24px; position: absolute;top:0px;right: 12%;}
+.modal i.fa-ban, .feature-cols .col i.fa-ban{color: red;}
+.modal i.fa-check, .feature-cols .col i.fa-check{color: green;}
+.feature-cols .col i:first-child{font-size: 62px;}
+.feature-cols .col h6{margin-top: 20px; font-size: 14px;}
+.feature-label{font-size: 12px;}
+.feature-modal .modal-body{padding: 30px;}
+.feature-modal .modal-body h5{font-weight: bold;margin-bottom: 15px; /*border-bottom: 2px solid var(--primary);*/}
+.feature-modal .modal-body p{font-size: 14px;}
+.valueSpan{
+  position: relative;
+  top:-8px;
+  font-size: 12px;
+}
+.bootstrap-select .dropdown-toggle:focus, .bootstrap-select>select.mobile-device:focus+.dropdown-toggle {
+  outline: thin dotted rgba(255,255,255,0) !important;
+  outline: 0px auto -webkit-focus-ring-color!important;
+  outline-offset: -2px;
+}
+.after-ajax{
+  display: none;
+}
+.search-result{height:100vh;overflow:scroll}
+.program-search-card .program-heading-search{font-weight: bold;}
+.program-search-card table td{font-size: 14px;}
+.search-school-logo{height: 90px;text-align :center}

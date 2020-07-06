@@ -37,7 +37,7 @@
     <!-- breadcrumbs -->
     <nav aria-label="breadcrumb" class="mb-4">
       <ol class="breadcrumb my-breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Schools & Universities</li>
       </ol>
     </nav>
@@ -196,6 +196,50 @@
                 <label class="input__label">About School</label>
                 <textarea class="form-control input-style" name="about" rows=4></textarea>
             </div>
+
+            <div class="form-group">
+              <label class="input__label">Features of School</label>
+              <div class="row px-5">
+                <div class="form-check check-remember check-me-out col-sm-6 mt-1 ">
+                  <input class="form-check-input checkbox" type="checkbox" id="workPermit" name="workPermit">
+                  <label class="form-check-label checkmark" for="workPermit" style="font-size:14px">
+                      Work Permit
+                  </label>
+                </div>
+                
+                <div class="form-check check-remember check-me-out col-sm-6 mt-1">
+                  <input class="form-check-input checkbox" type="checkbox" id="internship" name="internship">
+                  <label class="form-check-label checkmark" for="internship" style="font-size:14px">
+                      Internship Participation
+                  </label>
+                </div>
+
+                <div class="form-check check-remember check-me-out col-sm-6 mt-1">
+                  <input class="form-check-input checkbox" type="checkbox" id="workStudy" name="workStudy">
+                  <label class="form-check-label checkmark" for="workStudy" style="font-size:14px">
+                      Work while Study
+                  </label>
+                </div>
+
+                <div class="form-check check-remember check-me-out col-sm-6 mt-1">
+                  <input class="form-check-input checkbox" type="checkbox" id="offerLetter" name="offerLetter">
+                  <label class="form-check-label checkmark" for="offerLetter" style="font-size:14px">
+                      Offer Letter
+                  </label>
+                </div>
+
+                <div class="form-check check-remember check-me-out col-sm-6 mt-1">
+                  <input class="form-check-input checkbox" type="checkbox" id="accomodation" name="accomodation">
+                  <label class="form-check-label checkmark" for="accomodation" style="font-size:14px">
+                      Accomodation
+                  </label>
+                </div>
+              </div>
+
+              
+            </div>
+
+
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label class="input__label">School Logo</label>

@@ -37,7 +37,7 @@
     <!-- breadcrumbs -->
     <nav aria-label="breadcrumb" class="mb-4">
       <ol class="breadcrumb my-breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Agents</li>
       </ol>
     </nav>
@@ -57,7 +57,7 @@
           </thead>
           <tbody>
             <?php
-              $agent = "SELECT * from `admin` where is_superadmin = false";
+              $agent = "SELECT * from `admin` where id != ".$_SESSION['user_id'];
               $agent_result = $db->query($agent);
               while($agent_row = $agent_result->fetch_assoc()) {
                 ?>

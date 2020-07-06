@@ -10635,7 +10635,7 @@ h3.register__title {
   font-weight: 700;
   font-size: 30px;
   line-height: 35px;
-  color: var(--primary); }
+  color: var(--red); }
 
 .login-form,
 .register-form {
@@ -10880,7 +10880,7 @@ footer.dashboard p a:hover {
   position: absolute;
   width: 12px;
   height: 12px;
-  background: var(--primary);
+  background: var(--red);
   right: 25px;
   top: -5px;
   transform: rotate(45deg);
@@ -10910,12 +10910,12 @@ footer.dashboard p a:hover {
   overflow-y: visible; }
 
 .logo {
-  background: var(--primary);
+  background: var(--red);
   text-align: center;
   height: 60px; }
 
 .logo a {
-  font-size: 30px;
+  font-size: 24px;
   line-height: 60px;
   color: #ffffff;
   margin: 0;
@@ -10937,7 +10937,7 @@ div#page-wrapper {
   height: 60px;
   margin-top: 0;
   display: block !important;
-  background: var(--primary);
+  background: var(--red);
   line-height: 60px; }
 
 .logo-icon a {
@@ -11031,7 +11031,7 @@ input#search:focus + .search-submit,
 .custom-nav > li > a:active {
   border-radius: 0;
   -webkit-border-radius: 0;
-  background-color: var(--primary);
+  background-color: var(--red);
   color: #fff; }
 
 .custom-nav > li > a:hover i.fa {
@@ -11039,8 +11039,9 @@ input#search:focus + .search-submit,
   transition: 0.3s ease; }
 
 .sidebar-menu-collapsed .custom-nav > li > a:hover i.fa {
-  color: var(--primary);
-  color: var(--secondary);
+  /* color: var(--primary);
+  color: var(--secondary); */
+  color:#929292;
   transition: 0.3s ease; }
 
 .custom-nav > li.menu-list > a {
@@ -11203,7 +11204,7 @@ h5.left-nav-title {
 
 .sidebar-menu-collapsed .custom-nav li a span {
   position: absolute;
-  background: var(--primary);
+  background: var(--red);
   padding: 10px;
   left: 60px;
   top: 0px;
@@ -11223,7 +11224,7 @@ h5.left-nav-title {
   position: absolute;
   pointer-events: none;
   border-color: rgba(0, 0, 0, 0);
-  border-right-color: var(--primary);
+  border-right-color: var(--red);
   border-width: 6px;
   margin-top: -6px; }
 
@@ -11333,7 +11334,7 @@ ul.nav i {
 
 a.toggle-btn i {
   font-size: 20px;
-  color: var(--primary); }
+  color: var(--red); }
 
 .toggle-btn:hover {
   background: var(--light-bg-color); }
@@ -12047,7 +12048,7 @@ ul.dropdown-menu.drp-mnu li a {
   -o-border-radius: 4px; }
 
 ul.dropdown-menu li.user-info {
-  background: var(--primary);
+  background: var(--red);
   width: 100%;
   margin: 0;
   padding: 15px 15px;
@@ -12077,7 +12078,7 @@ ul.dropdown-menu.drp-mnu li a i {
   width: 34px;
   font-size: 15px;
   line-height: 25px;
-  color: var(--primary); }
+  color: var(--red); }
 
 .profile_img span {
   float: left;
@@ -12782,6 +12783,7 @@ ul.team-details li a span {
 
 
 #movetop {
+  background-color: var(--red);
   display: none;
   position: fixed;
   bottom: 15px;
@@ -13756,7 +13758,7 @@ select {
   background: url(../images/down.png) no-repeat 96% 52%; }
 
 .input-style:focus {
-  border: 1px solid var(--primary);
+  border: 1px solid var(--red);
   outline: none;
   box-shadow: none;
   background-color: #fff; }
@@ -13862,7 +13864,7 @@ p.backtohome a:hover {
   position: relative;
   font-size: 3em; }
 
-.text {
+.text1 {
   font-size: 70px;
   text-align: center;
   position: relative;

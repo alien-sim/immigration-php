@@ -38,7 +38,7 @@
     <!-- breadcrumbs -->
     <nav aria-label="breadcrumb" class="mb-4">
       <ol class="breadcrumb my-breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
         <li class="breadcrumb-item"><a href="schools.php">Schools</a></li>
         <li class="breadcrumb-item active" aria-current="page">Update School</li>
       </ol>
@@ -49,12 +49,17 @@
       $sql="select * from schools where id='".$_GET['id']."'";
       $result = mysqli_query($db, $sql);
       $school   = mysqli_fetch_array($result);
+
+      $sql_f = "select * from features where id=".$school['features'];
+      $result_f = mysqli_query($db, $sql_f);
+      $feature = mysqli_fetch_array($result_f);
     ?>
     <div class="card">
       <div class="card-body">
         <h3 class="card__title mb-3">Update Schools/ Universities</h3>
         <form action="update_school.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="idd" value="<?php echo $school['id'] ?>">
+            <input type="hidden" name="feature_id" value="<?php echo $school['features'] ?>">
             <div class="form-group">
                 <label class="input__label">School Name</label>
                 <input type="text" class="form-control input-style" name="school_name" placeholder="School Name" value="<?php echo $school['school_name'] ?>" required="required">
@@ -138,6 +143,77 @@
                 <label class="input__label">About School</label>
                 <textarea class="form-control input-style" name="about" rows=4><?php echo $school['about'] ?></textarea>
             </div> 
+
+            <div class="form-group">
+              <label class="input__label">Features of School</label>
+              <div class="row px-5">
+                <div class="form-check check-remember check-me-out col-sm-6 mt-1 ">
+                  <?php 
+                    if($feature['work_permit']){
+                      ?><input class="form-check-input checkbox" type="checkbox" id="workPermit" name="workPermit" checked><?php
+                    }else{
+                      ?><input class="form-check-input checkbox" type="checkbox" id="workPermit" name="workPermit"><?php
+                    }
+                  ?>
+                  <label class="form-check-label checkmark" for="workPermit" style="font-size:14px">
+                      Work Permit
+                  </label>
+                </div>
+                
+                <div class="form-check check-remember check-me-out col-sm-6 mt-1">
+                <?php 
+                    if($feature['internship']){
+                      ?><input class="form-check-input checkbox" type="checkbox" id="internship" name="internship" checked><?php
+                    }else{
+                      ?><input class="form-check-input checkbox" type="checkbox" id="internship" name="internship"><?php
+                    }
+                ?>
+                  <label class="form-check-label checkmark" for="internship" style="font-size:14px">
+                      Internship Participation
+                  </label>
+                </div>
+
+                <div class="form-check check-remember check-me-out col-sm-6 mt-1">
+                  <?php
+                    if($feature['work_study']){
+                      ?><input class="form-check-input checkbox" type="checkbox" id="workStudy" name="workStudy" checked><?php
+                    }else{
+                      ?><input class="form-check-input checkbox" type="checkbox" id="workStudy" name="workStudy"><?php
+                    }
+                  ?>
+                    <label class="form-check-label checkmark" for="workStudy" style="font-size:14px">
+                      Work while Study
+                  </label>
+                </div>
+
+                <div class="form-check check-remember check-me-out col-sm-6 mt-1">
+                  <?php
+                    if($feature['offer_letter']){
+                      ?><input class="form-check-input checkbox" type="checkbox" id="offerLetter" name="offerLetter" checked><?php
+                    }else{
+                      ?><input class="form-check-input checkbox" type="checkbox" id="offerLetter" name="offerLetter"><?php
+                    }
+                  ?>
+                  <label class="form-check-label checkmark" for="offerLetter" style="font-size:14px">
+                      Offer Letter
+                  </label>
+                </div>
+
+                <div class="form-check check-remember check-me-out col-sm-6 mt-1">
+                  <?php
+                    if($feature['accomodation']){
+                      ?><input class="form-check-input checkbox" type="checkbox" id="accomodation" name="accomodation" checked><?php
+                    }else{
+                      ?><input class="form-check-input checkbox" type="checkbox" id="accomodation" name="accomodation"><?php
+                    }
+                  ?>
+                  <label class="form-check-label checkmark" for="accomodation" style="font-size:14px">
+                      Accomodation
+                  </label>
+                </div>
+                    </div>
+            </div>
+
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label class="input__label">School Logo</label>
