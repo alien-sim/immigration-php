@@ -199,12 +199,15 @@
                 <label class="input__label">Level of Program</label>
                 <select class="custom-select input-style" name="level_program" required>
                   <option value="English as Second Language (ESL)">English as Second Language (ESL)</option>
-                  <option value="1-Year Post Secondary Diploma">1-Year Post Secondary Diploma</option>
-                  <option value="2-Year Undegraduate Diploma">2 Year Undegraduate Diploma</option>
-                  <option value="3-Year Bachelor's Degree">3-Year Bachelor's Degree</option>
-                  <option value="3-Year Undergraduate Advance Diploma">3-Year Undergraduate Advance Diploma</option>
-                  <option value="4-Year Bachelor's Degree">4-Year Bachelor's Degree</option>
-                  <option value="Postgraduate Certificate / Master's Degree">Postgraduate Certificate / Master's Degree</option>
+                  <option value=null>Select Level of education</option>
+                  <?php
+                    $program_level = get_program_levels();
+                    for($i=0 ; $i < count($program_level) ; ++$i){
+                      ?>
+                        <option value=<?php echo $program_level[$i]['level'] ?> ><?php echo $program_level[$i]['level'] ?></option>
+                      <?php
+                    }
+                  ?>
                 </select>
               </div>
               <div class="form-group col-md-6">

@@ -98,7 +98,7 @@ label span.text-muted{font-size:11px}
   display: none;
 }
 td span.badge{
-  color:#000 ;
+  /* color:#000 ; */
 }
 td span.Pending{
   background-color: var(--warning);
@@ -132,4 +132,7 @@ td span.Pending{
 }
 .border-radius{
   border-radius:4px;
+}
+.badge{
+  color: #fff;
 }

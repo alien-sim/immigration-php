@@ -59,7 +59,7 @@
                   ?><th width="10%">Agent</th><?php
                 }
               ?>
-              <th width="10%">Status</th>
+              <th width="10%">Education</th>
               <th width="5%">Program Info</th>
             </tr>
           </thead>
@@ -80,6 +80,7 @@
                   $school_name = get_school($program[1]);
                   $program_name = $program[0];
                 }
+                $level_code = get_education_level($student_row['level_education'], "code");
                 ?>
                   <tr>
                     <td><?php echo ucfirst($student_row['first_name'])." ".ucfirst($student_row['last_name']) ?>  </td>
@@ -91,7 +92,7 @@
                         ?><td><?php echo get_agent_email($student_row['agent_id']) ?> </td><?php
                       }
                     ?>
-                    <td><span class="badge <?php echo $student_row['status'] ?>"><?php echo $student_row['status'] ?></span></td>
+                    <td><span class="badge badge-primary" title="Completed <?php echo $student_row['level_education'] ?>"><?php echo $level_code ?></span></td>
                     <td><a href="choose_program.php?student_id=<?php echo $student_row['id'] ?>" ><i class="fa fa-external-link" aria-hidden="true"></i></a> </td>
                   </tr>
                 <?php

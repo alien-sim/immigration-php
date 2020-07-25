@@ -12,6 +12,8 @@
         $city        = (isset($_POST['city'])) ?  $_POST['city'] : array();
         $program_level =(isset($_POST['program_level'])) ?  $_POST['program_level'] : array();
         $work_permit = ($_POST['work_permit'] == 'false') ? false : true;
+        $exam_type   = $_POST['exam_type'];
+        $student_id = $_POST['student'];
         
         // Type of school
         $where_statement = '';
@@ -93,7 +95,19 @@
             $where_statement .= ' f.work_permit = 1 ';
         }
 
-        $all_programs = "select p.*, s.school_name as school_name, s.id as s_id, c.country_name, c.country_currency, c.currency_symbol from programs p
+        //exam_type
+        if($exam_type != ''){
+            if(!(empty($where_statement))){
+                $where_statement .= ' OR ';
+            }else{
+                $where_statement = ' where ';
+            }
+            $where_statement .= " p.exam_type = '".$exam_type."'";
+        }
+        if($student_id != 'null'){
+            $all_programs = get_student_programs($student_id, true);
+        }else{
+            $all_programs = "select p.*, s.school_name as school_name, s.id as sid, c.country_name, c.country_currency, c.currency_symbol from programs p
                     LEFT JOIN schools s
                     on p.school_id = s.id
                     left join 
@@ -101,7 +115,7 @@
                     on s.features = f.id
                     left join countries c on s.country = c.id".$where_statement."
                     order by school_name asc";
-
+        }
         $program_html .= "<div class='d-none'>".$all_programs."</div>";
         $program_result = $db->query($all_programs);
         while($program_row = $program_result->fetch_assoc()){
@@ -110,7 +124,7 @@
             $program_html .= '<h6 class="program-heading-search mb-2">';
             $program_html .= '<a href="program_detail.php?id= '.$program_row['id'].'" target="_blank">'. $program_row['program_name'] .'</a>';
             $program_html .= '</h6>'; 
-            $program_html .= '<a href="school_detail.php?id='. $program_row['s_id'].'" target="_blank"><label><i class="fa fa-map-marker"></i> '.$program_row['school_name'].' - '.strtoupper($program_row['country_name']).'</label></a>';
+            $program_html .= '<a href="school_detail.php?id='. $program_row['sid'].'" target="_blank"><label><i class="fa fa-map-marker"></i> '.$program_row['school_name'].' - '.strtoupper($program_row['country_name']).'</label></a>';
             $program_html .= '<table class="mt-3">';
             $program_html .= '<tr>';
             $program_html .= '<td width="25%">';
@@ -129,12 +143,16 @@
             $program_html .= '</table>';
             $program_html .= '</div>';
         }
+        if($student_id != 'null'){
+            $all_schools = get_student_programs($student_id, true);
+        }else{
 
-        $all_schools = "select distinct s.id, s.school_name, s.school_logo, c.country_name from schools s
-            left join programs p on s.id = p.school_id
-            inner join countries c on s.country = c.id 
-            inner join features f on s.features = f.id
-            ".$where_statement;
+            $all_schools = "select distinct s.id, s.school_name, s.school_logo, c.country_name from schools s
+                left join programs p on s.id = p.school_id
+                inner join countries c on s.country = c.id 
+                inner join features f on s.features = f.id
+                ".$where_statement;
+        }
         
         $school_html .= "<div class='d-none'>".$all_schools."</div>";
         $school_result = $db->query($all_schools);

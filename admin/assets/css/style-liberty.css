@@ -12353,8 +12353,8 @@ label select {
 /*-- badges --*/
 .badge {
   padding: 5px 15px;
-  padding-left: 20px;
-  font-size: 13.5px;
+  /* padding-left: 20px; */
+  font-size: 12px;
   position: relative; }
 
 .badge:before {

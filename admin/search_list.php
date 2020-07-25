@@ -17,6 +17,36 @@
         <div class="col-md-3 bg-light border py-3 border-radius">
 
             <div class="form-group">
+                <label class="input__label">Student </label>
+                <select name="student" class="w-100 selectpicker my-select student-select border border-radius"> 
+                    <option value=null>Select Student</option>
+                <?php
+                    $student = 'SELECT id, CONCAT(first_name," ",last_name) as `name` from `student`';
+                    $student_result = $db->query($student);
+                    while($student_row = $student_result->fetch_assoc()) {
+                        ?>
+                        <option value=<?php echo $student_row['id'] ?> ><?php echo $student_row['name'] ?></option>
+                        <?php
+                    }
+                ?>
+                </select>
+            </div>
+
+            <hr>
+
+            <div class="form-group">
+                <label class="input__label">English Exam Type </label>
+                <select name="exam_type" class="w-100 selectpicker my-select exam-type-select border border-radius"> 
+                    <option value="">Exam Type</option>
+                    <option value="no_test">No Test taken</option>
+                    <option value="ielts">IELTS</option>
+                    <option value="toefl">TOEFL</option>
+                    <option value="duolingo">Duolingo English Test</option>
+                </select>
+
+            </div>
+
+            <div class="form-group">
                 <label class="input__label">Country</label>
                 <select name="country" class="w-100 selectpicker my-select country-select border border-radius" multiple required>
                     <?php
@@ -100,12 +130,15 @@
                 <label>Program Level</label>
                 <select class="selectpicker my-select w-100 level-select border border-radius" multiple name="program_level">
                     <option value="English as Second Language (ESL)">English as Second Language (ESL)</option>
-                    <option value="1-Year Post Secondary Diploma">1-Year Post Secondary Diploma</option>
-                    <option value="2-Year Undegraduate Diploma">2 Year Undegraduate Diploma</option>
-                    <option value="3-Year Bachelor's Degree">3-Year Bachelor's Degree</option>
-                    <option value="3-Year Undergraduate Advance Diploma">3-Year Undergraduate Advance Diploma</option>
-                    <option value="4-Year Bachelor's Degree">4-Year Bachelor's Degree</option>
-                    <option value="Postgraduate Certificate / Master's Degree">Postgraduate Certificate / Master's Degree</option>
+                    <option value=null>Select Level of education</option>
+                    <?php
+                        $program_level = get_program_levels();
+                        for($i=0 ; $i < count($program_level) ; ++$i){
+                            ?>
+                            <option value=<?php echo $program_level[$i]['level'] ?> ><?php echo $program_level[$i]['level'] ?></option>
+                            <?php
+                        }
+                    ?>
                 </select>
 
             </div>

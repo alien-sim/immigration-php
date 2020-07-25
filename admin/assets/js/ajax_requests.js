@@ -145,6 +145,9 @@
       var app_fee     = $('#application-slider').val();
       var level       = ($('.level-select').selectpicker('val') == null ) ? [] : $('.level-select').selectpicker('val');
 
+      var exam_type   = $('.exam-type-select').selectpicker('val');
+      var student     = ($('.student-select').selectpicker('val') == null ) ? '' : $('.student-select').selectpicker('val');
+
       
       var school_type = '';
       if(university != ''){
@@ -177,7 +180,9 @@
         'country'     : country,
         'city'        : city,
         'program_level' : level,
-        'work_permit' : work_permit
+        'work_permit' : work_permit,
+        'exam_type'   : exam_type,
+        'student'     : student
       }
       callbackRequest(args);
   }
@@ -188,6 +193,7 @@
       type: 'post',
       data:args,
       success: function(result){
+          console.log("jdkjkj", result);
           $(".before-ajax").hide();
           $(".after-ajax").show();
           $("#nav-program-search").html(result['programs']);

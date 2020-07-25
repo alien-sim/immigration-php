@@ -82,7 +82,14 @@
 		$application_fee = $_POST['application_fee'];
 		$tution_fee = $_POST['tution_fee'];
 
-    	$query = $db->query("update programs set program_name='".$program_name."', description='".$description."', additional_requirements='".$admission_req."', other_fees='".$other_fees."', program_level='".$level_program."', length_program='".$length_program."', school_id='".$school_id."', application_fee='".$application_fee."', tution_fee='".$tution_fee."' where id='".$idd."' ");
+		$total_score = $_POST['total_score'] != '' ? $_POST['total_score'] : 0;
+		$listening = $_POST['listening'] != '' ? $_POST['listening'] : 0;
+		$reading = $_POST['reading'] != '' ? $_POST['reading'] : 0;
+		$writing = $_POST['writing'] != '' ? $_POST['writing'] : 0;
+		$speaking = $_POST['speaking'] != '' ? $_POST['speaking'] : 0;
+		$exam_type = $_POST['exam_type'];
+
+    	$query = $db->query("update programs set program_name='".$program_name."', description='".$description."', additional_requirements='".$admission_req."', other_fees='".$other_fees."', program_level='".$level_program."', length_program='".$length_program."', school_id='".$school_id."', application_fee='".$application_fee."', tution_fee='".$tution_fee."', total_score='".$total_score."', exam_type='".$exam_type."', listening='".$listening."', speaking='".$speaking."', writing='".$writing."', reading='".$reading."' where id='".$idd."' ");
     	if($query){
     		header("location:programs.php");
     	}else{

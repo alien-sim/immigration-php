@@ -90,6 +90,41 @@
             </div>
 
             <div class="form-row">
+              
+              <div class="form-group col-md-6">
+                <label class="input__label">Exam Type</label>
+                <select class="form-control input-style"  name="exam_type" id="exam_type">
+                  <option value="<?php echo $program['exam_type'] ?>"><?php echo $program['exam_type'] ?></option>
+                  <option value="no_test">No Test</option>
+                  <option value="ielts">IELTS</option>
+                  <option value="toefl">TOEFL</option>
+                  <option value="duolingo">Duolingo English Test</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label class="input__label">Total Score</label>
+                <input type="number" class="form-control input-style" name="total_score" placeholder="Total Score" value=<?php echo $program['total_score'] ?> min=0 max=10>
+              </div>
+
+              <div class="form-group col-md-3">
+                <label class="input__label">Listening Score</label>
+                <input type="number" class="form-control input-style" name="listening" placeholder="Listening Score" value=<?php echo $program['listening'] ?> min=0 max=10>
+              </div>
+              <div class="form-group col-md-3">
+                <label class="input__label">Speaking Score</label>
+                <input type="number" class="form-control input-style" name="speaking" placeholder="Speaking Score" value=<?php echo $program['speaking'] ?> min=0 max=10>
+              </div>
+              <div class="form-group col-md-3">
+                <label class="input__label">Writing Score</label>
+                <input type="number" class="form-control input-style" name="writing" placeholder="Writing Score" value=<?php echo $program['writing'] ?> min=0 max=10>
+              </div>
+              <div class="form-group col-md-3">
+                <label class="input__label">Reading Score</label>
+                <input type="number" class="form-control input-style" name="reading" placeholder="Reading Score" value=<?php echo $program['reading'] ?> min=0 max=10>
+              </div>
+            </div>
+
+            <div class="form-row">
               <div class="form-group col-md-6">
                 <label class="input__label">Tution Fee</label>
                 <input type="number" class="form-control input-style" value=<?php echo $program['tution_fee'] ?> name="tution_fee" placeholder="Tution Fee" required="required">
@@ -105,13 +140,14 @@
                 <label class="input__label">Level of Program</label>
                 <select class="custom-select input-style" name="level_program" required>
                     <option value="<?php echo $program['program_level'] ?>" selected><?php echo $program['program_level'] ?> </option>
-                    <option value="English as Second Language (ESL)">English as Second Language (ESL)</option>
-                    <option value="1-Year Post Secondary Diploma">1-Year Post Secondary Diploma</option>
-                    <option value="2-Year Undegraduate Diploma">2 Year Undegraduate Diploma</option>
-                    <option value="3-Year Bachelor's Degree">3-Year Bachelor's Degree</option>
-                    <option value="3-Year Undergraduate Advance Diploma">3-Year Undergraduate Advance Diploma</option>
-                    <option value="4-Year Bachelor's Degree">4-Year Bachelor's Degree</option>
-                    <option value="Postgraduate Certificate / Master's Degree">Postgraduate Certificate / Master's Degree</option>
+                    <?php
+                      $program_level = get_program_levels();
+                      for($i=0 ; $i < count($program_level) ; ++$i){
+                        ?>
+                          <option value=<?php echo $program_level[$i]['level'] ?> ><?php echo $program_level[$i]['level'] ?></option>
+                        <?php
+                      }
+                    ?>
                 </select>
               </div>
               <div class="form-group col-md-6">

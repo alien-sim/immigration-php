@@ -68,7 +68,7 @@
                   <input type="hidden" name="student_id" value=<?php echo $_GET['student_id'] ?> >
                   <input type="hidden" name="program_id" value=<?php echo $p['id'] ?> >
                   <?php 
-                    if($student['selected_program']){
+                    if($student['selected_program'] == $p['id']){
                       ?><label title="Selected"><i class="fa fa-check"></i></label><?php
                     }else{
 

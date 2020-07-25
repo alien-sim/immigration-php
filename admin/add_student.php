@@ -182,16 +182,14 @@
               <!-- <input type="text" class="form-control input-style" name="level_education" placeholder="Highest Education"> -->
               <select class="form-control input-style" id="level-education" name="level_education">
                 <option value=null>Select Level of education</option>
-                <option value="grade 10">Grade 10</option>
-                <option value="grade 12">Grade 12</option>
-                <option value="1-year post-secondary">1-Year Post-secondary Certificate</option>
-                <option value="2-year undergraduate diploma">2-Year Undergraduate Diploma</option>
-                <option value="3-year undergradute diploma">3-year Undergraduate Diploma</option>
-                <option value="3-year bachelor degree">3-Year Bachelor Degree</option>
-                <option value="4-year bachelor degree">4-Year Bachelor Degree</option>
-                <option value="postgraduate diploma">Postgraduate Certificate/Diploma</option>
-                <option value="masters degree">Masters Degree</option>
-                <option value="doctral degree">Doctral Degree</option>
+                <?php
+                  $program_level = get_program_levels();
+                  for($i=0 ; $i < count($program_level) ; ++$i){
+                    ?>
+                      <option value=<?php echo $program_level[$i]['level'] ?> ><?php echo $program_level[$i]['level'] ?></option>
+                    <?php
+                  }
+                ?>
               </select>
           </div>
           <div class="form-group col-md-4">
