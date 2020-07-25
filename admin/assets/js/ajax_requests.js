@@ -23,6 +23,107 @@
     $value1.on('input change', () => {
       $valueSpan1.html($value1.val()+'K');
     });
+    
+    // Exam-type change
+    $('select#exam_type').on('change', function() {
+      var exam_type = this.value;
+      var html_data = '';
+      var date_data = '<label class="input__label">Date of Exam <span class="text-danger">*</span></label>';
+      date_data += '<input type="date" class="form-control input-style" name="exam_type_date">';
+      var score = ["listening", "reading", "writing", "speaking"];
+      if(exam_type == 'ielts' || exam_type == 'toefl'){
+        $(".exam_date").html(date_data);
+        for(i=0; i<score.length; ++i){
+          html_data = '<label class="input__label">'+score[i] + ' <span class="text-danger">*</span></label>';
+          html_data += '<input type="number" class="form-control input-style" name="'+score[i]+'" placeholder="'+score[i]+' Score"  min=0 max=100 >';
+          $("."+score[i]).html(html_data);
+        }
+      }
+      else if(exam_type == 'duolingo'){
+        html_data = '<label class="input__label">Exact Score <span class="text-danger">*</span></label>';
+        html_data += '<input type="number" class="form-control input-style" name="exact_score" placeholder="Overall" min=0 max=100 >';
+
+        $(".listening").html(html_data);
+        $(".exam_date").html(date_data);
+        $(".reading").html("");
+        $(".writing").html("");
+        $(".speaking").html("");
+      }else{
+        $(".exam_date").html("");
+        $(".listening").html("");
+        $(".reading").html("");
+        $(".writing").html("");
+        $(".speaking").html("");
+      }
+    });
+
+    // Highest education
+    $("select#level-education").on('change', function(){
+      var highest_education = this.value;
+      var grading_scheme = '';
+      $("select#grading-scheme option").remove();
+      if(highest_education == 'grade 10' || highest_education == 'grade 12'){
+        grading_scheme = '<option value=null>Select Scheme</option>';
+        grading_scheme += '<option value="other">Other - (1-100)</option>';
+        grading_scheme += '<option value="cbse">CBSE</option>';
+        grading_scheme += '<option value="state_boards">State Boards</option>';
+        grading_scheme += '<option value="icse">CISCE/ICSE</option>';
+      }else{
+        grading_scheme = '<option value=null>Select Scheme</option>';
+        grading_scheme += '<option value="scale_1-10">Scale - (1-10)</option>';
+        grading_scheme += '<option value="scale_1-100">Scale - (1-100)</option>';
+        grading_scheme += '<option value="letter_grade"> Letter Grade</option>';
+        grading_scheme += '<option value="others">others</option>';
+      }
+      $("select#grading-scheme").append(grading_scheme)
+    })
+
+    // Upload more docs
+    $(".add-doc").click(function(){
+      html_form = '<div class="form-row mt-3">';
+      html_form += '<div class="form-group col-md-5">';
+      html_form += '<label class="input__label">Document Type</label>';
+      html_form += '<select class="custom-select" name="doc_type[]">';
+      html_form += '<option> Select </option>';
+      html_form += '<option>Grade 10 Transcript</option>';
+      html_form += '<option>Grade 12 Transcript</option>';
+      html_form += '<option>Undergraduate Transcript</option>';
+      html_form += '<option>Postgraduate Transcript</option>';
+      html_form += '<option>Others</option>';
+      html_form += '</select>';
+      html_form += '</div>';
+      html_form += '<div class="form-group col-md-5">';
+      html_form += '<label class="input__label">Doc Attachment</label>';
+      html_form += '<div class="custom-file">';
+      html_form += '<input type="file" class="custom-file-input" name="doc[]" id="validatedCustomFiledoc">';
+      html_form += '<label class="custom-file-label" for="validatedCustomFiledoc">Choose document attachment...</label>';
+      html_form += '</div>';
+      html_form += '</div>';
+      // html_form += '<div class="form-group col-md-2"><button class="btn btn-danger">Remove</button></div>';
+      html_form += '</div>';
+
+      $(".more-docs-div").append(html_form);
+    })
+
+    // GRE exam
+    $('input.gre_check').click(function(){
+      if($(this).is(":checked")){
+          $(".gre_exam").css("display","block")
+      }
+      else if($(this).is(":not(:checked)")){
+        $(".gre_exam").css("display","none")
+      }
+    });
+
+    // GMAT exam
+    $('input.gmat_check').click(function(){
+      if($(this).is(":checked")){
+          $(".gmat_exam").css("display","block")
+      }
+      else if($(this).is(":not(:checked)")){
+        $(".gmat_exam").css("display","none")
+      }
+    });
 
     // filter ajax search
     $(".apply-filter").click(function(){

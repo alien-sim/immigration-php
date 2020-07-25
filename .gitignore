@@ -1,2 +1,9 @@
 media/
 config.php
+webfonts/
+*.html
+js/
+fonts/
+img/
+css/
+flaticon.css

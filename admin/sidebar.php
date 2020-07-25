@@ -3,17 +3,17 @@
   <div class="sidebar-menu sticky-sidebar-menu">
 
     <!-- logo start -->
-    <div class="logo">
-      <h1><a href="index.php">Express Board</a></h1>
-    </div>
+    <!-- <div class="logo">
+      <h1><a href="index.php">Express Aboard</a></h1>
+    </div> -->
 
   <!-- if logo is image enable this -->
     <!-- image logo -->
-    <!-- <div class="logo">
+    <div class="logo bg-white">
       <a href="index.php">
-        <img src="image-path" alt="Your logo" title="Your logo" class="img-fluid" style="height:35px;" />
+        <img src="assets/images/logo_express.png" alt="Your logo" title="Your logo" class="img-fluid" style="width:90%;" />
       </a>
-    </div> -->
+    </div>
     <!-- //image logo -->
 
     <div class="logo-icon text-center">
@@ -24,7 +24,7 @@
     <div class="sidebar-menu-inner">
 
       <!-- sidebar nav start -->
-      <ul class="nav nav-pills nav-stacked custom-nav">
+      <ul class="nav nav-pills nav-stacked custom-nav" style="border-top:1px solid rgba(255,255,255,0.56)">
         <li><a href="index.php"><i class="fa fa-tachometer"></i><span> Dashboard</span></a></li>
         <?php
           if($_SESSION['is_superadmin']){
@@ -36,6 +36,7 @@
             <?php
           }
         ?>
+        <li><a href="student.php"><i class="fa fa-user-circle"></i><span> Student </span></a></li>
         <li><a href="search.php"><i class="fa fa-search"></i><span> Search </span></a></li>
       </ul>
       <!-- //sidebar nav end -->

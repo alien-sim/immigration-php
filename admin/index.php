@@ -13,7 +13,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Express Board </title>
+  <title>Express Abroad </title>
 
   <!-- CSS files import -->
   <?php 
@@ -37,19 +37,12 @@
     <!-- breadcrumbs -->
     <nav aria-label="breadcrumb" class="mb-4">
       <ol class="breadcrumb my-breadcrumb">
-        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+        <!-- <li class="breadcrumb-item"><a href="index.php">Home</a></li> -->
+        <li class="breadcrumb-item active" aria-current="page">Welcome Back <?php echo strtoupper($_SESSION['username']) ?>!</li>
       </ol>
     </nav>
     <!-- //breadcrumbs -->
-    <!-- blank block -->
-    <div class="card">
-      <div class="card-body">
-        <h3 class="card-title">Hi <?php echo strtoupper($_SESSION['username']) ?>!</h3>
-          
-      </div>
-    </div>
-    <!-- blank block -->
+    
   </div>
   <!-- //content -->
 </div>

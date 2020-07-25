@@ -1,6 +1,6 @@
 <!--footer section start-->
 <footer class="dashboard">
-  <p>&copy 2020 Collective. All Rights Reserved.</p>
+  <p>&copy 2020 Express Abroad. All Rights Reserved.</p>
 </footer>
 <!--footer section end-->
 
@@ -116,5 +116,6 @@
 <script src="assets/js/bootstrap.min.js"></script>
 <!-- Latest compiled and minified JavaScript Bootstrap Select -->
 <script src="assets/js/bootstrap-select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 <script src="assets/js/ajax_requests.js"></script>
 

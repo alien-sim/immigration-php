@@ -148,6 +148,40 @@
                 <label class="input__label">Program Description</label>
                 <textarea class="form-control input-style" name="description" row=2></textarea>
             </div> 
+
+            <div class="form-row">
+              
+              <div class="form-group col-md-6">
+                <label class="input__label">Exam Type</label>
+                <select class="form-control input-style" name="exam_type" id="exam_type">
+                  <option value="no_test">No Test</option>
+                  <option value="ielts">IELTS</option>
+                  <option value="toefl">TOEFL</option>
+                  <option value="duolingo">Duolingo English Test</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label class="input__label">Total Score</label>
+                <input type="number" class="form-control input-style" name="total_score" placeholder="Total Score" min=0 max=10>
+              </div>
+
+              <div class="form-group col-md-3">
+                <label class="input__label">Listening Score</label>
+                <input type="number" class="form-control input-style" name="listening" placeholder="Listening Score" min=0 max=10>
+              </div>
+              <div class="form-group col-md-3">
+                <label class="input__label">Speaking Score</label>
+                <input type="number" class="form-control input-style" name="speaking" placeholder="Speaking Score" min=0 max=10>
+              </div>
+              <div class="form-group col-md-3">
+                <label class="input__label">Writing Score</label>
+                <input type="number" class="form-control input-style" name="writing" placeholder="Writing Score" min=0 max=10>
+              </div>
+              <div class="form-group col-md-3">
+                <label class="input__label">Reading Score</label>
+                <input type="number" class="form-control input-style" name="reading" placeholder="Reading Score" min=0 max=10>
+              </div>
+            </div>
             
             <div class="form-row">
               <div class="form-group col-md-6">

@@ -35,6 +35,9 @@
                     <!-- form -->
                     <form action="login.php" method="POST">
                         <div class="login__header text-center mb-lg-5 mb-4">
+                            <div class="col-md-8 offset-md-2">
+                                <img src="assets/images/logo_express.png" style="width:100% ; margin-bottom:15px">
+                            </div>
                             <h3 class="login__title mb-2"> Login</h3>
                             <p>Welcome back, login to continue</p>
                         </div>

@@ -14,11 +14,11 @@
 
 <div class="tab-pane fade show active my-4 row" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
     <div class="row px-3">
-        <div class="col-md-3">
+        <div class="col-md-3 bg-light border py-3 border-radius">
 
             <div class="form-group">
                 <label class="input__label">Country</label>
-                <select name="country" class="w-100 selectpicker my-select country-select" multiple required>
+                <select name="country" class="w-100 selectpicker my-select country-select border border-radius" multiple required>
                     <?php
                     $country = "SELECT * from `countries`";
                     $country_result = $db->query($country);
@@ -33,7 +33,7 @@
 
             <div class="form-group">
                 <label class="input__label">State/ City</label>
-                <select name="city" class="selectpicker my-select w-100 city-select" multiple required>
+                <select name="city" class="selectpicker my-select w-100 city-select border border-radius" multiple required>
                     <?php
                     foreach($city_array as $city) {
                         ?>
@@ -98,7 +98,7 @@
 
             <div class="form-group">
                 <label>Program Level</label>
-                <select class="selectpicker my-select w-100 level-select" multiple name="program_level">
+                <select class="selectpicker my-select w-100 level-select border border-radius" multiple name="program_level">
                     <option value="English as Second Language (ESL)">English as Second Language (ESL)</option>
                     <option value="1-Year Post Secondary Diploma">1-Year Post Secondary Diploma</option>
                     <option value="2-Year Undegraduate Diploma">2 Year Undegraduate Diploma</option>

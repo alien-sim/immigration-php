@@ -7,11 +7,66 @@
         return $ts;
     }
     
-    function get_country_name($country_id){
-        $sql = "select country_name from countries where id='".$country_id."'";
+    function get_country_name($country_id, $currency=false){
+        $sql = "select country_name, currency_symbol from countries where id='".$country_id."'";
         $result = mysqli_query($GLOBALS['db'], $sql);
         $country   = mysqli_fetch_array($result);
+        if($currency){
+            return [$country[0], $country[1]];
+        }
         return $country[0];
+    }
+
+    function get_countries(){
+        $countries = array();
+        $country = "SELECT id, country_name from `countries`";
+        $country_result = $GLOBALS['db']->query($country);
+        while($country_row = mysqli_fetch_array($country_result)){
+            $countries[] = $country_row;
+        }
+        return $countries;
+    }
+
+    function get_date_format($date_obj){
+        $date = new DateTime($date_obj) ;
+        return $date->format('M d, Y');
+    }
+
+    function get_agent_email($agent_id){
+        $sql = "select email from admin where id=".$agent_id;
+        $result = $GLOBALS['db']->query($sql);
+        $agent = mysqli_fetch_array($result);
+
+        return $agent[0];
+    }
+
+    function get_student_programs($student_id){
+        $program_array = [];
+        $student_sql = "select * from student s left join exam_details e on s.exam_type_id = e.id where s.id=".$student_id;
+        $student_result = $GLOBALS['db']->query($student_sql);
+        $student = mysqli_fetch_array($student_result);
+
+        $program_sql = "select  p.*, s.id as sid, s.school_name, s.city, s.country  from programs p
+                        inner join schools s on p.school_id = s.id 
+                        where
+                            case 
+                                when exam_type = 'duolingo'
+                                    then total_score <= ".$student['score']."
+                                else 
+                                    exam_type = '".$student['exam_type_name']."' and
+                                    speaking <= ".$student['speaking']." and 
+                                    listening <= ".$student['listening']." and 
+                                    writing <= ".$student['writing']." and
+                                    reading <= ".$student['reading']."
+                            end";
+        $program_result = $GLOBALS['db']->query($program_sql);
+        while($programs = $program_result->fetch_assoc()){
+            array_push($program_array, $programs);
+        }
+        // echo gettype($programs);
+        // echo $program_sql;
+        return $program_array;
+
     }
 
     function get_google_map_canvas($address){
