@@ -7,6 +7,10 @@
     $programs = [];
     if (isset($_GET['student_id'])){
       $programs = get_student_programs($_GET['student_id']);
+
+      $sql = "select * from student where id=".$_GET['student_id'];
+      $result = mysqli_query($db, $sql);
+      $student   = mysqli_fetch_array($result);
     }
     // echo $programs;
     // print_r($programs)
@@ -63,7 +67,14 @@
                 <form action="choose_program.php?student_id=<?php echo $_GET['student_id'] ?>" method="post">
                   <input type="hidden" name="student_id" value=<?php echo $_GET['student_id'] ?> >
                   <input type="hidden" name="program_id" value=<?php echo $p['id'] ?> >
-                  <button type="submit" class="btn btn-primary btn-sm" name="select_program">Select</button>
+                  <?php 
+                    if($student['selected_program']){
+                      ?><label title="Selected"><i class="fa fa-check"></i></label><?php
+                    }else{
+
+                      ?><button type="submit" class="btn btn-primary btn-sm" name="select_program">Select</button><?php
+                    }
+                  ?>
                 </form>
               <h5><a href="program_detail.php?id=<?php echo $p['id'] ?>" target="_blank"><?php echo $p['program_name'] ?></a></h5>
               <h6><a href="school_detail.php?id=<?php echo $p['sid'] ?>" target="_blank"><?php echo $p['school_name'] ." - ". $country_info[0]  ?> </a></h6>

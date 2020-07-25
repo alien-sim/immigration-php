@@ -126,6 +126,10 @@ td span.Pending{
   color: #fff;
   float: right;
 }
+.select-program .col-md-12 label{
+  color: green;
+  float: right;
+}
 .border-radius{
   border-radius:4px;
 }
