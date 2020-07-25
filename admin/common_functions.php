@@ -40,6 +40,21 @@
         return $agent[0];
     }
 
+    function get_program($program_id){
+        
+        $sql = "select program_name, school_id from programs where id=".$program_id;
+        $result = $GLOBALS['db'] -> query($sql);
+        $program = mysqli_fetch_array($result);
+        return $program;
+    }
+
+    function get_school($school_id){
+        $sql = "select school_name from schools where id=".$school_id;
+        $result = $GLOBALS['db'] -> query($sql);
+        $school = mysqli_fetch_array($result);
+        return $school[0];
+    }
+
     function get_student_programs($student_id){
         $program_array = [];
         $student_sql = "select * from student s left join exam_details e on s.exam_type_id = e.id where s.id=".$student_id;

@@ -50,16 +50,17 @@
         <table id="example" class="display" style="width:100%">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Apply Date</th>
-              <th>Program</th>
-              <th>School</th>
+              <th width="15%">Name</th>
+              <th width="10%">Apply Date</th>
+              <th width="25%">Program</th>
+              <th width="25%">School</th>
               <?php 
                 if($_SESSION['is_superadmin']){
-                  ?><th>Agent</th><?php
+                  ?><th width="10%">Agent</th><?php
                 }
               ?>
-              <th>Status</th>
+              <th width="10%">Status</th>
+              <th width="5%">Program Info</th>
             </tr>
           </thead>
           <tbody>
@@ -71,18 +72,27 @@
               }
               $student_result = $db->query($student);
               while($student_row = $student_result->fetch_assoc()) {
+                if(!($student_row['selected_program'])){
+                  $school_name = "-";
+                  $program_name = "-";
+                }else{
+                  $program = get_program($student_row['selected_program']);
+                  $school_name = get_school($program[1]);
+                  $program_name = $program[0];
+                }
                 ?>
                   <tr>
-                    <td><?php echo $student_row['first_name']." ".$student_row['last_name'] ?>  </td>
+                    <td><?php echo ucfirst($student_row['first_name'])." ".ucfirst($student_row['last_name']) ?>  </td>
                     <td><?php echo get_date_format($student_row['created']) ?></td>
-                    <td><?php echo '-'?></td>
-                    <td><?php echo '-'?></td>
+                    <td><?php echo $program_name ?></td>
+                    <td><?php echo $school_name ?></td>
                     <?php 
                       if($_SESSION['is_superadmin']){
                         ?><td><?php echo get_agent_email($student_row['agent_id']) ?> </td><?php
                       }
                     ?>
                     <td><span class="badge <?php echo $student_row['status'] ?>"><?php echo $student_row['status'] ?></span></td>
+                    <td><a href="choose_program.php?student_id=<?php echo $student_row['id'] ?>" ><i class="fa fa-external-link" aria-hidden="true"></i></a> </td>
                   </tr>
                 <?php
               }
