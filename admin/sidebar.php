@@ -37,6 +37,7 @@
           }
         ?>
         <li><a href="student.php"><i class="fa fa-user-circle"></i><span> Student </span></a></li>
+        <li><a href="applications.php"><i class="fa fa-address-card"></i><span> Applications </span></a></li>
         <li><a href="search.php"><i class="fa fa-search"></i><span> Search </span></a></li>
       </ul>
       <!-- //sidebar nav end -->

@@ -297,10 +297,10 @@
 	if(isset($_POST['select_program'])){
 		$program_id = $_POST['program_id'];
 		$student_id = $_POST['student_id'];
-		$query = "update student set selected_program='$program_id' where id=".$student_id;
+		$query = "insert into applications (student_id, program_id) values('$student_id', '$program_id')";
 		$sql = $db->query($query);
 		if($sql){
-			header("location:stripe-integration/index.php?student_id=".$student_id);
+			// header("location:stripe-integration/index.php?student_id=".$student_id);
 		}
 		// echo "<script>console.log('$program_id')</script>";
 	}

@@ -107,6 +107,20 @@
 
     }
 
+    function get_student_application_details($student_id){
+        $sql = "select 
+        count(id) as added, 
+        (select count(id) from applications where student_id=".$student_id." and applied=1) as applied, 
+        (select count(id) from applications where student_id=".$student_id." and submitted=1) as submitted,
+        (select count(id) from applications where student_id=".$student_id." and status='cancelled') as cancelled,
+        (select count(id) from applications where student_id=".$student_id." and status='accepted') as accepted
+    from applications where student_id=".$student_id;
+        $result = $GLOBALS['db']->query($sql);
+        $applications = mysqli_fetch_array($result);
+
+        return $applications;
+    }
+
     function get_google_map_canvas($address){
         
         $data_arr = geocode($address);

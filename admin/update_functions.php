@@ -111,4 +111,20 @@
     		echo mysqli_error($db);
     	}
 	}
+
+	if(isset($_POST['update_application'])){
+		$app_id = $_POST['idd'];
+		$status = $_POST['status'];
+		$applied =  isset($_POST['applied']) ? 1 : 0;
+		$submitted =  isset($_POST['submitted']) ? 1 : 0;
+		// echo $app_id, $status, $applied, $submitted;
+		$sql = "update applications set status='$status', applied='$applied', submitted='$submitted' where id='$app_id'";
+		$query = $db->query($sql);
+		if($query){
+			header("location:applications.php");
+			// echo 'done';
+		}else{
+			echo mysqli_error($db);
+		}
+	}
 ?>

@@ -12367,14 +12367,14 @@ label select {
   border-radius: 50%; }
 
 .badge-success {
-  background-color: rgba(10, 187, 135, 0.1);
+  background-color: rgba(10, 187, 135, 1);
   color: #0abb87; }
 
 .badge-success:before {
   background: #0abb87; }
 
 .badge-warning {
-  background-color: rgba(255, 184, 34, 0.1);
+  background-color: rgba(255, 184, 34, 1);
   color: #ffb822; }
 
 .badge-warning:before {

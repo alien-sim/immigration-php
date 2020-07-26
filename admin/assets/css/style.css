@@ -136,3 +136,18 @@ td span.Pending{
 .badge{
   color: #fff;
 }
+.badge-grey{
+  background-color: #ccc;
+}
+.badge.processing{
+  background-color: var(--primary);
+}
+.badge.not.paid{
+  background-color: #ccc;
+}
+.badge.cancelled{
+  background-color: #ffc107;
+}
+.badge.accepted{
+  background-color: #03c895;
+}

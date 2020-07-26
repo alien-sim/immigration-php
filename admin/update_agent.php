@@ -14,7 +14,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Collective Admin Panel a Flat Bootstrap Responsive Website Template | Blank Page </title>
+  <title>Update Agent </title>
 
   <!-- CSS files import -->
   <?php 
@@ -39,8 +39,8 @@
     <nav aria-label="breadcrumb" class="mb-4">
       <ol class="breadcrumb my-breadcrumb">
         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-        <li class="breadcrumb-item"><a href="programs.php">Programs</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Update Programs</li>
+        <li class="breadcrumb-item"><a href="agents.php">Agents</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Update Agent</li>
       </ol>
     </nav>
     <!-- //breadcrumbs -->
@@ -53,7 +53,7 @@
     <div class="card">
       <div class="card-body">
         <h3 class="card__title mb-3">Agents</h3>
-        <form action="update_program.php" method="post">
+        <form action="update_agent.php" method="post">
             <input type="hidden" name="idd" value="<?php echo $agent['id'] ?>">
             <div class="form-group">
                 <label for="inputEmail4" class="input__label" name="email">Email</label>
