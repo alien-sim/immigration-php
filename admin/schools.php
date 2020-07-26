@@ -264,6 +264,10 @@
                     <label class="custom-file-label" for="validatedCustomFile3">Choose 4 Gallery Images</label>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="input__label">Google Map Iframe</label>
+                <textarea class="form-control input-style" name="map" rows=2></textarea>
+            </div>
           
         </div>
         <div class="modal-footer">

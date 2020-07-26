@@ -123,7 +123,12 @@
 		} 
 		$gallery_str = implode(",",$gallery_arr);
 
-    	$query = $db->query("insert into schools (school_name, founded, type, total_students, intrested_students, city, country, about, address, cost_of_living_yearly, tution_fee_yearly, application_fee, dli, school_logo, cover_img, gallery, features) values('$school_name', '$founded', '$type', '$total_students', '$intrested_students', '$city', '$country', '$about', '$address', '$living_cost', '$tution_fee', '$application_fee', '$dli', '$logo_filename', '$cover_filename','$gallery_str', '$feature_id') ");
+		$find = 'width="600" height="450"';
+		$replace = 'width="100%" height="100%"';
+		$map = str_replace($find, $replace, $_POST['map']);
+
+
+    	$query = $db->query("insert into schools (school_name, founded, type, total_students, intrested_students, city, country, about, address, cost_of_living_yearly, tution_fee_yearly, application_fee, dli, school_logo, cover_img, gallery, features, map) values('$school_name', '$founded', '$type', '$total_students', '$intrested_students', '$city', '$country', '$about', '$address', '$living_cost', '$tution_fee', '$application_fee', '$dli', '$logo_filename', '$cover_filename','$gallery_str', '$feature_id','$map') ");
     	if($query){
     		header("location:schools.php");
     	}else{
@@ -178,7 +183,7 @@
 		}else{
 			$gmat_id = 0;
 		}
-
+		
 		$refusedVisa = $_POST['refusedVisa'];
 		$validPermit = $_POST['validPermit'];
 		$details = $_POST['details'];
@@ -190,7 +195,7 @@
 		refused_visa, valid_permit, detail, agent_id, passport_number, gender, marital_status, status )
 		values('$first_name', '$middle_name', '$last_name', '$dob', '$first_language', '$citizenship', '$address', '$city', '$state', '$country','$zip', 
 		'$email', '$phone', '$edu_country', '$level_education', '$grading_scheme', '$grade_scale', '$avg_grade', '$exam_type', $exam_id, '$gre_id', '$gmat_id',
-		'$refusedVisa', '$validPermit', '$details', '$agent', '$passport', '$gender', '$marital_status', 'Pending..')
+		'$refusedVisa', '$validPermit', '$details', '$agent', '$passport', '$gender', '$marital_status', '')
 		");
 
 		if($query){

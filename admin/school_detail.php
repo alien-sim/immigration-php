@@ -133,15 +133,8 @@
   <!-- main content start -->
 <div class="main-content">
   <!-- content -->
-  <div class="container-fluid content-top-gap">
-    <!-- breadcrumbs -->
-    <nav aria-label="breadcrumb" class="mb-4">
-      <ol class="breadcrumb my-breadcrumb">
-        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><?php echo $school['school_name'] ?></li>
-      </ol>
-    </nav>
-    <!-- //breadcrumbs -->
+  <div class="container-fluid content-top-gap p-0">
+    
     <!-- blank block -->
     <div class="card">
       <div class="card-body p-0">
@@ -288,9 +281,15 @@
             <div class="col-md-12 divided-cols">
                 <h3>Location</h3>
                 <p> <i class="fa fa-map-marker"></i> <?php  echo $school['address'] ?></p>
-                <div class="col-md-12 gmap_canvas">
-                <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.2803904488196!2d-73.57544908456839!3d45.50443397910148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91a465e73b34d%3A0xdcbfab498dcc40a5!2sMcGill%20University%20School%20of%20Continuing%20Studies!5e0!3m2!1sen!2sin!4v1592836907315!5m2!1sen!2sin" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe> -->
-                </div>
+                <?php 
+                  if($school['map']){
+                    ?>
+                      <div class="col-md-12 mt-4 gmap_canvas">
+                          <?php echo $school['map'] ?>
+                      </div>
+                    <?php
+                  }
+                ?>
             </div>
 
             <div class="col-md-12 divided-cols mb-5">

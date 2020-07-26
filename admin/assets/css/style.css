@@ -4,7 +4,7 @@
 .school-program-card{margin-top: 15px;}
 /* .school-program-card .col-md-1 img{width:60%} */
 .school-program-card img{width:52px; margin-right: 20px;}
-.cover-image{height:300px; background-size:cover; background-position: center;}
+.cover-image{height:400px; background-size:cover; background-position: center;}
 .program-cover{ background-size:cover; background-position: center;}
 .program-cover img{max-height:80px; margin-bottom:20px}
 .program-cover h3{color: white;text-shadow: rgb(0, 0, 0) 1px 1px 4px; margin:15px 0px 0px;}
@@ -22,7 +22,7 @@
 .financials-head{border-bottom: 2px solid #e1e1e1;font-family: 'Anton', sans-serif; color: var(--primary);}
 .tution-row{border-bottom: 2px dotted #e1e1e1;}
 .financials-foot{margin-top:40px; border-top: 2px solid #e1e1e1;border-bottom: 2px solid #e1e1e1;}
-/* .gmap_canvas{height:300px} */
+.gmap_canvas{height:300px}
 .school-gallery{top: 260px;}
 .img-common{margin: auto; width:336px}
 .school-gallery .img-div{height: 80px; width: 120px;background-size: cover; background-position: center; 
