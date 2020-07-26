@@ -67,9 +67,18 @@
                 <form action="choose_program.php?student_id=<?php echo $_GET['student_id'] ?>" method="post">
                   <input type="hidden" name="student_id" value=<?php echo $_GET['student_id'] ?> >
                   <input type="hidden" name="program_id" value=<?php echo $p['id'] ?> > 
-                    
+                    <?php
+                      $sql = "select * from applications where student_id=".$_GET['student_id']." and program_id=".$p['id'];
+                      $result = mysqli_query($db, $sql);
+                      $selected = mysqli_fetch_array($result);
+                      if($selected){
+                        ?><button type="submit" class="btn btn-success btn-sm" name="deselect_program">Deselect</button><?php
+                      }else{
+                        ?><button type="submit" class="btn btn-primary btn-sm" name="select_program">Select</button><?php
+                      }
+                    ?>
 
-                      <button type="submit" class="btn btn-primary btn-sm" name="select_program">Select</button>
+                      
                    
                 </form>
               <h5><a href="program_detail.php?id=<?php echo $p['id'] ?>" target="_blank"><?php echo $p['program_name'] ?></a></h5>
