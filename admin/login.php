@@ -59,14 +59,14 @@
                         </div> -->
                         <div class="d-flex align-items-center flex-wrap justify-content-between">
                             <button type="submit" name="login" class="btn bg-red btn-style mt-4">Login now</button>
-                            <!-- <p class="signup mt-4">Don’t have an account? <a href="register.html"
+                            <p class="signup mt-4">Don’t have an account? <a href="register.html"
                                     class="signuplink">Sign
-                                    up</a></p> -->
+                                    up</a></p>
                         </div>
                     </form>
                     <!-- //form -->
-                    <!-- <p class="backtohome mt-4"><a href="index.php" class="back"><i class="fa fa-chevron-left"
-                                aria-hidden="true"></i>Back to Home </a></p> -->
+                    <p class="backtohome mt-4"><a href="../index.html" class="back"><i class="fa fa-chevron-left"
+                                aria-hidden="true"></i>Back to Home </a></p>
                 </div>
             </div>
         </section>

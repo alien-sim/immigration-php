@@ -151,3 +151,6 @@ td span.Pending{
 .badge.accepted{
   background-color: #03c895;
 }
+.backtohome a, .signup a{
+  color:var(--red);
+}
