@@ -239,7 +239,7 @@
                     <input type="file" class="custom-file-input" name="gallery_img[]" multiple >
                     <label class="custom-file-label">Choose 4 Gallery Images</label>
                 </div>
-                <input type="hidden" value="<?php echo $school['gallery_img'] ?>" name="old_gallery"/>
+                <input type="hidden" value="<?php echo $school['gallery'] ?>" name="old_gallery"/>
               </div>
 
               <div class="form-group">

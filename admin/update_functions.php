@@ -47,7 +47,7 @@
 		}else{
 			$cover_filename = $_POST['old_cover'];
 		}
-		if($_FILES['gallery_img']['name']){
+		if($_FILES['gallery_img']['size'][0] != 0){
 			$gallery_dir = "../media/gallery/";
 			$gallery_arr = [];
 			foreach($_FILES["gallery_img"]["tmp_name"] as $key=>$tmp_name) {
