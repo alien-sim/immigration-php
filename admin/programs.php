@@ -162,24 +162,24 @@
               </div>
               <div class="form-group col-md-6">
                 <label class="input__label">Total Score</label>
-                <input type="number" class="form-control input-style" name="total_score" placeholder="Total Score" min=0 max=10>
+                <input type="number" class="form-control input-style" step="0.1" name="total_score" placeholder="Total Score" min=0 max=10>
               </div>
 
               <div class="form-group col-md-3">
                 <label class="input__label">Listening Score</label>
-                <input type="number" class="form-control input-style" name="listening" placeholder="Listening Score" min=0 max=10>
+                <input type="number" class="form-control input-style" step="0.1" name="listening" placeholder="Listening Score" min=0 max=10>
               </div>
               <div class="form-group col-md-3">
                 <label class="input__label">Speaking Score</label>
-                <input type="number" class="form-control input-style" name="speaking" placeholder="Speaking Score" min=0 max=10>
+                <input type="number" class="form-control input-style" step="0.1" name="speaking" placeholder="Speaking Score" min=0 max=10>
               </div>
               <div class="form-group col-md-3">
                 <label class="input__label">Writing Score</label>
-                <input type="number" class="form-control input-style" name="writing" placeholder="Writing Score" min=0 max=10>
+                <input type="number" class="form-control input-style" step="0.1" name="writing" placeholder="Writing Score" min=0 max=10>
               </div>
               <div class="form-group col-md-3">
                 <label class="input__label">Reading Score</label>
-                <input type="number" class="form-control input-style" name="reading" placeholder="Reading Score" min=0 max=10>
+                <input type="number" class="form-control input-style" step="0.1" name="reading" placeholder="Reading Score" min=0 max=10>
               </div>
             </div>
             

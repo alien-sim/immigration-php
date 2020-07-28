@@ -242,6 +242,11 @@
                 <input type="hidden" value="<?php echo $school['gallery_img'] ?>" name="old_gallery"/>
               </div>
 
+              <div class="form-group">
+                <label class="input__label">Google Map Iframe</label>
+                <textarea class="form-control input-style" name="map" rows=2><?php echo $school['map'] ?></textarea>
+              </div>
+
 
             <div class="form-group text-right">
               <button type="submit" name="update_school" class="btn btn-primary btn-style">Update</button>

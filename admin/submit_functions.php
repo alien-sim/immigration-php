@@ -123,10 +123,7 @@
 		} 
 		$gallery_str = implode(",",$gallery_arr);
 
-		$find = 'width="600" height="450"';
-		$replace = 'width="100%" height="100%"';
-		$map = str_replace($find, $replace, $_POST['map']);
-
+		$map = get_map_link($_POST['map']);
 
     	$query = $db->query("insert into schools (school_name, founded, type, total_students, intrested_students, city, country, about, address, cost_of_living_yearly, tution_fee_yearly, application_fee, dli, school_logo, cover_img, gallery, features, map) values('$school_name', '$founded', '$type', '$total_students', '$intrested_students', '$city', '$country', '$about', '$address', '$living_cost', '$tution_fee', '$application_fee', '$dli', '$logo_filename', '$cover_filename','$gallery_str', '$feature_id','$map') ");
     	if($query){

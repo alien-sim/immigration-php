@@ -61,7 +61,9 @@
 			$gallery_str = $_POST['old_gallery'];
 		}
 
-        $sql="update schools set school_name='".$school_name."', founded='".$founded."', type='".$type."', total_students='".$total_students."', intrested_students = '".$intrested_students."', city='".$city."', country='".$country."', about='".$about."', tution_fee_yearly = '".$tution_fee."', cost_of_living_yearly = '".$living_cost."', application_fee='".$application_fee."', address='".$address."', dli='".$dli."', school_logo='".$logo_filename."', cover_img='".$cover_filename."', gallery='".$gallery_str."' where id='".$idd."'";
+		$map = get_map_link($_POST['map']);
+		
+        $sql="update schools set school_name='".$school_name."', founded='".$founded."', type='".$type."', total_students='".$total_students."', intrested_students = '".$intrested_students."', city='".$city."', country='".$country."', about='".$about."', tution_fee_yearly = '".$tution_fee."', cost_of_living_yearly = '".$living_cost."', application_fee='".$application_fee."', address='".$address."', dli='".$dli."', school_logo='".$logo_filename."', cover_img='".$cover_filename."', gallery='".$gallery_str."', map='".$map."' where id='".$idd."'";
 		if(mysqli_query($db,$sql)){
 			header("location:schools.php");
 		}

@@ -103,24 +103,24 @@
               </div>
               <div class="form-group col-md-6">
                 <label class="input__label">Total Score</label>
-                <input type="number" class="form-control input-style" name="total_score" placeholder="Total Score" value=<?php echo $program['total_score'] ?> min=0 max=10>
+                <input type="number" class="form-control input-style" name="total_score" step="0.1" placeholder="Total Score" value=<?php echo $program['total_score'] ?> min=0 max=10>
               </div>
 
               <div class="form-group col-md-3">
                 <label class="input__label">Listening Score</label>
-                <input type="number" class="form-control input-style" name="listening" placeholder="Listening Score" value=<?php echo $program['listening'] ?> min=0 max=10>
+                <input type="number" class="form-control input-style" name="listening" step="0.1" placeholder="Listening Score" value=<?php echo $program['listening'] ?> min=0 max=10>
               </div>
               <div class="form-group col-md-3">
                 <label class="input__label">Speaking Score</label>
-                <input type="number" class="form-control input-style" name="speaking" placeholder="Speaking Score" value=<?php echo $program['speaking'] ?> min=0 max=10>
+                <input type="number" class="form-control input-style" name="speaking" step="0.1" placeholder="Speaking Score" value=<?php echo $program['speaking'] ?> min=0 max=10>
               </div>
               <div class="form-group col-md-3">
                 <label class="input__label">Writing Score</label>
-                <input type="number" class="form-control input-style" name="writing" placeholder="Writing Score" value=<?php echo $program['writing'] ?> min=0 max=10>
+                <input type="number" class="form-control input-style" name="writing" step="0.1" placeholder="Writing Score" value=<?php echo $program['writing'] ?> min=0 max=10>
               </div>
               <div class="form-group col-md-3">
                 <label class="input__label">Reading Score</label>
-                <input type="number" class="form-control input-style" name="reading" placeholder="Reading Score" value=<?php echo $program['reading'] ?> min=0 max=10>
+                <input type="number" class="form-control input-style" name="reading" step="0.1" placeholder="Reading Score" value=<?php echo $program['reading'] ?> min=0 max=10>
               </div>
             </div>
 

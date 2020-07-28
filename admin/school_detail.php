@@ -285,7 +285,7 @@
                   if($school['map']){
                     ?>
                       <div class="col-md-12 mt-4 gmap_canvas">
-                          <?php echo $school['map'] ?>
+                        <iframe src="<?php echo $school['map'] ?>" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0" ></iframe>
                       </div>
                     <?php
                   }
