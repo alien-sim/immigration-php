@@ -52,6 +52,7 @@
             <tr>
               <th>Username</th>
               <th>Email</th>
+              <th>Activate/Deactivate</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -64,6 +65,15 @@
                   <tr>
                     <td><?php echo $agent_row['username'] ?>  </td>
                     <td><?php echo $agent_row['email'] ?></td>
+                    <td>
+                      <?php
+                        if($agent_row['is_active']){
+                          ?><a href="activate_deactivate.php?id=<?php echo $agent_row['id'] ?>" class="badge badge-warning">Dectivate</a><?php
+                        }else{
+                          ?><a href="activate_deactivate.php?id=<?php echo $agent_row['id'] ?>" class="badge badge-success">Activate</a><?php
+                        }
+                      ?>
+                    </td>
                     <td>
 						<a href="update_agent.php?id=<?php echo $agent_row['id'] ?>" class="btn btn-link"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 						<a href="delete.php?page=agents&id=<?php echo $agent_row['id'] ?>" class="btn btn-link" onclick="return confirm('Are you sure to delete School?')"><i class="fa fa-trash" aria-hidden="true"></i></a>

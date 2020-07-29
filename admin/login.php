@@ -59,7 +59,7 @@
                         </div> -->
                         <div class="d-flex align-items-center flex-wrap justify-content-between">
                             <button type="submit" name="login" class="btn bg-red btn-style mt-4">Login now</button>
-                            <p class="signup mt-4">Don’t have an account? <a href="register.html"
+                            <p class="signup mt-4">Don’t have an account? <a href="register.php"
                                     class="signuplink">Sign
                                     up</a></p>
                         </div>

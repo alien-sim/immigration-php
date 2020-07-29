@@ -319,4 +319,64 @@
 		}
 		// echo "<script>console.log('$program_id')</script>";
 	}
+
+	// add agent info
+	if(isset($_POST['register'])){
+		$first_name = $_POST['first_name'];
+		$last_name = $_POST['last_name'];
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+
+		$username = $first_name." ".$last_name;
+
+		$query = $db->query("insert into admin (username, email, password) values('$username', '$email', '$password') ");
+		if($query){
+			$admin_id = $db->insert_id;
+			add_agent_info($_POST, $admin_id, $db);
+			
+		}else{
+			echo mysqli_error($db);
+		}
+		
+	}
+
+	function add_agent_info($post, $admin_id, $db){
+
+		$first_name = $post['first_name'];
+		$last_name = $post['last_name'];
+		$company_name = $post['company_name'];
+		$website = $post['website'];
+		$facebook = $post['facebook'];
+		$student_source = $post['student_source'];
+		$address = $post['address'];
+		$city = $post['city'];
+		$state = $post['state'];
+		$zip = $post['zip'];
+		$contact_number = $post['contact_number'];
+		$whatsapp = $post['whatsapp'];
+		$begin_recruitment = $post['begin_recruitment'];
+		$services = $post['services'];
+		$association = $post['association'];
+		$recruit_from = $post['recruit_from'];
+		$approx_student = $post['approx_students'];
+		$marketing = $post['marketting'];
+		$no_of_students = $post['no_of_students'];
+		$referred  = isset($post['referred']) ? 1 : 0;
+
+		$sql = "insert into agent_info(admin_id, first_name, last_name, company, website, facebook, student_source, 
+			address, city, state, zip, contact_number, whatsapp, begin_recruitment, services, association, recruit_from,
+			approx_student, no_of_students, marketing, referred )
+			values($admin_id, '$first_name','$last_name', '$company_name', '$website', '$facebook', '$student_source', 
+			'$address', '$city','$state','$zip', '$contact_number','$whatsapp', '$begin_recruitment','$services','$association','$recruit_from',
+			'$approx_student', '$no_of_students','$marketing','$referred' )";
+
+		$query = $db->query($sql);
+		if($query){
+			header("location:login.php?msg=success");
+		}else{
+			echo mysqli_error($db);
+		}
+
+
+	}
 ?>
