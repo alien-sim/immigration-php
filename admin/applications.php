@@ -64,7 +64,8 @@
                     }
                 ?>
                 <th width="8%">status</th>
-                <th width="5%">Current Stage</th>
+                <th width="5%">Requirements</th>
+                <th width="5%">Current Requirements</th>
             </tr>
           </thead>
           <tbody>
@@ -73,22 +74,24 @@
                 $app_sql = 'select 
                         ap.*, concat(s.first_name," ",s.last_name) as name, 
                         p.program_name, sl.school_name,
-                        a.email
-                    from applications ap
-                    left join student s on ap.student_id = s.id
-                    left join admin a on s.agent_id = a.id
-                    left join programs p on ap.program_id = p.id
-                    left join schools sl on p.school_id = sl.id';
-              }else{
-                $app_sql = "select 
-                        ap.*, concat(s.first_name,' ',s.last_name) as name, 
-                        p.program_name, sl.school_name,
-                        a.email, a.id as admin_id
+                        a.email, c.country_flag
                     from applications ap
                     left join student s on ap.student_id = s.id
                     left join admin a on s.agent_id = a.id
                     left join programs p on ap.program_id = p.id
                     left join schools sl on p.school_id = sl.id
+                    left join countries c on sl.country = c.id';
+              }else{
+                $app_sql = "select 
+                        ap.*, concat(s.first_name,' ',s.last_name) as name, 
+                        p.program_name, sl.school_name,
+                        a.email, a.id as admin_id, c.country_flag
+                    from applications ap
+                    left join student s on ap.student_id = s.id
+                    left join admin a on s.agent_id = a.id
+                    left join programs p on ap.program_id = p.id
+                    left join schools sl on p.school_id = sl.id
+                    left join countries c on sl.country = c.id
                     where a.id=".$_SESSION['id'];
               }
               $result = $db->query($app_sql);
@@ -103,14 +106,43 @@
                     <td><?php echo ucwords($app['name']) ?></td>
                     
                     <td><?php echo $app['program_name'] ?></td>
-                    <td><?php echo $app['school_name'] ?></td>
+                    <td><img src="../media/flags/<?php echo $app['country_flag'] ?>" width="25px" class="mr-2"> <?php echo $app['school_name'] ?></td>
                     <?php 
                         if($_SESSION['is_superadmin']){
                         ?><td><?php echo $app['email'] ?></th><?php
                         }
                     ?>
-                    <td><span class="badge <?php echo $app['status'] ?> "> <?php echo ucwords($app['status']) ?></span></td>
-                    <td></td>
+                    <td>
+                      <span class="badge <?php echo $app['status'] ?> "> 
+                        <?php 
+                          if($app['status'] == 'not paid'){
+                            ?>
+                              <a href="stripe-integration/" target="_blank" style="color:inherit"><i class="fa fa-money" aria-hidden="true"></i>    
+                            <?php
+                              echo ucwords($app['status']);
+                            ?></a><?php
+                          }else{
+                            echo ucwords($app['status']);
+                          }
+                        ?>
+                      </span>
+                      </td>
+                    <td>
+                      <span class="badge <?php echo $app['requirements'] ?>">
+                        <?php echo $app['requirements'] ?>
+                      </span>
+                    </td>
+                    <td>
+                      <?php
+                        if($app['current_stage']){
+                          ?>
+                            <span class="badge badge-grey">
+                              <?php echo $app['current_stage'] ?>
+                            </span>
+                          <?php
+                        }
+                      ?>
+                    </td>
                   </tr>
                 <?php
               }

@@ -157,11 +157,15 @@
                 <textarea class="form-control input-style" name="address" row=2></textarea>
             </div>    
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label class="input__label">City</label>
                     <input type="text" class="form-control input-style" name="city" placeholder="City" required="required">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <label class="input__label">State</label>
+                    <input type="text" class="form-control input-style" name="state" placeholder="State" required="required">
+                </div>
+                <div class="form-group col-md-4">
                     <label class="input__label">Country</label>
                     <select name="country" class="custom-select input-style" required>
                         <option value="null">Select Country</option>

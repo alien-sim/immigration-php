@@ -91,6 +91,37 @@
                 </div>
             </div>
             <div class="form-row">
+              <div class="form-group col-md-4">
+                <label class="input__label">Current Stage</label>
+                <select class="form-control input-style"  name="current_stage" id="current_stage">
+                  <option><?php echo $application['current_stage'] ?></option>
+                  <option>Pre-Payment</option>
+                  <option>Pre-Submission</option>
+                  <option>Submission</option>
+                  <option>Post-Submission</option>
+                  <option>Admission</option>
+                  <option>Pre-Arrival</option>
+                  <option>Arrival</option>
+                  <option>Post-Decision</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label class="input__label">Requirements</label>
+                <select class="form-control input-style"  name="requirements" id="requirements">
+                  <option value="<?php echo $application['requirements'] ?>"><?php echo $application['requirements'] ?></option>
+                  <option value="Missing">Missing</option>
+                  <option value="Reviewing">Reviewing</option>
+                  <option value="None Outstanding">None Outstanding</option>
+                  <option value="Not Approved">Not Approved</option>
+                  <option value="Complete">Complete</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
                 <div class="form-group col-md-4 ">
                     <div class="form-check check-remember check-me-out mt-3">
                     <?php 

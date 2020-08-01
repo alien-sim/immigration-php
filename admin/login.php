@@ -28,6 +28,18 @@
 
     <!-- content -->
     <div class="">
+
+    <?php
+        if(isset($_GET['msg']) && $_GET['msg'] == 'not_active'){
+            ?>
+                <div class="alert alert-info fade show" role="alert">
+                <strong>Not Activated!</strong> You are on our waitlist. You can login once the admin activates you.
+                </div>
+            <?php
+        }
+    ?>
+    
+
         <!-- login form -->
         <section class="login-form py-md-5 py-3">
             <div class="card card_border p-md-4">

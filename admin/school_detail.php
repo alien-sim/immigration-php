@@ -172,7 +172,7 @@
                 <img src="../media/logos/<?php echo $school['school_logo'] ?>" class="school-logo" >
                 <h4><?php echo $school['school_name'] ?></h4>
                 <img src="../media/flags/<?php echo $country['country_flag'] ?>" class="country-flag">
-                <?php echo $school['city'].", ".$country['country_name'] ?>
+                <?php echo $school['city'].", ".$school['state'].", ".$country['country_name'] ?>
                 <?php
                   if($school['dli']){
                     ?>

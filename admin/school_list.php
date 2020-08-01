@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <img src="../media/logos/<?php echo $school_row['school_logo'] ?>">
                         <h6 class="card-text  mb-4"><?php echo $school_row['school_name'] ?></h6>
-                        <p class="card-text"><small class="text-muted"><?php echo $school_row['city'] ?></small></p>
+                        <p class="card-text"><small class="text-muted"><?php echo $school_row['state'] ?></small></p>
                     </div>
                 </div>
             </div>

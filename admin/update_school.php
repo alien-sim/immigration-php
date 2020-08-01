@@ -96,11 +96,16 @@
                 <textarea class="form-control input-style" name="address" row=2><?php echo $school['address'] ?></textarea>
             </div>    
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label class="input__label">City</label>
                     <input type="text" class="form-control input-style" name="city" placeholder="City" value="<?php echo $school['city'] ?>" required="required">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <label class="input__label">State</label>
+                    <input type="text" class="form-control input-style" name="state" placeholder="State" value="<?php echo $school['state'] ?>" required="required">
+                </div>
+
+                <div class="form-group col-md-4">
                     <label class="input__label">Country</label>
                     <!-- <input type="text" class="form-control input-style" name="country" placeholder="Country" value="<?php echo $school['country'] ?>" required="required"> -->
                     <select name="country" class="custom-select input-style" required>

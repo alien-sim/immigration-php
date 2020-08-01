@@ -134,4 +134,18 @@
         
         return $map;
     }
+
+    function intake_for_programs(){
+                 
+        $intake_months = ['Jan', 'Mar', 'May', 'Jul', 'Sept', 'Nov'];
+        $current_month = date('m');
+        $current_year = date('Y');
+        $next_year = $current_year + 1;
+        if($current_month > 1){
+            foreach($intake_months as $key => $month){
+                
+            }
+        }
+                
+    }
 ?>

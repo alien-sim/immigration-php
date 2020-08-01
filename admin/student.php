@@ -61,7 +61,12 @@
               ?>
               <th width="10%">Education</th>
               <th width="15%">Applications</th>
-              <th width="10%">Program Info</th>
+              <th width="7%">Program Info</th>
+              <?php 
+                if($_SESSION['is_superadmin']){
+                  ?><th width="10%">Delte</th><?php
+                }
+              ?>
             </tr>
           </thead>
           <tbody>
@@ -109,6 +114,13 @@
                       ?>
                     </td>
                     <td><a href="choose_program.php?student_id=<?php echo $student_row['id'] ?>" ><i class="fa fa-external-link" aria-hidden="true"></i></a> </td>
+                    <?php 
+                      if($_SESSION['is_superadmin']){
+                        ?><td>
+                          <a href="delete_student.php?id=<?php echo $student_row['id'] ?>" class="btn btn-link" onclick="return confirm('Are you sure to delete student?')"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </td><?php
+                      }
+                    ?>
                   </tr>
                 <?php
               }

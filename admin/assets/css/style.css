@@ -139,17 +139,20 @@ td span.Pending{
 .badge-grey{
   background-color: #ccc;
 }
-.badge.processing{
+.badge.Reviewing, .badge.processing{
   background-color: var(--primary);
 }
 .badge.not.paid{
   background-color: #ccc;
 }
-.badge.cancelled{
+.badge.Missing, .badge.cancelled{
   background-color: #ffc107;
 }
-.badge.accepted{
+.badge.Completed, .badge.None.outstanding,  .badge.accepted{
   background-color: #03c895;
+}
+.badge.Not.Approved{
+  background-color: var(--red);
 }
 .backtohome a, .signup a{
   color:var(--red);

@@ -5,15 +5,19 @@
 	if(isset($_POST['login'])){
         $username = mysqli_real_escape_string($db,$_POST['username']);
         $pass = mysqli_real_escape_string($db,$_POST['password']);
-        $query = $db->query("select * FROM `admin` WHERE `username`='$username' AND `password`='$pass' ");
+        $query = $db->query("select * FROM `admin` WHERE (`username`='$username' or `email`='$username') AND `password`='$pass' ");
         if(mysqli_num_rows($query)) { 
-        	$row = mysqli_fetch_row($query);
-        	session_start();
-			$_SESSION['email'] 			= $row[1];
-			$_SESSION['is_superadmin'] 	= $row[4];
-			$_SESSION['username'] 		= $username;
-			$_SESSION['user_id']		= $row[0];
-            header("location:index.php");
+			$row = mysqli_fetch_row($query);
+			if($row[6]){
+				session_start();
+				$_SESSION['email'] 			= $row[1];
+				$_SESSION['is_superadmin'] 	= $row[4];
+				$_SESSION['username'] 		= $row[3];
+				$_SESSION['user_id']		= $row[0];
+				header("location:index.php");
+			}else{
+				header("location:login.php?msg=not_active");
+			}
         }
 
         else { 
@@ -91,7 +95,8 @@
     	$type 			= $_POST['type'];
     	$total_students = $_POST['total_students'];
     	$intrested_students = $_POST['int_students'];
-    	$city 			= $_POST['city'];
+		$city 			= $_POST['city'];
+		$state 			= $_POST['state'];
     	$country 		= $_POST['country'];
     	$about 			= mysqli_real_escape_string($db,$_POST['about']);
     	$tution_fee 	= $_POST['tution_fee'];
@@ -125,7 +130,7 @@
 
 		$map = get_map_link($_POST['map']);
 
-    	$query = $db->query("insert into schools (school_name, founded, type, total_students, intrested_students, city, country, about, address, cost_of_living_yearly, tution_fee_yearly, application_fee, dli, school_logo, cover_img, gallery, features, map) values('$school_name', '$founded', '$type', '$total_students', '$intrested_students', '$city', '$country', '$about', '$address', '$living_cost', '$tution_fee', '$application_fee', '$dli', '$logo_filename', '$cover_filename','$gallery_str', '$feature_id','$map') ");
+    	$query = $db->query("insert into schools (school_name, founded, type, total_students, intrested_students, city, state, country, about, address, cost_of_living_yearly, tution_fee_yearly, application_fee, dli, school_logo, cover_img, gallery, features, map) values('$school_name', '$founded', '$type', '$total_students', '$intrested_students', '$city', '$state', '$country', '$about', '$address', '$living_cost', '$tution_fee', '$application_fee', '$dli', '$logo_filename', '$cover_filename','$gallery_str', '$feature_id','$map') ");
     	if($query){
     		header("location:schools.php");
     	}else{

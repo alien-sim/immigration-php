@@ -86,6 +86,7 @@
   if (path_name.includes("programs.php") || path_name.includes("program.php")){
     CKEDITOR.replace( 'admission_req', toolbar);
     CKEDITOR.replace( 'other_fees', toolbar);
+    CKEDITOR.replace( 'description', toolbar);
   }
 </script>
 <!-- // CK Editor settings -->
