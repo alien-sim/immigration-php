@@ -112,10 +112,10 @@
             $all_programs = get_student_programs($student_id, true);
         }else{
             $all_programs = "select p.*, s.school_name as school_name, s.id as sid, s.school_logo, s.city, s.state, c.country_name, c.country_currency, c.currency_symbol from programs p
-                    LEFT JOIN schools s on p.school_id = s.id
-                    left join features f on s.features = f.id
-                    left join countries c on s.country = c.id".$where_statement."
-                    order by school_name asc";
+            LEFT JOIN schools s on p.school_id = s.id
+            left join features f on s.features = f.id
+            left join countries c on s.country = c.id".$where_statement."
+            order by school_name asc";
         }
         $program_html .= "<div class='d-none'>".$all_programs."</div>";
         $program_result = $db->query($all_programs);
@@ -155,6 +155,8 @@
             $program_html .= '</td>';
             $program_html .= '</tr>';
             $program_html .= '</table>';
+            $program_html .= '<div class="w-100 text-right py-2">';
+            $program_html .= '<button id="program-'.$program_row['id'].'" data-toggle="modal" data-target="#selectStudentModal" attr="'.$program_row['id'].'" class="select-student-program btn btn-outline-dark">Select Student</button></div>';
             $program_html .= '</div>';
         }
         

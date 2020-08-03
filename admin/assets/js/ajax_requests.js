@@ -1,5 +1,11 @@
 
   $(document).ready(function () {
+
+    $("#nav-program-search ").on("click", ".program-search-card button", function(){
+      var program_id = $(this).attr("attr");
+      $("#selectStudentModal input#program_id").val(program_id);
+    });
+
     /*  data tables js  */
     $('#example').DataTable();
 
@@ -201,3 +207,5 @@
       }
     })
   }
+
+  

@@ -61,7 +61,7 @@
         $student_result = $GLOBALS['db']->query($student_sql);
         $student = mysqli_fetch_array($student_result);
 
-        $program_sql = "select  p.*, s.id as sid, s.school_name, s.school_logo, s.city, s.country, c.country_name, c.country_currency, c.currency_symbol  from programs p
+        $program_sql = "select  p.*, s.id as sid, s.school_name, s.school_logo, s.city, s.state, s.country, c.country_name, c.country_currency, c.currency_symbol  from programs p
                         inner join schools s on p.school_id = s.id 
                         inner join countries c on s.country = c.id
                         where
@@ -76,6 +76,7 @@
                                     reading <= ".$student['reading']."
                             end";
         if($return_query){
+            // echo $program_sql;
             return $program_sql;
         }
         $program_result = $GLOBALS['db']->query($program_sql);

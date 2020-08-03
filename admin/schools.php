@@ -264,7 +264,7 @@
             <div class="form-group">
                 <label class="input__label">Gallery Images <span class="text-muted">(Atleast select 4 images)</span></label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="gallery_img[]" id="validatedCustomFile3" multiple required>
+                    <input type="file" class="custom-file-input" name="gallery_img[]" id="validatedCustomFile3" multiple>
                     <label class="custom-file-label" for="validatedCustomFile3">Choose 4 Gallery Images</label>
                 </div>
             </div>

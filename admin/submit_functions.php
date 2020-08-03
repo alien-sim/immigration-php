@@ -307,7 +307,9 @@
 		$query = "insert into applications (student_id, program_id, status, apply_date) values('$student_id', '$program_id', 'not paid', now())";
 		$sql = $db->query($query);
 		if($sql){
-			// header("location:stripe-integration/index.php?student_id=".$student_id);
+			if($_POST['page']){
+				header("location:stripe-integration/index.php?student_id=".$student_id);
+			}
 			header("location:choose_program.php?student_id=".$student_id);
 		}
 	}

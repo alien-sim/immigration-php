@@ -1,15 +1,15 @@
 <?php
     $city_array = [];
-    $country = "SELECT city from `schools` group by city";
+    $country = "SELECT distinct state from `schools` where state != ''";
     $country_result = $db->query($country);
     // echo $country_result;
     while($city_row = $country_result->fetch_assoc()){
         // $city_split = explode(",", $city_row['city']);
         // for($i=0; $i<count($city_split); ++$i){
         // }
-        array_push($city_array, $city_row['city']);
+        array_push($city_array, $city_row['state']);
     }
-    $city_array = array_unique($city_array);
+    // $city_array = array_unique($city_array);
 ?>
 
 <div class="tab-pane fade show active my-4 row" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
@@ -115,18 +115,6 @@
             </div>
 
             <div class="form-group">
-                <label class="input__label">Tution Fee</label>
-                <input id="tution-slider" class="custom-range " type="range" min="0" max="100" value="0" style="width:90%" />
-                <span class="font-weight-bold text-primary tutionSpan valueSpan"></span>
-            </div>
-
-            <div class="form-group">
-                <label class="input__label">Application Fee</label>
-                <input id="application-slider" class="custom-range " type="range" min="0" max="50" value="0" style="width:90%" />
-                <span class="font-weight-bold text-primary applicationSpan valueSpan"></span>
-            </div>
-
-            <div class="form-group">
                 <label>Program Level</label>
                 <select class="selectpicker my-select w-100 level-select border border-radius" multiple name="program_level">
                     <option value="English as Second Language (ESL)">English as Second Language (ESL)</option>
@@ -142,6 +130,19 @@
                 </select>
 
             </div>
+
+            <div class="form-group">
+                <label class="input__label">Tution Fee</label>
+                <input id="tution-slider" class="custom-range " type="range" min="0" max="100" value="0" style="width:90%" />
+                <span class="font-weight-bold text-primary tutionSpan valueSpan"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="input__label">Application Fee</label>
+                <input id="application-slider" class="custom-range " type="range" min="0" max="50" value="0" style="width:90%" />
+                <span class="font-weight-bold text-primary applicationSpan valueSpan"></span>
+            </div>
+
             <hr>
             <div class="form-group text-right">
                 <button class="btn btn-primary apply-filter">Apply Filters</button>
@@ -171,5 +172,41 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal" id="selectStudentModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <form action="search.php" method="post">
+        <div class="modal-header">
+          <h5 class="modal-title">Select Student</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="program_id" name="program_id">
+            <input type="hidden" name="page" value="search">
+            <select class="custom-select input-style" name="student_id" required>
+            <option hidden disabled selected value="">Select..</option>
+                <?php
+                    $sql = "select id, first_name, last_name from student order by first_name, last_name";
+                    $query = $db->query($sql);
+                    while($student = $query->fetch_assoc()) {
+                        ?><option value=<?php echo $student['id'] ?>><?php echo ucwords($student['first_name']." ".$student['last_name']) ?></option><?php
+                    }
+                ?>
+            </select>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+          <button type="submit" name="select_program" class="btn btn-primary">Apply</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 

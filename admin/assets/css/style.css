@@ -148,7 +148,7 @@ td span.Pending{
 .badge.Missing, .badge.cancelled{
   background-color: #ffc107;
 }
-.badge.Completed, .badge.None.outstanding,  .badge.accepted{
+.badge.Complete, .badge.None.Outstanding,  .badge.accepted{
   background-color: #03c895;
 }
 .badge.Not.Approved{
