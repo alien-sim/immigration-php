@@ -1,6 +1,7 @@
 <?php
 	include_once './config.php';
 	include_once './common_functions.php' ;
+	$program_error = '';
 	// Login Function
 	if(isset($_POST['login'])){
         $username = mysqli_real_escape_string($db,$_POST['username']);
@@ -61,17 +62,25 @@
 		$school_id = $_POST['school_id'];
 		$application_fee = $_POST['application_fee'];
 		$tution_fee = $_POST['tution_fee'];
+		
+		$intakes_arr = [];
+		foreach($_POST['intakes'] as $mon){
+			array_push($intakes_arr, $mon);
+		}
+		$intakes = implode(",",$intakes_arr);
+		echo "<script>console.log('$intakes')</script>";
 
-		$total_score = $_POST['total_score'] != '' ? $_POST['total_score'] : 0;
-		$listening = $_POST['listening'] != '' ? $_POST['listening'] : 0;
-		$reading = $_POST['reading'] != '' ? $_POST['reading'] : 0;
-		$writing = $_POST['writing'] != '' ? $_POST['writing'] : 0;
-		$speaking = $_POST['speaking'] != '' ? $_POST['speaking'] : 0;
-		$exam_type = $_POST['exam_type'];
-
-    	$query = $db->query("insert into programs (program_name, description, program_level, length_program, school_id, additional_requirements, other_fees, tution_fee, application_fee, exam_type, total_score, listening, reading, speaking, writing) values('$program_name', '$description', '$level_program', '$length_program','$school_id','$admission_req', '$other_fees', '$tution_fee', '$application_fee',  '$exam_type', '$total_score', '$listening', '$reading', '$speaking', '$writing') ");
+		$query = $db->query(
+			"insert into programs (program_name, description, program_level, length_program, school_id, 
+			additional_requirements, other_fees, tution_fee, application_fee, intakes) 
+			values('$program_name', '$description', '$level_program', '$length_program','$school_id',
+			'$admission_req', '$other_fees', '$tution_fee', '$application_fee', '$intakes') "
+		);
     	if($query){
-    		header("location:programs.php");
+			$program_id = $db->insert_id;
+			insert_exam_details($_POST, $program_id, $db);
+			// header("location:programs.php");
+			echo $program_error;
     	}else{
     		echo mysqli_error($db);
     	}
@@ -274,6 +283,45 @@
 			echo mysqli_error($db);
 		}
 	}
+
+	function insert_exam_details($post, $program_id, $db){
+
+		if(isset($post['ielts'])){
+			insert_in_exam_in_table($program_id, 'ielts', $db, $post);
+		}
+		if(isset($post['toefl'])){
+			insert_in_exam_in_table($program_id, 'toefl', $db, $post);
+		}
+		if(isset($post['pte'])){
+			insert_in_exam_in_table($program_id, 'pte', $db, $post);
+		}
+		if(isset($post['celpip'])){
+			insert_in_exam_in_table($program_id, 'celpip', $db, $post);
+		}
+		if(isset($post['cae'])){
+			insert_in_exam_in_table($program_id, 'cae', $db, $post);
+		}
+		return "";
+
+	}
+
+	function insert_in_exam_in_table($program_id, $exam, $db, $post){
+		$total_score = $post[$exam.'_total_score'];
+		$listening = $post[$exam.'_listening'];
+		$speaking = $post[$exam.'_speaking'];
+		$writing = $post[$exam.'_writing'];
+		$reading = $post[$exam.'_reading'];
+
+		$query = "insert into program_exam_details (program_id, exam_type, total_score, listening, speaking, writing, reading)
+		values('$program_id', '$exam', '$total_score', '$listening', '$speaking', '$writing', '$reading')
+		";
+		$sql = $db->query($query);
+		if($sql){
+
+		}else{
+			echo mysqli_error($db);
+		}
+	}
 	
 	if (isset($_POST['upload_docs'])){
 
@@ -342,8 +390,9 @@
 			add_agent_info($_POST, $admin_id, $db);
 			
 		}else{
-			echo mysqli_error($db);
+			$program_error .= mysqli_error($db)." => ";
 		}
+
 		
 	}
 

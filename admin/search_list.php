@@ -10,6 +10,7 @@
         array_push($city_array, $city_row['state']);
     }
     // $city_array = array_unique($city_array);
+    $current_month = date("m");
 ?>
 
 <div class="tab-pane fade show active my-4 row" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
@@ -34,7 +35,7 @@
 
             <hr>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label class="input__label">English Exam Type </label>
                 <select name="exam_type" class="w-100 selectpicker my-select exam-type-select border border-radius"> 
                     <option value="">Exam Type</option>
@@ -43,8 +44,7 @@
                     <option value="toefl">TOEFL</option>
                     <option value="duolingo">Duolingo English Test</option>
                 </select>
-
-            </div>
+            </div> -->
 
             <div class="form-group">
                 <label class="input__label">Country</label>
@@ -118,7 +118,6 @@
                 <label>Program Level</label>
                 <select class="selectpicker my-select w-100 level-select border border-radius" multiple name="program_level">
                     <option value="English as Second Language (ESL)">English as Second Language (ESL)</option>
-                    <option value=null>Select Level of education</option>
                     <?php
                         $program_level = get_program_levels();
                         for($i=0 ; $i < count($program_level) ; ++$i){
@@ -129,6 +128,130 @@
                     ?>
                 </select>
 
+            </div>
+
+            <div class="form-group">
+              <label class="input__label">Intake</label>
+              <select name="intakes" class="w-100 selectpicker my-select intake-select border border-radius">
+                <option value=null>Select intake</option>
+                    <option value="1">Jan
+                    <?php
+                        
+                        if($current_month>=1){
+                            echo (int) date("Y")+1;
+                        }else{
+                            echo date("Y");
+                        }
+                    ?>
+                    </option>
+                    <option value="2">Feb
+                        <?php
+                            if($current_month>=2){
+                                echo (int) date("Y")+1;
+                            }else{
+                                echo date("Y");
+                            }
+                        ?>
+                    </option>
+                    <option value="3">Mar
+                        <?php
+                            
+                            if($current_month>=3){
+                                echo (int) date("Y")+1;
+                            }else{
+                                echo date("Y");
+                            }
+                        ?>
+                    </option>
+                    <option value="4">Apr
+                        <?php
+                            
+                            if($current_month>=4){
+                                echo (int) date("Y")+1;
+                            }else{
+                                echo date("Y");
+                            }
+                        ?>
+                    </option>
+                    <option value="5">May
+                        <?php
+                            
+                            if($current_month>=5){
+                                echo (int) date("Y")+1;
+                            }else{
+                                echo date("Y");
+                            }
+                        ?>
+                    </option>
+                    <option value="6">Jun
+                        <?php
+                            
+                            if($current_month>=6){
+                                echo (int) date("Y")+1;
+                            }else{
+                                echo date("Y");
+                            }
+                        ?>
+                    </option>
+                    <option value="7">Jul
+                        <?php
+                            
+                            if($current_month>=3){
+                                echo (int) date("Y")+1;
+                            }else{
+                                echo date("Y");
+                            }
+                        ?>
+                    </option>
+                    <option value="8">Aug
+                    <?php
+                        
+                        if($current_month>=8){
+                            echo (int) date("Y")+1;
+                        }else{
+                            echo date("Y");
+                        }
+                    ?>
+                    </option>
+                    <option value="9">Sept
+                        <?php
+                        
+                            if($current_month>=9){
+                                echo (int) date("Y")+1;
+                            }else{
+                                echo date("Y");
+                            }
+                        ?>
+                    </option>
+                    <option value="10">Oct
+                        <?php
+                        
+                            if($current_month>=10){
+                                echo (int) date("Y")+1;
+                            }else{
+                                echo date("Y");
+                            }
+                        ?>
+                    </option>
+                    <option value="11">Nov
+                        <?php
+                            if($current_month>=11){
+                                echo (int) date("Y")+1;
+                            }else{
+                                echo date("Y");
+                            }
+                        ?>
+                    </option>
+                    <option value="12">Dec
+                        <?php
+                            if($current_month>=12){
+                                echo (int) date("Y")+1;
+                            }else{
+                                echo date("Y");
+                            }
+                        ?>
+                    </option>
+                </select>
             </div>
 
             <div class="form-group">

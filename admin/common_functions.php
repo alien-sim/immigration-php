@@ -61,20 +61,24 @@
         $student_result = $GLOBALS['db']->query($student_sql);
         $student = mysqli_fetch_array($student_result);
 
-        $program_sql = "select  p.*, s.id as sid, s.school_name, s.school_logo, s.city, s.state, s.country, c.country_name, c.country_currency, c.currency_symbol  from programs p
-                        inner join schools s on p.school_id = s.id 
-                        inner join countries c on s.country = c.id
-                        where
-                            case 
-                                when exam_type = 'duolingo'
-                                    then total_score <= ".$student['score']."
-                                else 
-                                    exam_type = '".$student['exam_type_name']."' and
-                                    speaking <= ".$student['speaking']." and 
-                                    listening <= ".$student['listening']." and 
-                                    writing <= ".$student['writing']." and
-                                    reading <= ".$student['reading']."
-                            end";
+        $program_sql = "
+            select distinct program_name, p.id, p.tution_fee, p.application_fee, p.cost_of_living, p.program_level, s.id as `sid` , s.school_name, s.school_logo, c.country_name, s.city, s.state, c.country_currency, c.currency_symbol, s.country from programs p 
+            left join program_exam_details ped on p.id = ped.program_id 
+            inner join schools s on p.school_id = s.id 
+            inner join countries c on s.country = c.id
+            where ped.exam_type is null 
+            union 
+            select distinct program_name, p.id, p.tution_fee, p.application_fee, p.cost_of_living, p.program_level, s.id as `sid` , s.school_name, s.school_logo, c.country_name, s.city, s.state, c.country_currency, c.currency_symbol, s.country from programs p 
+            inner join schools s on p.school_id = s.id 
+            inner join countries c on s.country = c.id
+            right join program_exam_details ped on p.id = ped.program_id 
+                where 
+                    (exam_type = '".$student['exam_type_name']."' and 
+                    speaking <= ".$student['speaking']." and 
+                    listening <= ".$student['listening']." and 
+                    writing <= ".$student['writing']." and
+                    reading <= ".$student['reading'].")
+        ";
         if($return_query){
             // echo $program_sql;
             return $program_sql;

@@ -150,8 +150,9 @@
       var tution_fee  = $('#tution-slider').val();
       var app_fee     = $('#application-slider').val();
       var level       = ($('.level-select').selectpicker('val') == null ) ? [] : $('.level-select').selectpicker('val');
+      var intakes     = ($('.intake-select').selectpicker('val') == null ) ? '' : $('.intake-select').selectpicker('val');
 
-      var exam_type   = $('.exam-type-select').selectpicker('val');
+      // var exam_type   = $('.exam-type-select').selectpicker('val');
       var student     = ($('.student-select').selectpicker('val') == null ) ? '' : $('.student-select').selectpicker('val');
 
       
@@ -187,7 +188,8 @@
         'city'        : city,
         'program_level' : level,
         'work_permit' : work_permit,
-        'exam_type'   : exam_type,
+        // 'exam_type'   : exam_type,
+        'intakes'     : intakes,
         'student'     : student
       }
       callbackRequest(args);
@@ -204,6 +206,9 @@
           $(".after-ajax").show();
           $("#nav-program-search").html(result['programs']);
           $("#nav-school-search .row").html(result['schools']);
+      },
+      error: function(error){
+        console.log("error -- ", error);
       }
     })
   }

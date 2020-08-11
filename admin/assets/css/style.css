@@ -157,3 +157,7 @@ td span.Pending{
 .backtohome a, .signup a{
   color:var(--red);
 }
+.month-intake{
+  padding: 8px 15px;
+  font-size: 12px;
+}

@@ -150,39 +150,8 @@
             </div> 
 
             <div class="form-row">
-              
-              <div class="form-group col-md-2">
-                <label class="input__label">Exam Type</label>
-                <select class="form-control input-style" name="exam_type" id="exam_type">
-                  <option value="no_test">No Test</option>
-                  <option value="ielts">IELTS</option>
-                  <option value="toefl">TOEFL</option>
-                  <option value="duolingo">Duolingo English Test</option>
-                </select>
-              </div>
-              <div class="form-group col-md-2">
-                <label class="input__label">Total Score</label>
-                <input type="number" class="form-control input-style" step="0.1" name="total_score" placeholder="Total Score" min=0 max=10>
-              </div>
-
-              <div class="form-group col-md-2">
-                <label class="input__label">Listening Score</label>
-                <input type="number" class="form-control input-style" step="0.1" name="listening" placeholder="Listening " min=0 max=10>
-              </div>
-              <div class="form-group col-md-2">
-                <label class="input__label">Speaking Score</label>
-                <input type="number" class="form-control input-style" step="0.1" name="speaking" placeholder="Speaking " min=0 max=10>
-              </div>
-              <div class="form-group col-md-2">
-                <label class="input__label">Writing Score</label>
-                <input type="number" class="form-control input-style" step="0.1" name="writing" placeholder="Writing " min=0 max=10>
-              </div>
-              <div class="form-group col-md-2">
-                <label class="input__label">Reading Score</label>
-                <input type="number" class="form-control input-style" step="0.1" name="reading" placeholder="Reading" min=0 max=10>
-              </div>
             </div>
-            
+
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label class="input__label">Tution Fee</label>
@@ -192,9 +161,6 @@
                 <label class="input__label">Application Fee</label>
                 <input type="number" class="form-control input-style" name="application_fee" placeholder="Application Fee" required="required">
               </div>
-            </div>
-
-            <div class="form-row">
             </div>
             
             <div class="form-row">
@@ -229,6 +195,25 @@
               </div>
 
             </div>  
+
+            <div class="form-group">
+              <label class="input__label">Intake</label>
+              <select name="intakes[]" class="w-100 selectpicker my-select intake-select border border-radius" multiple required>
+                    <option value="1">Jan</option>
+                    <option value="2">Feb</option>
+                    <option value="3">Mar</option>
+                    <option value="4">Apr</option>
+                    <option value="5">May</option>
+                    <option value="6">Jun</option>
+                    <option value="7">Jul</option>
+                    <option value="8">Aug</option>
+                    <option value="9">Sept</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                </select>
+            </div>
+
             <div class="form-group">
                 <label class="input__label">Admission Requirements</label>
                 <textarea class="form-control input-style" name="admission_req" row=2></textarea>
@@ -236,7 +221,182 @@
             <div class="form-group">
                 <label class="input__label">Other Fees</label>
                 <textarea class="form-control input-style" name="other_fees" row=2></textarea>
-            </div>          
+            </div>    
+            
+            <!-- EXAMS -->
+
+            <!-- IELTS -->
+            <div class="form-row">
+              
+              
+              <div class="col-md-2 pt-3">
+                <div class="form-check check-remember check-me-out">
+                  <input class="form-check-input checkbox" type="checkbox" id="ielts" name="ielts">
+                  <label class="form-check-label checkmark" for="ielts">
+                      IELTS
+                  </label>
+                </div>
+              </div>
+              
+              <div class="form-group col-md-2">
+                <label class="input__label">Total Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="ielts_total_score" placeholder="Total Score" min=0 max=10>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label class="input__label">Listening Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="ielts_listening" placeholder="Listening " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Speaking Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="ielts_speaking" placeholder="Speaking " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Writing Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="ielts_writing" placeholder="Writing " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Reading Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="ielts_reading" placeholder="Reading" min=0 max=10>
+              </div>
+            </div>
+
+            <!-- TOEFL -->
+            <div class="form-row">
+              
+              <div class="col-md-2 pt-3">
+                <div class="form-check check-remember check-me-out">
+                  <input class="form-check-input checkbox" type="checkbox" id="toefl" name="toefl">
+                  <label class="form-check-label checkmark" for="toefl">
+                    TOEFL
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label class="input__label">Total Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="toefl_total_score" placeholder="Total Score" min=0 max=10>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label class="input__label">Listening Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="toefl_listening" placeholder="Listening " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Speaking Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="toefl_speaking" placeholder="Speaking " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Writing Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="toefl_writing" placeholder="Writing " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Reading Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="toefl_reading" placeholder="Reading" min=0 max=10>
+              </div>
+            </div>
+
+            <!-- PTE -->
+            <div class="form-row">
+              
+              <div class="col-md-2 pt-3">
+                <div class="form-check check-remember check-me-out">
+                  <input class="form-check-input checkbox" type="checkbox" id="pte" name="pte">
+                  <label class="form-check-label checkmark" for="pte">
+                    PTE
+                  </label>
+                </div>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Total Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="pte_total_score" placeholder="Total Score" min=0 max=10>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label class="input__label">Listening Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="pte_listening" placeholder="Listening " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Speaking Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="pte_speaking" placeholder="Speaking " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Writing Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="pte_writing" placeholder="Writing " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Reading Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="pte_reading" placeholder="Reading" min=0 max=10>
+              </div>
+            </div>
+
+            <!-- CELPIP -->
+            <div class="form-row">
+              
+            <div class="col-md-2 pt-3">
+                <div class="form-check check-remember check-me-out">
+                  <input class="form-check-input checkbox" type="checkbox" id="celpip" name="celpip">
+                  <label class="form-check-label checkmark" for="celpip">
+                    CELPIP
+                  </label>
+                </div>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Total Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="celpip_total_score" placeholder="Total Score" min=0 max=10>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label class="input__label">Listening Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="celpip_listening" placeholder="Listening " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Speaking Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="celpip_speaking" placeholder="Speaking " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Writing Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="celpip_writing" placeholder="Writing " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Reading Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="celpip_reading" placeholder="Reading" min=0 max=10>
+              </div>
+            </div>
+
+            <!-- CAE -->
+            <div class="form-row">
+              
+              <div class="col-md-2 pt-3">
+                <div class="form-check check-remember check-me-out">
+                  <input class="form-check-input checkbox" type="checkbox" id="cae" name="cae">
+                  <label class="form-check-label checkmark" for="cae">
+                    CAE
+                  </label>
+                </div>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Total Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="cae_total_score" placeholder="Total Score" min=0 max=10>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label class="input__label">Listening Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="cae_listening" placeholder="Listening " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Speaking Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="cae_speaking" placeholder="Speaking " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Writing Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="cae_writing" placeholder="Writing " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Reading Score</label>
+                <input type="number" class="form-control input-style" step="0.1" name="cae_reading" placeholder="Reading" min=0 max=10>
+              </div>
+            </div>
           
         </div>
         <div class="modal-footer">

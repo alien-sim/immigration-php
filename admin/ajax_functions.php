@@ -12,8 +12,9 @@
         $city        = (isset($_POST['city'])) ?  $_POST['city'] : array();
         $program_level =(isset($_POST['program_level'])) ?  $_POST['program_level'] : array();
         $work_permit = ($_POST['work_permit'] == 'false') ? false : true;
-        $exam_type   = $_POST['exam_type'];
+        // $exam_type   = $_POST['exam_type'];
         $student_id = $_POST['student'];
+        $intake = $_POST['intakes'];
         
         // Type of school
         $where_statement = '';
@@ -95,15 +96,29 @@
             $where_statement .= ' f.work_permit = 1 ';
         }
 
-        //exam_type
-        if($exam_type != ''){
+        // Intakes
+        if($intake){
             if(!(empty($where_statement))){
                 $where_statement .= ' OR ';
             }else{
                 $where_statement = ' where ';
             }
-            $where_statement .= " p.exam_type = '".$exam_type."'";
+            if($intake < 3){
+                $where_statement .= " p.intakes LIKE '%,".$intake.",%' OR p.intakes LIKE '".$intake.",%'";
+            }else{
+                $where_statement .= " p.intakes LIKE '%".$intake."%' ";
+            }
         }
+
+        //exam_type
+        // if($exam_type != ''){
+        //     if(!(empty($where_statement))){
+        //         $where_statement .= ' OR ';
+        //     }else{
+        //         $where_statement = ' where ';
+        //     }
+        //     $where_statement .= " p.exam_type = '".$exam_type."'";
+        // }
 
         $school_result = [];
         $school_unique = [];

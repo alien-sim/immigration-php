@@ -97,27 +97,47 @@
                 <table>
                     <tr>
                         <td width="8%" class="text-info"><i class="fa fa-signal" aria-hidden="true"></i></td>
-                        <td width="32%" class="text-info"><b>Program Level :</b></td>
-                        <td width="60%"><?php echo $program['program_level'] ?></td>
+                        <td width="37%" class="text-info"><b>Program Level :</b></td>
+                        <td width="55%"><?php echo $program['program_level'] ?></td>
                     </tr>
                     <tr>
                         <td width="8%" class="text-info"><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                        <td width="32%" class="text-info"><b>Program Length :</b></td>
-                        <td width="60%"><?php echo $program['length_program'] ?></td>
+                        <td width="37%" class="text-info"><b>Program Length :</b></td>
+                        <td width="55%"><?php echo $program['length_program'] ?></td>
                     </tr>
                     <tr>
                         <td width="8%" class="text-info"><i class="fa fa-money" aria-hidden="true"></i></td>
-                        <td width="32%" class="text-info"><b>Application fee :</b></td>
-                        <td width="60%"><?php echo $country['currency_symbol']." ".number_format($program['application_fee'],2)." ".$country['country_currency'] ?></td>
+                        <td width="37%" class="text-info"><b>Application fee :</b></td>
+                        <td width="55%"><?php echo $country['currency_symbol']." ".number_format($program['application_fee'],2)." ".$country['country_currency'] ?></td>
                     </tr>
                     <tr>
                         <td width="8%"></td>
-                        <td width="32%" class="text-info"><b>Tution fee :</b></td>
-                        <td width="60%"><?php echo $country['currency_symbol']." ".number_format($program['tution_fee'],2)." ".$country['country_currency'] ?></td>
+                        <td width="37%" class="text-info"><b>Tution fee :</b></td>
+                        <td width="55%"><?php echo $country['currency_symbol']." ".number_format($program['tution_fee'],2)." ".$country['country_currency'] ?></td>
                     </tr>
                 </table>
-                
-                 
+            <hr>
+            <?php
+              if($program['intakes']){
+                ?><h5 class="text-info text-center">Intakes</h5><?php
+
+                $current_year = date("Y");
+                $next_year = (int)$current_year+1;
+                $months = explode(',', $program['intakes']);
+                $current_month = date("m");
+                foreach($months as $mon ){
+                  if($current_month > $mon){
+                    ?>
+                      <h6 class="month-intake"><span class="badge badge-primary"><?php echo date("F", mktime(0, 0, 0, $mon, 10))." ". $next_year ?></span></h6>
+                    <?php
+                  }else{
+                    ?>
+                      <h6 class="month-intake"><span class="badge badge-primary"><?php echo date("F", mktime(0, 0, 0, $mon, 10))." ". $current_year ?></span></h6>
+                    <?php
+                  }
+                }
+              }
+            ?>
             </div>
         </div>
     </div>
