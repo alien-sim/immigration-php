@@ -20,7 +20,6 @@
 				header("location:login.php?msg=not_active");
 			}
         }
-
         else { 
         	echo "Wrong user id or password!"; 
         }

@@ -1,5 +1,6 @@
 <?php
 	include_once './config.php';
+
 	if(isset($_POST['update_school'])){
 
 		$workPermit 	= isset($_POST['workPermit']) ? 1 : 0;
@@ -85,12 +86,7 @@
 		$application_fee = $_POST['application_fee'];
 		$tution_fee = $_POST['tution_fee'];
 
-		// $total_score = $_POST['total_score'] != '' ? $_POST['total_score'] : 0;
-		// $listening = $_POST['listening'] != '' ? $_POST['listening'] : 0;
-		// $reading = $_POST['reading'] != '' ? $_POST['reading'] : 0;
-		// $writing = $_POST['writing'] != '' ? $_POST['writing'] : 0;
-		// $speaking = $_POST['speaking'] != '' ? $_POST['speaking'] : 0;
-		// $exam_type = $_POST['exam_type'];
+		update_exam_details($_POST, $db);
 
 		$intakes_arr = [];
 		foreach($_POST['intakes'] as $mon){
@@ -105,6 +101,73 @@
     	if($query){
     		header("location:programs.php");
     	}else{
+    		echo mysqli_error($db);
+    	}
+	}
+
+	function update_exam_details($post, $db){
+		$program_id = $_POST['idd'];
+
+		if(isset($post['ielts'])){
+			$ielts = $db->query("select * FROM program_exam_details WHERE program_id='$program_id' and exam_type='ielts' ");
+        	if(mysqli_num_rows($ielts)) {
+				update_program_exam_details($post, $db, 'ielts');
+			}else{
+				insert_in_exam_in_table($program_id, 'ielts', $db, $post);
+			}
+		}
+		
+		if(isset($post['toefl'])){
+			$toefl = $db->query("select * FROM program_exam_details WHERE program_id='$program_id' and exam_type='toefl' ");
+        	if(mysqli_num_rows($toefl)) {
+				update_program_exam_details($post, $db, 'toefl');
+			}else{
+				insert_in_exam_in_table($program_id, 'toefl', $db, $post);
+			}
+		}
+
+		if(isset($post['pte'])){
+			$pte = $db->query("select * FROM program_exam_details WHERE program_id='$program_id' and exam_type='pte' ");
+        	if(mysqli_num_rows($pte)) {
+				update_program_exam_details($post, $db, 'pte');
+			}else{
+				insert_in_exam_in_table($program_id, 'pte', $db, $post);
+			}
+		}
+
+		if(isset($post['celpip'])){
+			$celpip = $db->query("select * FROM program_exam_details WHERE program_id='$program_id' and exam_type='celpip' ");
+        	if(mysqli_num_rows($celpip)) {
+				update_program_exam_details($post, $db, 'celpip');
+			}else{
+				insert_in_exam_in_table($program_id, 'celpip', $db, $post);
+			}
+		}
+
+		if(isset($post['cae'])){
+			$cae = $db->query("select * FROM program_exam_details WHERE program_id='$program_id' and exam_type='cae' ");
+        	if(mysqli_num_rows($cae)) {
+				update_program_exam_details($post, $db, 'cae');
+			}else{
+				insert_in_exam_in_table($program_id, 'cae', $db, $post);
+			}
+		}
+	}
+
+	function update_program_exam_details($post, $db, $exam){
+		$total_score = $post[$exam.'_total_score'];
+		$listening = $post[$exam.'_listening'];
+		$speaking = $post[$exam.'_speaking'];
+		$writing = $post[$exam.'_writing'];
+		$reading = $post[$exam.'_reading'];
+
+		$update_query = "update program_exam_details set total_score='$total_score', listening='$listening', 
+		speaking='$speaking', writing='$writing', reading='$reading' where program_id=".$post['idd']." and exam_type='$exam'";
+		
+		$query = $db->query($update_query);
+		if($query){
+			echo 'done';
+		}else{
     		echo mysqli_error($db);
     	}
 	}

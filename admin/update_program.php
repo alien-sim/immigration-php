@@ -5,12 +5,20 @@
     if(!isset($_SESSION['email'])){ 
         header("location:login.php");
     }
-    $month = [];
-    $month_sql = "select * from months";
-    $month_result = $db -> query($month_sql);
-    while($months = $month_result->fetch_assoc()){
-      array_push($month,$months);
-    }
+    $month = [
+      1 => 'Jan',
+      2 => 'Feb',
+      3 => 'Mar',
+      4 => 'Apr',
+      5 => 'May',
+      6 => 'Jun',
+      7 => 'Jul',
+      8 => 'Aug',
+      9 => 'Sept',
+      10 => 'Oct',
+      11 => 'Nov',
+      12 => 'Dec'
+    ]
 
 ?>
 <!doctype html>
@@ -111,12 +119,12 @@
               <label class="input__label">Intake</label>
               <select name="intakes[]" class="w-100 selectpicker my-select intake-select border border-radius" multiple required>
                 <?php
-                  $selected_month = explode(",",$program['intakes']);
-                  foreach($month as $mon){
-                    if(in_array($mon['id'],$selected_month)){
-                      ?><option value=<?php echo $mon['id'] ?> selected><?php echo $mon['month'] ?></option><?php
+                  $selected_month = explode(",", $program['intakes']);
+                  foreach($month as $key => $mon){
+                    if(in_array($key ,$selected_month)){
+                      ?><option value=<?php echo $key ?> selected><?php echo $mon ?></option><?php
                     }else{
-                      ?><option value=<?php echo $mon['id'] ?>><?php echo $mon['month'] ?></option><?php
+                      ?><option value=<?php echo $key ?>><?php echo $mon ?></option><?php
                     }
                   }
                 ?>
@@ -153,6 +161,234 @@
                 <label class="input__label">Other Fees</label>
                 <textarea class="form-control input-style" name="other_fees" row=2><?php echo $program['other_fees'] ?> </textarea>
             </div>          
+
+            <!-- EXAMS -->
+            <?php 
+            
+              $ielts_sql = "select * from program_exam_details where program_id=".$program['id']." and exam_type='ielts'";
+              $ielts_result =  mysqli_query($db, $ielts_sql);
+              $ielts   = mysqli_fetch_array($ielts_result);
+
+              $toefl_sql = "select * from program_exam_details where program_id=".$program['id']." and exam_type='toefl'";
+              $toefl_result =  mysqli_query($db, $toefl_sql);
+              $toefl   = mysqli_fetch_array($toefl_result);
+
+              $pte_sql = "select * from program_exam_details where program_id=".$program['id']." and exam_type='pte'";
+              $pte_result =  mysqli_query($db, $pte_sql);
+              $pte   = mysqli_fetch_array($pte_result);
+
+              $celpip_sql = "select * from program_exam_details where program_id=".$program['id']." and exam_type='celpip'";
+              $celpip_result =  mysqli_query($db, $celpip_sql);
+              $celpip   = mysqli_fetch_array($celpip_result);
+
+              $cae_sql = "select * from program_exam_details where program_id=".$program['id']." and exam_type='cae'";
+              $cae_result =  mysqli_query($db, $cae_sql);
+              $cae   = mysqli_fetch_array($cae_result);
+
+            ?>
+
+            <!-- IELTS -->
+            <div class="form-row">
+              
+              
+              <div class="col-md-2 pt-3">
+                <div class="form-check check-remember check-me-out">
+                  <?php
+                  if($ielts){
+                    ?><input class="form-check-input checkbox" type="checkbox" id="ielts" checked name="ielts"><?php
+                  }else{
+                    ?><input class="form-check-input checkbox" type="checkbox" id="ielts" name="ielts"><?php
+                  }
+                  ?>
+                  <label class="form-check-label checkmark" for="ielts">
+                      IELTS
+                  </label>
+                </div>
+              </div>
+              
+              <div class="form-group col-md-2">
+                <label class="input__label">Total Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $ielts['total_score'] ?>" step="0.1" name="ielts_total_score" placeholder="" min=0 max=10>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label class="input__label">Listening Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $ielts['listening'] ?>" step="0.1" name="ielts_listening" placeholder=" " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Speaking Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $ielts['speaking'] ?>" step="0.1" name="ielts_speaking" placeholder=" " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Writing Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $ielts['writing'] ?>" step="0.1" name="ielts_writing" placeholder=" " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Reading Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $ielts['reading'] ?>" step="0.1" name="ielts_reading" placeholder="" min=0 max=10>
+              </div>
+            </div>
+
+            <!-- TOEFL -->
+            <div class="form-row">
+              
+              <div class="col-md-2 pt-3">
+                <div class="form-check check-remember check-me-out">
+                  <?php 
+                    if($toefl){
+                      ?><input class="form-check-input checkbox" type="checkbox" checked id="toefl" name="toefl"><?php
+                    }else{
+                      ?><input class="form-check-input checkbox" type="checkbox" id="toefl" name="toefl"><?php
+                    }
+                  ?>
+                  <label class="form-check-label checkmark" for="toefl">
+                    TOEFL
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label class="input__label">Total Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $toefl['total_score'] ?>" step="0.1" name="toefl_total_score" placeholder="" min=0 max=10>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label class="input__label">Listening Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $toefl['listening'] ?>" step="0.1" name="toefl_listening" placeholder=" " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Speaking Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $toefl['speaking'] ?>" step="0.1" name="toefl_speaking" placeholder=" " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Writing Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $toefl['writing'] ?>" step="0.1" name="toefl_writing" placeholder=" " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Reading Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $toefl['reading'] ?>" step="0.1" name="toefl_reading" placeholder="" min=0 max=10>
+              </div>
+            </div>
+
+            <!-- PTE -->
+            <div class="form-row">
+              
+              <div class="col-md-2 pt-3">
+                <div class="form-check check-remember check-me-out">
+                  <?php 
+                    if($pte){
+                      ?><input class="form-check-input checkbox" type="checkbox" checked id="pte" name="pte"><?php
+                    }else{
+                      ?><input class="form-check-input checkbox" type="checkbox" id="pte" name="pte"><?php
+                    }
+                  ?>
+                  <label class="form-check-label checkmark" for="pte">
+                    PTE
+                  </label>
+                </div>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Total Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $pte['total_score'] ?>" step="0.1" name="pte_total_score" placeholder="" min=0 max=10>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label class="input__label">Listening Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $pte['listening'] ?>" step="0.1" name="pte_listening" placeholder=" " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Speaking Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $pte['speaking'] ?>" step="0.1" name="pte_speaking" placeholder=" " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Writing Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $pte['writing'] ?>" step="0.1" name="pte_writing" placeholder="" min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Reading Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $pte['reading'] ?>" step="0.1" name="pte_reading" placeholder="" min=0 max=10>
+              </div>
+            </div>
+
+            <!-- CELPIP -->
+            <div class="form-row">
+              
+              <div class="col-md-2 pt-3">
+                <div class="form-check check-remember check-me-out">
+                <?php 
+                    if($celpip){
+                      ?><input class="form-check-input checkbox" type="checkbox" checked id="celpip" name="celpip"><?php
+                    }else{
+                      ?><input class="form-check-input checkbox" type="checkbox" id="celpip" name="celpip"><?php
+                    }
+                  ?>
+                  <label class="form-check-label checkmark" for="celpip">
+                    CELPIP
+                  </label>
+                </div>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Total Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $celpip['total_score'] ?>" step="0.1" name="celpip_total_score" placeholder="" min=0 max=10>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label class="input__label">Listening Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $celpip['listening'] ?>" step="0.1" name="celpip_listening" placeholder=" " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Speaking Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $celpip['speaking'] ?>" step="0.1" name="celpip_speaking" placeholder=" " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Writing Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $celpip['writing'] ?>" step="0.1" name="celpip_writing" placeholder=" " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Reading Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $celpip['reading'] ?>" step="0.1" name="celpip_reading" placeholder="" min=0 max=10>
+              </div>
+            </div>
+
+            <!-- CAE -->
+            <div class="form-row">
+              
+              <div class="col-md-2 pt-3">
+                <div class="form-check check-remember check-me-out">
+                <?php 
+                    if($cae){
+                      ?><input class="form-check-input checkbox" type="checkbox" checked id="cae" name="cae"><?php
+                    }else{
+                      ?><input class="form-check-input checkbox" type="checkbox" id="cae" name="cae"><?php
+                    }
+                  ?>
+                  <label class="form-check-label checkmark" for="cae">
+                    CAE
+                  </label>
+                </div>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Total Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $cae['total_score'] ?>" step="0.1" name="cae_total_score" placeholder="" min=0 max=10>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label class="input__label">Listening Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $cae['listening'] ?>" step="0.1" name="cae_listening" placeholder=" " min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Speaking Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $cae['speaking'] ?>" step="0.1" name="cae_speaking" placeholder="" min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Writing Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $cae['writing'] ?>" step="0.1" name="cae_writing" placeholder="" min=0 max=10>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="input__label">Reading Score</label>
+                <input type="number" class="form-control input-style" value="<?php echo $cae['reading'] ?>" step="0.1" name="cae_reading" placeholder="" min=0 max=10>
+              </div>
+            </div>
 
             <div class="form-group text-right">
               <button type="submit" name="update_program" class="btn btn-primary btn-style">Update</button>

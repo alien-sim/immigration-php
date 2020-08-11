@@ -333,7 +333,7 @@
             <!-- CELPIP -->
             <div class="form-row">
               
-            <div class="col-md-2 pt-3">
+              <div class="col-md-2 pt-3">
                 <div class="form-check check-remember check-me-out">
                   <input class="form-check-input checkbox" type="checkbox" id="celpip" name="celpip">
                   <label class="form-check-label checkmark" for="celpip">
