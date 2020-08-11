@@ -68,7 +68,6 @@
 			array_push($intakes_arr, $mon);
 		}
 		$intakes = implode(",",$intakes_arr);
-		echo "<script>console.log('$intakes')</script>";
 
 		$query = $db->query(
 			"insert into programs (program_name, description, program_level, length_program, school_id, 
@@ -79,8 +78,8 @@
     	if($query){
 			$program_id = $db->insert_id;
 			insert_exam_details($_POST, $program_id, $db);
-			// header("location:programs.php");
-			echo $program_error;
+			header("location:programs.php");
+			// echo $program_error;
     	}else{
     		echo mysqli_error($db);
     	}
