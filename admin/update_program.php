@@ -141,7 +141,7 @@
                       $program_level = get_program_levels();
                       for($i=0 ; $i < count($program_level) ; ++$i){
                         ?>
-                          <option value=<?php echo $program_level[$i]['level'] ?> ><?php echo $program_level[$i]['level'] ?></option>
+                          <option value="<?php echo $program_level[$i]['level'] ?>" ><?php echo $program_level[$i]['level'] ?></option>
                         <?php
                       }
                     ?>

@@ -87,7 +87,7 @@
               while($school_row = $school_result->fetch_assoc()) {
                 ?>
                   <tr>
-                    <td><?php echo $school_row['school_name'] ?></td>
+                    <td><a href="school_detail.php?id=<?php echo $school_row['id'] ?>" target="_blank" ><?php echo $school_row['school_name'] ?></a></td>
                     <td><?php echo $school_row['city'] ?></td>
                     <td><?php echo get_country_name($school_row['country']); ?></td>
                     <!-- <td><?php #echo $school_row['currency'] ?></td> -->

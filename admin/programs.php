@@ -86,7 +86,7 @@
               while($progarm_row = $progarm_result->fetch_assoc()) {
                 ?>
                   <tr>
-                    <td><?php echo $progarm_row['program_name'] ?></td>
+                    <td><a href="program_detail.php?id=<?php echo $progarm_row['id'] ?>"  target="_blank"><?php echo $progarm_row['program_name'] ?></a></td>
                     <td><?php echo $progarm_row['length_program'] ?></td>
                     <td><?php echo $progarm_row['program_level'] ?></td>
                     <td>

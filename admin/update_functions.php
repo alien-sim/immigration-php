@@ -163,10 +163,10 @@
 
 		$update_query = "update program_exam_details set total_score='$total_score', listening='$listening', 
 		speaking='$speaking', writing='$writing', reading='$reading' where program_id=".$post['idd']." and exam_type='$exam'";
-		
+
 		$query = $db->query($update_query);
 		if($query){
-			echo 'done';
+			
 		}else{
     		echo mysqli_error($db);
     	}
