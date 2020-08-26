@@ -80,7 +80,7 @@
             }
             $where_statement .= ' LOWER(p.program_level) in (';
             foreach($program_level as $p){
-                $where_statement .= "LOWER('".$p."'),";
+                $where_statement .= "LOWER('".mysqli_real_escape_string($db, $p)."'),";
             } 
             $where_statement = rtrim($where_statement, ",");
             $where_statement .= ')';

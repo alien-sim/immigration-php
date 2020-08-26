@@ -328,7 +328,7 @@
             ?>
             <div class="card text-center mb-2">
                 <div class="card-body">
-                    <a href="#"><h6 class="card-title"><?php echo $program_row['program_name'] ?></h6></a>
+                    <a href="program_detail.php?id=<?php echo $program_row['id'] ?>" target="_blank"><h6 class="card-title"><?php echo $program_row['program_name'] ?></h6></a>
                     <div class="row mt-3 py-2 bg-light light-row-2">
                         <div class="col">
                             <label>

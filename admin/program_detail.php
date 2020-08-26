@@ -94,26 +94,26 @@
                 <div class="w-100 text-center text-primary py-2">
                     <i class="fa fa-graduation-cap"></i>
                 </div>
-                <table>
+                <table width="100%">
                     <tr>
                         <td width="8%" class="text-info"><i class="fa fa-signal" aria-hidden="true"></i></td>
-                        <td width="37%" class="text-info"><b>Program Level :</b></td>
-                        <td width="55%"><?php echo $program['program_level'] ?></td>
+                        <td width="32%" class="text-info"><b>Program Level :</b></td>
+                        <td width="60%"><?php echo $program['program_level'] ?></td>
                     </tr>
                     <tr>
                         <td width="8%" class="text-info"><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                        <td width="37%" class="text-info"><b>Program Length :</b></td>
-                        <td width="55%"><?php echo $program['length_program'] ?></td>
+                        <td width="32%" class="text-info"><b>Program Length :</b></td>
+                        <td width="60%"><?php echo $program['length_program'] ?></td>
                     </tr>
                     <tr>
                         <td width="8%" class="text-info"><i class="fa fa-money" aria-hidden="true"></i></td>
-                        <td width="37%" class="text-info"><b>Application fee :</b></td>
-                        <td width="55%"><?php echo $country['currency_symbol']." ".number_format($program['application_fee'],2)." ".$country['country_currency'] ?></td>
+                        <td width="32%" class="text-info"><b>Application fee :</b></td>
+                        <td width="60%"><?php echo $country['currency_symbol']." ".number_format($program['application_fee'],2)." ".$country['country_currency'] ?></td>
                     </tr>
                     <tr>
                         <td width="8%"></td>
-                        <td width="37%" class="text-info"><b>Tution fee :</b></td>
-                        <td width="55%"><?php echo $country['currency_symbol']." ".number_format($program['tution_fee'],2)." ".$country['country_currency'] ?></td>
+                        <td width="32%" class="text-info"><b>Tution fee :</b></td>
+                        <td width="60%"><?php echo $country['currency_symbol']." ".number_format($program['tution_fee'],2)." ".$country['country_currency'] ?></td>
                     </tr>
                 </table>
             <hr>
