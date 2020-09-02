@@ -6,6 +6,11 @@
       $("#selectStudentModal input#program_id").val(program_id);
     });
 
+    $(".program-select-button").on("click", "button", function(){
+      var program_id = $(this).attr("attr");
+      $("#selectStudentModalProgram input#program_id").val(program_id);
+    });
+
     /*  data tables js  */
     $('#example').DataTable();
 

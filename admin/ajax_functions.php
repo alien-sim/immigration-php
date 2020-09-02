@@ -14,7 +14,7 @@
         $work_permit = ($_POST['work_permit'] == 'false') ? false : true;
         // $exam_type   = $_POST['exam_type'];
         $student_id = $_POST['student'];
-        $intake = $_POST['intakes'];
+        $intake = ($_POST['intakes'] == 'null') ? null : $_POST['intakes'];
         
         // Type of school
         $where_statement = '';
@@ -25,7 +25,7 @@
         // Tution fee
         if($tution_fee != 0){
             if(!(empty($where_statement))){
-                $where_statement .= ' OR ';
+                $where_statement .= ' and ';
             }else{
                 $where_statement = ' where ';
             }
@@ -35,7 +35,7 @@
         // Application fee
         if($application_fee != 0){
             if(!(empty($where_statement))){
-                $where_statement .= ' OR ';
+                $where_statement .= ' and ';
             }else{
                 $where_statement = ' where ';
             }
@@ -45,7 +45,7 @@
         // Country
         if(count($country)){
             if(!(empty($where_statement))){
-                $where_statement .= ' OR ';
+                $where_statement .= ' and ';
             }else{
                 $where_statement = ' where ';
             }
@@ -59,11 +59,11 @@
         // City
         if(count($city)){
             if(!(empty($where_statement))){
-                $where_statement .= ' OR ';
+                $where_statement .= ' and ';
             }else{
                 $where_statement = ' where ';
             }
-            $where_statement .= ' LOWER(s.city) in (';
+            $where_statement .= ' LOWER(s.state) in (';
             foreach($city as $c){
                 $where_statement .= "LOWER('".$c."'),";
             } 
@@ -74,7 +74,7 @@
         //Program Level
         if(count($program_level)){
             if(!(empty($where_statement))){
-                $where_statement .= ' OR ';
+                $where_statement .= ' and ';
             }else{
                 $where_statement = ' where ';
             }
@@ -89,7 +89,7 @@
         // Work permit feature
         if($work_permit){
             if(!(empty($where_statement))){
-                $where_statement .= ' OR ';
+                $where_statement .= ' and ';
             }else{
                 $where_statement = ' where ';
             }
@@ -99,7 +99,7 @@
         // Intakes
         if($intake){
             if(!(empty($where_statement))){
-                $where_statement .= ' OR ';
+                $where_statement .= ' and ';
             }else{
                 $where_statement = ' where ';
             }

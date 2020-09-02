@@ -351,8 +351,10 @@
                             </label>
                             <span><?php echo $program_row['program_level'] ?> </span>
                         </div>
-                    
                     </div>
+                      <div class="col mt-3 program-select-button">
+                        <button id="program-<?php echo $program_row['id'] ?>" data-toggle="modal" data-target="#selectStudentModalProgram" attr="<?php echo $program_row['id'] ?>" class="select-student-program btn btn-outline-dark">Select Student</button></div>
+                      </div>
                 </div>
             </div>
             <?php
@@ -509,6 +511,42 @@
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal" id="selectStudentModalProgram" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <form action="search.php" method="post">
+        <div class="modal-header">
+          <h5 class="modal-title">Select Student</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="program_id" name="program_id">
+            <input type="hidden" name="page" value="search">
+            <select class="custom-select input-style" name="student_id" required>
+            <option hidden disabled selected value="">Select..</option>
+                <?php
+                    $sql = "select id, first_name, last_name from student order by first_name, last_name";
+                    $query = $db->query($sql);
+                    while($student = $query->fetch_assoc()) {
+                        ?><option value=<?php echo $student['id'] ?>><?php echo ucwords($student['first_name']." ".$student['last_name']) ?></option><?php
+                    }
+                ?>
+            </select>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+          <button type="submit" name="select_program" class="btn btn-primary">Apply</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 <!-- Gallery modal end -->
