@@ -1,5 +1,6 @@
-<?php 
-    include_once './submit_functions.php'; 
+<?php
+    include_once './common_functions.php'; 
+    include_once './update_functions.php'; 
     session_start(); 
     if(!isset($_SESSION['email'])){ 
         header("location:login.php");
@@ -44,7 +45,15 @@
       </ol>
     </nav>
     <!-- //breadcrumbs -->
-    <form action="add_student.php" method="post">
+    <?php
+        $student_sql = "select * from student s 
+            left join exam_details ed on s.id=ed.student_id 
+            where s.id=".$_GET['student_id'];
+        $result = mysqli_query($db, $student_sql);
+        $student = mysqli_fetch_array($result);
+    ?>
+    <form action="student_detail.php" method="post">
+    <input type="hidden" name="student_id" value="<?php echo $_GET['student_id'] ?>">
     <!-- Card personal block -->
     <div class="card">
       <div class="card-body student-form-card">
@@ -53,26 +62,26 @@
         <div class="form-row mt-3">
             <div class="form-group col-md-4">
                 <label class="input__label">First Name <span class="text-danger">*</span></label>
-                <input type="text" class="form-control input-style" name="first_name" placeholder="First Name">
+                <input type="text" class="form-control input-style" name="first_name" value="<?php echo $student['first_name'] ?>" placeholder="First Name">
             </div>
             <div class="form-group col-md-4">
                 <label class="input__label">Middle Name <span class="text-danger">*</span></label>
-                <input type="text" class="form-control input-style" name="middle_name" placeholder="Middle Name">
+                <input type="text" class="form-control input-style" name="middle_name" value="<?php echo $student['middle_name'] ?>" placeholder="Middle Name">
             </div>
             <div class="form-group col-md-4">
                 <label class="input__label">Last Name <span class="text-danger">*</span></label>
-                <input type="text" class="form-control input-style" name="last_name" placeholder="Last Name">
+                <input type="text" class="form-control input-style" name="last_name" value="<?php echo $student['last_name'] ?>" placeholder="Last Name">
             </div>
         </div>
 
         <div class="form-row  mt-3">
             <div class="form-group col-md-4">
                 <label class="input__label">Date of Birth <span class="text-danger">*</span></label>
-                <input type="date" class="form-control input-style" name="dob" placeholder="Date of Birth">
+                <input type="date" class="form-control input-style" name="dob" value="<?php echo $student['date_of_birth'] ?>" placeholder="Date of Birth">
             </div>
             <div class="form-group col-md-4">
                 <label class="input__label">First Language <span class="text-danger">*</span></label>
-                <input type="text" class="form-control input-style" name="first_language" placeholder="First language">
+                <input type="text" class="form-control input-style" name="first_language" value="<?php echo $student['first_language'] ?>" placeholder="First language">
             </div>
             <div class="form-group col-md-4">
                 <label class="input__label">Country of Citizenship <span class="text-danger">*</span></label>
@@ -80,9 +89,11 @@
                     <option value="null">Select Country</option>
                     <?php
                       for($i=0 ; $i < count($country_list) ; ++$i){
-                        ?>
-                          <option value=<?php echo $country_list[$i]['id'] ?> ><?php echo $country_list[$i]['country_name'] ?></option>
-                        <?php
+                          if($country_list[$i]['id'] == $student['citizenship']){
+                              ?><option selected value=<?php echo $country_list[$i]['id'] ?> ><?php echo $country_list[$i]['country_name'] ?></option><?php
+                          }else{
+                              ?><option value=<?php echo $country_list[$i]['id'] ?> ><?php echo $country_list[$i]['country_name'] ?></option><?php
+                          }
                       }
                     ?>
                 </select>
@@ -92,20 +103,43 @@
         <div class="form-row mt-3">
             <div class="form-group col-md-4">
                 <label class="input__label">Passport Number <span class="text-danger">*</span></label>
-                <input type="text" class="form-control input-style" name="passport" placeholder="Passport Number">
+                <input type="text" class="form-control input-style" value="<?php echo $student['passport_number'] ?>" name="passport" placeholder="Passport Number">
             </div>
             <div class="form-group col-md-4">
                 <label class="input__label">Gender <span class="text-danger">*</span></label>
                 <select class="form-control input-style" name="gender">
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
+                <?php 
+                    if($student['gender'] == 'male'){
+                        ?>
+                        <option value="male" selected>Male</option>
+                        <option value="female">Female</option>
+                        <?php
+                    }else{
+                        ?>
+                        <option value="male">Male</option>
+                        <option value="female" selected>Female</option>
+                        <?php
+                    }
+                ?>
                 </select>
             </div>
             <div class="form-group col-md-4">
                 <label class="input__label">Marital Status <span class="text-danger">*</span></label>
                 <select class="form-control input-style" name="marital">
-                  <option value="maried">Married</option>
-                  <option value="single">Single</option>
+                <?php
+                    if($student['marital_status'] == 'married'){
+                        ?>
+                        <option value="married" selected >Married</option>
+                        <option value="single">Single</option>
+                        <?php
+                    }else{
+                        ?>
+                        <option value="married" >Married</option>
+                        <option value="single"selected>Single</option>
+                        <?php
+                    }
+                ?>
+                  
                 </select>
             </div>
         </div>
@@ -114,17 +148,17 @@
         <div class="form-row mt-3">
             <div class="form-group col-md-8">
                 <label class="input__label">Address <span class="text-danger">*</span></label>
-                <input type="text" class="form-control input-style" name="address" placeholder="Address">
+                <input type="text" class="form-control input-style" value="<?php echo $student['address'] ?>" name="address" placeholder="Address">
             </div>
             <div class="form-group col-md-4">
                 <label class="input__label">City/Town <span class="text-danger">*</span></label>
-                <input type="text" class="form-control input-style" name="city" placeholder="City">
+                <input type="text" class="form-control input-style" value="<?php echo $student['city'] ?>" name="city" placeholder="City">
             </div>
         </div>
         <div class="form-row mt-3">
             <div class="form-group col-md-4">
                 <label class="input__label">State <span class="text-danger">*</span></label>
-                <input type="text" class="form-control input-style" name="state" placeholder="State">
+                <input type="text" class="form-control input-style" value="<?php echo $student['state'] ?>" name="state" placeholder="State">
             </div>
             <div class="form-group col-md-4">
                 <label class="input__label">Country <span class="text-danger">*</span></label>
@@ -132,26 +166,28 @@
                     <option value="null">Select Country</option>
                     <?php
                       for($i=0 ; $i < count($country_list) ; ++$i){
-                        ?>
-                          <option value=<?php echo $country_list[$i]['id'] ?> ><?php echo $country_list[$i]['country_name'] ?></option>
-                        <?php
+                        if($country_list[$i]['id'] == $student['citizenship']){
+                            ?><option selected value=<?php echo $country_list[$i]['id'] ?> ><?php echo $country_list[$i]['country_name'] ?></option><?php
+                        }else{
+                            ?><option value=<?php echo $country_list[$i]['id'] ?> ><?php echo $country_list[$i]['country_name'] ?></option><?php
+                        }
                       }
                     ?>
                 </select>
             </div>
             <div class="form-group col-md-4">
                 <label class="input__label">Postal/Zip Code <span class="text-danger">*</span></label>
-                <input type="text" class="form-control input-style" name="zip" placeholder="Zip/Postal Code">
+                <input type="text" class="form-control input-style" value="<?php echo $student['zip'] ?>" name="zip" placeholder="Zip/Postal Code">
             </div>
         </div>
         <div class="form-row mt-3">
             <div class="form-group col-md-4">
                 <label class="input__label">Email</label>
-                <input type="email" class="form-control input-style" name="email" placeholder="Email Address">
+                <input type="email" class="form-control input-style" value="<?php echo $student['email'] ?>" name="email" placeholder="Email Address">
             </div>
             <div class="form-group col-md-4">
                 <label class="input__label">Phone Number <span class="text-danger">*</span></label>
-                <input type="text" class="form-control input-style" name="phone" placeholder="987654321">
+                <input type="text" class="form-control input-style" name="phone" value="<?php echo $student['phone_number'] ?>" placeholder="987654321">
             </div>
         </div>
           
@@ -170,9 +206,11 @@
                 <option value="null">Select Country</option>
                 <?php
                   for($i=0 ; $i < count($country_list) ; ++$i){
-                    ?>
-                      <option value=<?php echo $country_list[$i]['id'] ?> ><?php echo $country_list[$i]['country_name'] ?></option>
-                    <?php
+                    if($country_list[$i]['id'] == $student['citizenship']){
+                        ?><option selected value=<?php echo $country_list[$i]['id'] ?> ><?php echo $country_list[$i]['country_name'] ?></option><?php
+                    }else{
+                        ?><option value=<?php echo $country_list[$i]['id'] ?> ><?php echo $country_list[$i]['country_name'] ?></option><?php
+                    }
                   }
                 ?>
               </select>
@@ -185,24 +223,29 @@
                 <?php
                   $program_level = get_program_levels();
                   for($i=0 ; $i < count($program_level) ; ++$i){
-                    ?>
-                      <option value=<?php echo $program_level[$i]['level'] ?> ><?php echo $program_level[$i]['level'] ?></option>
-                    <?php
+                      if($program_level[$i]['level'] == $student['level_education']){
+                        ?>
+                        <option selected value="<?php echo $program_level[$i]['level'] ?>" ><?php echo $program_level[$i]['level'] ?></option>
+                        <?php
+                      }else{
+                        ?>
+                        <option value="<?php echo $program_level[$i]['level'] ?>" ><?php echo $program_level[$i]['level'] ?></option>
+                        <?php 
+                      }
                   }
                 ?>
               </select>
           </div>
           <div class="form-group col-md-4">
               <label class="input__label">Grading Scheme <span class="text-danger">*</span></label>
-              <select class="form-control input-style" id="grading-scheme">
-                <option value=null>Select Scheme</option>
-              </select>
+              <input name="grading_scheme" class="form-control input-style"  value="<?php echo $student['grading_scheme'] ?>">
+              
           </div>
         </div>
         <div class="form-row mt-3">
           <div class="form-group col-md-4">
               <label class="input__label">Grade Average <span class="text-danger">*</span></label>
-              <input type="text" class="form-control input-style" name="avg_grade" placeholder="Average grade">
+              <input type="text" class="form-control input-style" name="avg_grade"  value="<?php echo $student['grade_avg'] ?>" placeholder="Average grade">
           </div>
         </div>
       </div>
@@ -216,7 +259,8 @@
         <div class="form-row mt-3">
           <div class="form-group col-md-2">
               <label class="input__label">English Exam Type <span class="text-danger">*</span></label>
-              <select class="form-control input-style" name="exam_type" id="exam_types">
+              <select class="form-control input-style" name="exam_type" id="exam_type">
+                  <option value="<?php echo $student['exam_type_name'] ?>"><?php echo $student['exam_type_name'] ?></option>
                   <option value="no_test">No Test taken</option>
                   <option value="ielts">IELTS</option>
                   <option value="toefl">TOEFL</option>
@@ -227,23 +271,23 @@
           </div>
           <div class="form-group col-md-2 exam_date">
             <label class="input__label">Date of Exam <span class="text-danger">*</span></label>
-            <input type="date" class="form-control input-style" name="exam_type_date">
+            <input type="date" class="form-control input-style" value="<?php echo $student['exam_date'] ?>" name="exam_type_date">
           </div>
           <div class="form-group col-md-2 listening">
-            <label class="input__label"> Listening <span class="text-danger">*</span></label>
-            <input type="number" class="form-control input-style" name="listening" placeholder="Listening Score"  min=0 max=10>
+            <label class="input__label"> listening <span class="text-danger">*</span></label>
+            <input type="number" class="form-control input-style" name="listening" value="<?php echo $student['listening'] ?>" placeholder="listening Score"  min=0 max=10>
           </div>
           <div class="form-group col-md-2 reading">
-            <label class="input__label"> Reading <span class="text-danger">*</span></label>
-            <input type="number" class="form-control input-style" name="reading" placeholder="Reading Score"  min=0 max=10>
+            <label class="input__label"> reading <span class="text-danger">*</span></label>
+            <input type="number" class="form-control input-style" name="reading" value="<?php echo $student['reading'] ?>" placeholder="reading Score"  min=0 max=10>
           </div>
           <div class="form-group col-md-2 writing">
-            <label class="input__label"> Writing<span class="text-danger">*</span></label>
-            <input type="number" class="form-control input-style" name="writing" placeholder="Writing Score"  min=0 max=10>
+            <label class="input__label"> writing<span class="text-danger">*</span></label>
+            <input type="number" class="form-control input-style" name="writing" value="<?php echo $student['writing'] ?>" placeholder="writing Score"  min=0 max=10>
           </div>
           <div class="form-group col-md-2 speaking">
-            <label class="input__label"> Speaking<span class="text-danger">*</span></label>
-            <input type="number" class="form-control input-style" name="speaking" placeholder="Speaking Score"  min=0 max=10>
+            <label class="input__label"> speaking<span class="text-danger">*</span></label>
+            <input type="number" class="form-control input-style" name="speaking" value="<?php echo $student['speaking'] ?>" placeholder="speaking Score"  min=0 max=10>
           </div>
         </div>
       </div>
@@ -327,16 +371,42 @@
               <div class="form-group col-md-12">
                 <label class="input__label bold-label" style="text-transform:none">Have you been refused a visa from Canada, the USA, the United Kingdom, New Zealand or Australia? <span class="text-danger">*</span></label>
                 <div class="form-check px-5">
-                  <input class="form-check-input" type="radio" name="refusedVisa" id="refusedVisa1" value="1">
-                  <label class="form-check-label" for="refusedVisa1">
-                    Yes
-                  </label>
+                <?php
+                    if($student['refused_visa']){
+                        ?>
+                        <input class="form-check-input" type="radio" name="refusedVisa" id="refusedVisa1" value="1" checked>
+                        <label class="form-check-label" for="refusedVisa1">
+                          Yes
+                        </label>
+                        <?php
+                    }else{
+                        ?>
+                        <input class="form-check-input" type="radio" name="refusedVisa" id="refusedVisa1" value="1">
+                        <label class="form-check-label" for="refusedVisa1">
+                          Yes
+                        </label>
+                        <?php
+                    }
+                ?>
                 </div>
                 <div class="form-check px-5">
-                  <input class="form-check-input" type="radio" name="refusedVisa" id="refusedVisa2" value="0">
-                  <label class="form-check-label" for="refusedVisa2">
-                    No
-                  </label>
+                <?php
+                    if(!($student['refused_visa'])){
+                        ?>
+                        <input class="form-check-input" type="radio" name="refusedVisa" id="refusedVisa2" value="0" checked>
+                        <label class="form-check-label" for="refusedVisa2">
+                            No
+                        </label>
+                        <?php
+                    }else{
+                        ?>
+                        <input class="form-check-input" type="radio" name="refusedVisa" id="refusedVisa2" value="0">
+                        <label class="form-check-label" for="refusedVisa2">
+                            No
+                        </label>
+                        <?php
+                    }
+                ?>
                 </div>
               </div> 
             </div><!-- form-row end -->
@@ -344,23 +414,51 @@
                 <div class="form-group col-md-12">
                   <label class="input__label  bold-label">Do you have a valid study permit/visa?</label>
                   <div class="form-check px-5">
-                    <input class="form-check-input" type="radio" name="validPermit" id="validPermit1" value="1">
-                    <label class="form-check-label" for="validPermit1">
-                      Yes
-                    </label>
+                  <?php
+                    if($student['valid_permit']){
+                        ?>
+                        <input class="form-check-input" type="radio" name="validPermit" id="validPermit1" value="1" checked>
+                        <label class="form-check-label" for="validPermit1">
+                        Yes
+                        </label>
+                        <?php
+                    }else{
+                        ?>
+                        <input class="form-check-input" type="radio" name="validPermit" id="validPermit1" value="1">
+                        <label class="form-check-label" for="validPermit1">
+                        Yes
+                        </label>
+                        <?php
+                    }
+                  ?>
+                    
                   </div>
                   <div class="form-check px-5">
-                    <input class="form-check-input" type="radio" name="validPermit" id="validPermit2" value="0">
-                    <label class="form-check-label" for="validPermit2">
-                      No
-                    </label>
+                    <?php
+                        if($student['valid_permit']){
+                            ?>
+                            <input class="form-check-input" type="radio" name="validPermit" id="validPermit2" value="0">
+                            <label class="form-check-label" for="validPermit2">
+                            No
+                            </label>
+                            <?php
+                        }else{
+                            ?>
+                            <input class="form-check-input" type="radio" name="validPermit" id="validPermit2" value="0" checked>
+                            <label class="form-check-label" for="validPermit2">
+                            No
+                            </label>
+                            <?php
+                        }
+                    ?>
+                    
                   </div>
                 </div>
             </div><!-- form-row end -->
             <div class="form-row mt-3">
                 <div class="form-group col-md-12">
                   <label class="input__label bold-label">If you answered "Yes" to any of above, provide details</label>
-                  <textarea class="form-control" name="details"></textarea>
+                  <textarea class="form-control" name="details"><?php echo $student['detail'] ?></textarea>
                 </div>
             </div>
         </div>
@@ -370,7 +468,7 @@
     <!-- Card submit button -->
     <div class="card mt-3">
       <div class="card-body text-right">
-        <button type="submit" name="add_student" class="btn btn-primary">Add Student</button>
+        <button type="submit" name="update_student" class="btn btn-primary">Update Student</button>
       </div>
     </div>
     </form>

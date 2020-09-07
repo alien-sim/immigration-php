@@ -3,6 +3,7 @@
     include_once './common_functions.php' ;
     
     if(isset($_POST['filter_search'])){
+        // echo $_POST['country'];
         $program_html = '';
         $school_html = '';
         $school_type = $_POST['school_type'];
@@ -151,9 +152,9 @@
 
             $program_html .= '<div class="bg-light w-100 program-search-card p-3 mb-3">';
             $program_html .= '<h6 class="program-heading-search mb-2">';
-            $program_html .= '<a href="program_detail.php?id= '.$program_row['id'].'" target="_blank">'. $program_row['program_name'] .'</a>';
+            $program_html .= '<a href="program_detail.php?id='.$program_row['id'].'" target="_blank">'. $program_row['program_name'] .'</a>';
             $program_html .= '</h6>'; 
-            $program_html .= '<a href="school_detail.php?id='. $program_row['sid'].'" target="_blank"><label><i class="fa fa-map-marker"></i> '.$program_row['school_name'].' - '.strtoupper($program_row['country_name']).'</label></a>';
+            $program_html .= '<a href="school_detail.php?id='.$program_row['sid'].'" target="_blank"><label><i class="fa fa-map-marker"></i> '.$program_row['school_name'].' - '.strtoupper($program_row['country_name']).'</label></a>';
             $program_html .= '<table class="mt-3">';
             $program_html .= '<tr>';
             $program_html .= '<td width="25%">';
@@ -194,6 +195,35 @@
         }
         header('Content-Type: application/json');
         echo json_encode(array('programs' => $program_html, 'schools' => $school_html));
+        exit;
+    }
+
+    if(isset($_POST['filter_student'])){
+        
+        $all_students = '<select class="custom-select input-style" name="student_id" required>';
+        $all_students .= '<option hidden disabled selected value="">Select..</option>';
+
+        $program_id = $_POST['program_id'];
+        $sql = "select s.id, s.first_name, s.last_name from student s 
+            inner join program_exam_details ped on s.exam_type_name = ped.exam_type 
+            inner join exam_details ed on s.id = ed.student_id 
+            where 
+                ped.program_id = ".$program_id." and
+                ed.reading >= ped.reading and 
+                ed.speaking >= ped.speaking and 
+                ed.writing  >= ped.writing and 
+                ed.listening >= ped.listening  
+            order by 
+                s.first_name, s.last_name";
+        $query = $db->query($sql);
+        while($student = $query->fetch_assoc()) {
+            $all_students .= "<option value=".$student['id'].">". ucwords($student['first_name']." ".$student['last_name']) ."</option>";
+        }
+
+        $all_students .= "</select>";
+
+        header('Content-Type: application/json');
+        echo json_encode(array('student_list' => $all_students));
         exit;
     }
 ?>

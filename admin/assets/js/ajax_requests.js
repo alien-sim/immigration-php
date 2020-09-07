@@ -4,11 +4,23 @@
     $("#nav-program-search ").on("click", ".program-search-card button", function(){
       var program_id = $(this).attr("attr");
       $("#selectStudentModal input#program_id").val(program_id);
-    });
-
-    $(".program-select-button").on("click", "button", function(){
-      var program_id = $(this).attr("attr");
-      $("#selectStudentModalProgram input#program_id").val(program_id);
+      var args = {
+        "filter_student":1,
+        "program_id":program_id
+      }
+      $.ajax({
+        url: "ajax_functions.php",
+        type: 'post',
+        data: args,
+        success: function(result){
+            console.log("result", result);
+            $("#eligible-student-list").html(result['student_list']);
+            
+        },
+        error: function(error){
+          console.log("error in fetching student :: ", error);
+        }
+      })
     });
 
     /*  data tables js  */
@@ -36,7 +48,7 @@
     });
     
     // Exam-type change
-    $('select#exam_type').on('change', function() {
+    $('xxxx').on('change', function() {
       var exam_type = this.value;
       var html_data = '';
       var date_data = '<label class="input__label">Date of Exam <span class="text-danger">*</span></label>';
@@ -200,13 +212,12 @@
       callbackRequest(args);
   }
   function callbackRequest(args){
-    console.log(args);
     $.ajax({
       url: "ajax_functions.php",
       type: 'post',
       data:args,
       success: function(result){
-          console.log("jdkjkj", result);
+          console.log("result", result);
           $(".before-ajax").hide();
           $(".after-ajax").show();
           $("#nav-program-search").html(result['programs']);

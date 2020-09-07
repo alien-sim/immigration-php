@@ -57,28 +57,34 @@
 
     function get_student_programs($student_id, $return_query=false){
         $program_array = [];
-        $student_sql = "select * from student s left join exam_details e on s.exam_type_id = e.id where s.id=".$student_id;
-        $student_result = $GLOBALS['db']->query($student_sql);
-        $student = mysqli_fetch_array($student_result);
+        $id_vars = '(';
+        $id_sql = "select ped.program_id as `ids` from program_exam_details ped
+            inner join student s on ped.exam_type = s.exam_type_name
+            inner join exam_details ed on s.id = ed.student_id
+            where 
+                ed.student_id = ".$student_id." and
+                ed.reading >= ped.reading and 
+                ed.speaking >= ped.speaking and 
+                ed.writing  >= ped.writing and 
+                ed.listening >= ped.listening ";
+        $id_result = $GLOBALS['db']->query($id_sql);
+        // echo $id_sql;
+        while($program_ids = $id_result->fetch_assoc()){
+            $id_vars .= $program_ids['ids'].",";
+        } 
+        $id_vars = rtrim($id_vars, ",");
+        $id_vars = $id_vars.")";
 
-        $program_sql = "
-            select distinct program_name, p.id, p.tution_fee, p.application_fee, p.cost_of_living, p.program_level, s.id as `sid` , s.school_name, s.school_logo, c.country_name, s.city, s.state, c.country_currency, c.currency_symbol, s.country from programs p 
-            left join program_exam_details ped on p.id = ped.program_id 
-            inner join schools s on p.school_id = s.id 
-            inner join countries c on s.country = c.id
-            where ped.exam_type is null 
-            union 
-            select distinct program_name, p.id, p.tution_fee, p.application_fee, p.cost_of_living, p.program_level, s.id as `sid` , s.school_name, s.school_logo, c.country_name, s.city, s.state, c.country_currency, c.currency_symbol, s.country from programs p 
-            inner join schools s on p.school_id = s.id 
-            inner join countries c on s.country = c.id
-            right join program_exam_details ped on p.id = ped.program_id 
-                where 
-                    (exam_type = '".$student['exam_type_name']."' and 
-                    speaking <= ".$student['speaking']." and 
-                    listening <= ".$student['listening']." and 
-                    writing <= ".$student['writing']." and
-                    reading <= ".$student['reading'].")
-        ";
+        $program_sql = "select 
+                p.id, p.program_name, p.tution_fee, p.application_fee, p.cost_of_living, p.program_level,
+                sc.id as `sid` , sc.school_name, sc.school_logo, sc.city, sc.state, sc.country,
+                c.country_currency, c.currency_symbol, c.country_name
+            from programs p
+            left join schools sc on p.school_id = sc.id 
+            inner join countries c on sc.country = c.id
+            where p.id in".$id_vars;
+
+        // echo $program_sql;
         if($return_query){
             // echo $program_sql;
             return $program_sql;

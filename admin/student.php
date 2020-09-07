@@ -64,7 +64,7 @@
               <th width="7%">Program Info</th>
               <?php 
                 if($_SESSION['is_superadmin']){
-                  ?><th width="10%">Delte</th><?php
+                  ?><th width="10%">Delete</th><?php
                 }
               ?>
             </tr>
@@ -84,7 +84,9 @@
                 ?>
                   <tr>
                     <td><?php echo $student_row['id'] ?></td>
-                    <td><?php echo ucfirst($student_row['first_name'])." ".ucfirst($student_row['last_name']) ?>  </td>
+                    <td><b><a href="student_detail.php?student_id=<?php echo $student_row['id'] ?>">
+                      <?php echo ucfirst($student_row['first_name'])." ".ucfirst($student_row['last_name']) ?>
+                    </a></b></td>
                     
                     <td><?php echo $student_row['email'] ?></td>
                     <td>India</td>

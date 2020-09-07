@@ -1,5 +1,5 @@
 <?php
-	include_once './config.php';
+	include_once './submit_functions.php';
 
 	if(isset($_POST['update_school'])){
 
@@ -202,6 +202,84 @@
 			// echo 'done';
 		}else{
 			echo mysqli_error($db);
+		}
+	}
+
+	if(isset($_POST['update_student'])){
+		$student_id = $_POST['student_id'];
+		$first_name = $_POST['first_name'];
+		$middle_name = $_POST['middle_name'];
+		$last_name = $_POST['last_name'];
+		$dob = $_POST['dob'];
+		$first_language = $_POST['first_language'];
+		$citizenship = $_POST['citizenship'];
+		$passport = $_POST['passport'];
+		$gender = $_POST['gender'];
+		$marital_status = $_POST['marital'];
+
+		$address = mysqli_real_escape_string($db,$_POST['address']);
+		$city = $_POST['city'];
+		$state = $_POST['state'];
+		$country = $_POST['country'];
+		$zip = $_POST['zip'];
+		$email = $_POST['email'];
+		$phone = $_POST['phone'];
+
+		$edu_country = $_POST['education_country'];
+		$level_education = mysqli_real_escape_string($db, $_POST['level_education']);
+		$grading_scheme  = $_POST['grading_scheme'];
+		// $grade_scale = $_POST['grade_scale'];
+		$avg_grade = $_POST['avg_grade'];
+
+		$exam_type = $_POST['exam_type'];
+		if($exam_type != 'no_test'){
+			update_exam_scores($_POST, $db);
+		}
+		$refusedVisa = $_POST['refusedVisa'];
+		$validPermit = $_POST['validPermit'];
+		$details = $_POST['details'];
+		$agent = $_SESSION['user_id'];
+
+		$sql = "update student set first_name='$first_name', middle_name='$middle_name', last_name='$last_name', 
+		date_of_birth='$dob', first_language='$first_language', citizenship='$citizenship', address='$address', city='$city', 
+		state='$state', country='$country', zip='$zip', email='$email', phone_number='$phone', education_country='$edu_country',
+		level_education='$level_education', grading_scheme='$grading_scheme', grade_avg='$avg_grade', 
+		exam_type_name='$exam_type', refused_visa='$refusedVisa', valid_permit='$validPermit', detail='$details', 
+		passport_number='$passport', gender='$gender', marital_status='$marital_status' where id='$student_id'";
+
+		$query = $db->query($sql);
+		if($query){
+			header("location:student.php");
+		}else{
+			echo mysqli_error($db);
+		}
+
+
+	}
+
+	function update_exam_scores($post, $db){
+		$listening = $post['listening'];
+		$reading = $post['reading'];
+		$writing = $post['writing'];
+		$speaking = $post['speaking'];
+		$exam_date = $post['exam_type_date'];
+
+		$sql_check = "select id from exam_details where student_id=".$post['student_id'];
+		$query_check = $db->query($sql_check);
+        if(mysqli_num_rows($query_check)) { 
+
+			$sql="update exam_details set exam_date='$exam_date', reading='$reading' , writing='$writing', speaking='$speaking', 
+			listening='$listening' where student_id=".$post['student_id'];
+			$query = $db->query($sql);
+			if($query){
+				// header("location:student.php");
+				return '';
+			}else{
+				echo mysqli_error($db);
+			}
+		}else{
+			// echo "here";
+			$exam_id = add_exam_type($post, $db, $post['student_id']);
 		}
 	}
 ?>

@@ -3,7 +3,7 @@
     include_once './config.php';
 
     $student_id = $_GET['id'];
-    $tables = ['applicataions', 'exam_details', 'upload_docs'];
+    $tables = ['applications', 'exam_details', 'upload_docs'];
 
     foreach($tables as $table){
         $sql = "delete from ".$table." where student_id=".$student_id ;

@@ -138,6 +138,12 @@
                 }
               }
             ?>
+
+            <hr>
+              <div class="text-center">
+                <button id="program-<?php echo $program['id'] ?>" data-toggle="modal" data-target="#selectStudentModalProgram" attr="<?php echo $program['id'] ?>" class="select-student-program btn btn-outline-dark">Select Student</button>
+              </div>
+
             </div>
         </div>
     </div>
@@ -146,6 +152,58 @@
   <!-- //content -->
 </div>
 <!-- main content end-->
+
+<!-- Select Student Modal -->
+<div class="modal fade bd-example-modal" id="selectStudentModalProgram" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <form action="search.php" method="post">
+        <div class="modal-header">
+          <h5 class="modal-title">Select Student</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="program_id" name="program_id" value="<?php echo $_GET['id'] ?>">
+            <input type="hidden" name="page" value="search">
+            <select class="custom-select input-style" name="student_id" required>
+            <option disabled selected value="">Select..</option>
+                <?php
+                    $sql_student = "select s.id, s.first_name, s.last_name from student s 
+                    inner join program_exam_details ped on s.exam_type_name = ped.exam_type 
+                    inner join exam_details ed on s.id = ed.student_id 
+                    where 
+                        ped.program_id = ".$_GET['id']." and
+                        ed.reading >= ped.reading and 
+                        ed.speaking >= ped.speaking and 
+                        ed.writing  >= ped.writing and 
+                        ed.listening >= ped.listening  
+                    order by 
+                        s.first_name, s.last_name";
+
+                        // echo $sql_student;
+                    $query_student = $db->query($sql_student);
+                    if(mysqli_num_rows($query_student)) { 
+                      while($student = $query_student->fetch_assoc()) {
+                          ?><option value=<?php echo $student['id'] ?>><?php echo ucwords($student['first_name']." ".$student['last_name']) ?></option><?php
+                      }
+                    }
+                ?>
+            </select>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+          <button type="submit" name="select_program" class="btn btn-primary">Apply</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 </section>
   <!-- footer include -->
   <?php

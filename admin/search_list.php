@@ -312,16 +312,7 @@
         <div class="modal-body">
             <input type="hidden" id="program_id" name="program_id">
             <input type="hidden" name="page" value="search">
-            <select class="custom-select input-style" name="student_id" required>
-            <option hidden disabled selected value="">Select..</option>
-                <?php
-                    $sql = "select id, first_name, last_name from student order by first_name, last_name";
-                    $query = $db->query($sql);
-                    while($student = $query->fetch_assoc()) {
-                        ?><option value=<?php echo $student['id'] ?>><?php echo ucwords($student['first_name']." ".$student['last_name']) ?></option><?php
-                    }
-                ?>
-            </select>
+            <div id="eligible-student-list"></div>
         </div>
 
         <div class="modal-footer">

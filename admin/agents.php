@@ -52,7 +52,7 @@
             <tr>
               <th>Username</th>
               <th>Email</th>
-              <th>Activate/Deactivate</th>
+              <th>Details</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -66,13 +66,8 @@
                     <td><?php echo $agent_row['username'] ?>  </td>
                     <td><?php echo $agent_row['email'] ?></td>
                     <td>
-                      <?php
-                        if($agent_row['is_active']){
-                          ?><a href="activate_deactivate.php?id=<?php echo $agent_row['id'] ?>" class="badge badge-warning">Dectivate</a><?php
-                        }else{
-                          ?><a href="activate_deactivate.php?id=<?php echo $agent_row['id'] ?>" class="badge badge-success">Activate</a><?php
-                        }
-                      ?>
+                      <a href="agent_details.php?agent_id=<?php echo $agent_row['id'] ?>"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+                      
                     </td>
                     <td>
 						<a href="update_agent.php?id=<?php echo $agent_row['id'] ?>" class="btn btn-link"><i class="fa fa-pencil" aria-hidden="true"></i></a>

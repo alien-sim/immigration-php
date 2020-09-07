@@ -200,15 +200,18 @@
 		$agent = $_SESSION['user_id'];
 
 		$query = $db->query("insert into student(first_name, middle_name, last_name, date_of_birth, first_language, citizenship, address, city, state, country, zip,
-		email, phone_number, education_country, level_education, grading_scheme, grade_scale, grade_avg, exam_type_name, exam_type_id, GRE_exam, GMAT_exam,
+		email, phone_number, education_country, level_education, grading_scheme, grade_scale, grade_avg, exam_type_name,  GRE_exam, GMAT_exam,
 		refused_visa, valid_permit, detail, agent_id, passport_number, gender, marital_status, status )
 		values('$first_name', '$middle_name', '$last_name', '$dob', '$first_language', '$citizenship', '$address', '$city', '$state', '$country','$zip', 
-		'$email', '$phone', '$edu_country', '$level_education', '$grading_scheme', '$grade_scale', '$avg_grade', '$exam_type', $exam_id, '$gre_id', '$gmat_id',
+		'$email', '$phone', '$edu_country', '$level_education', '$grading_scheme', '$grade_scale', '$avg_grade', '$exam_type', '$gre_id', '$gmat_id',
 		'$refusedVisa', '$validPermit', '$details', '$agent', '$passport', '$gender', '$marital_status', '')
 		");
 
 		if($query){
 			$student_id = $db->insert_id;
+			if($exam_type != 'no_test'){
+				add_exam_type($_POST, $db, $student_id);
+			}
 			header("location:upload_docs.php?student_id=".$student_id);
 		}else{
 			echo mysqli_error($db);
@@ -216,27 +219,19 @@
 
 	}
 
-	function add_exam_type($post, $db){
-		if($post['exam_type'] == 'duolingo'){
-			$listening = '';
-			$reading = '';
-			$writing = '';
-			$speaking = '';
-			$exact_score = $post['exact_score'];
-		}else{
-			$listening = $post['listening'];
-			$reading = $post['reading'];
-			$writing = $post['writing'];
-			$speaking = $post['speaking'];
-			$exact_score = 0;
-		}
+	function add_exam_type($post, $db, $student_id){
+		
+		$listening = $post['listening'];
+		$reading = $post['reading'];
+		$writing = $post['writing'];
+		$speaking = $post['speaking'];
 		$exam_date = $post['exam_type_date'];
 
-		$query = $db->query("insert into exam_details(exam_date, reading, writing, speaking, listening, score) 
-		values('$exam_date', '$reading', '$writing', '$speaking','$listening', '$exact_score')");
+		$query = $db->query("insert into exam_details(exam_date, reading, writing, speaking, listening, student_id) 
+		values('$exam_date', '$reading', '$writing', '$speaking','$listening','$student_id')");
     	if($query){
-			$exam_type_id = $db->insert_id;
-			return $exam_type_id;
+			// $exam_type_id = $db->insert_id;
+			return '';
     	}else{
 			echo mysqli_error($db);
 		}
